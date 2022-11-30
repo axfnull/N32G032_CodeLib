@@ -8,10 +8,10 @@
         1、时钟源：
                     HSE=8M,PLL=48M,AHB=48M,APB1=48M,APB2=48M,LPTIM CLK=LSI
         2、端口配置：
-                    PC1选择为LPTIM输出
+                    PA9选择为LPTIM输出
         3、LPTIM：
-                    LPTIM 4分频LSI，输出PWM信号
+                    LPTIM CLK不分频，LPTIM输出PWM信号,频率50HZ（ARR设为600）。
     使用方法：
-        1、编译后打开调试模式，可观察到PC1引脚PWM信号
+        1、编译后打开调试模式，可观察到PA9引脚PWM信号
 4、注意事项
     无

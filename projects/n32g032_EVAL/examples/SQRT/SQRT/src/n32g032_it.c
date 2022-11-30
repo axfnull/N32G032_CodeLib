@@ -28,7 +28,7 @@
 /**
  * @file n32g032_it.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -91,7 +91,7 @@ void HDIV_SQRT_IRQHandler(void)
     if (SQRT_GetIntStatus() == SET)
     {
         SQRT_ClrIntPendingBit();
-        printf("RADICANT = %d \r\n",SQRT_GetRADICANT_Data());
+        printf("RADICAND = %d \r\n",SQRT_GetRADICAND_Data());
         printf("ROOT = %d \r\n",SQRT_GetROOT_Data());
     }
     printf("SQRT Test End\r\n");

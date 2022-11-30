@@ -27,7 +27,7 @@
 
 /**
  * @file main.c
- * @author Nations Solution Team
+ * @author Nations 
  * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
@@ -71,7 +71,7 @@ int main(void)
     ADC_ConfigRegularChannel(ADC, ADC_CH_4_PA4, 1, ADC_SAMP_TIME_14CYCLES5);
 
     /* Configure high and low analog watchdog thresholds */
-    ADC_ConfigAnalogWatchdogThresholds(ADC, 0x0B00, 0x0000);
+    ADC_ConfigAnalogWatchdogThresholds(ADC, 0x0B00, 0x0300);
     /* Configure channel1 as the single analog watchdog guarded channel */
     ADC_ConfigAnalogWatchdogSingleChannel(ADC, ADC_CH_4_PA4);
     /* Enable analog watchdog on one regular channel */
@@ -109,6 +109,7 @@ int main(void)
  */
 void RCC_Configuration(void)
 {
+    ErrorStatus HSIStartUpStatus;
     /* Enable peripheral clocks ------------------------------------------------*/
     /* Enable GPIOA clocks */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
@@ -120,6 +121,20 @@ void RCC_Configuration(void)
 
     /* enable ADC1M clock */
     RCC_EnableHsi(ENABLE);
+    
+    /* Wait til1 HSI is ready*/
+    HSIStartUpStatus = RCC_WaitHsiStable(); 
+    if(HSIStartUpStatus == SUCCESS)
+    {
+    }
+    else
+    {
+        /* If HSI fails to start-up, the application will have wrong clock configuration. User can add here some code to deal with this error*/
+        /* Go to infinital 1oop*/
+        while(1)
+        {
+        }
+    }
     RCC_ConfigAdc1mClk(RCC_ADC1MCLK_SRC_HSI, RCC_ADC1MCLK_DIV8);
 }
 

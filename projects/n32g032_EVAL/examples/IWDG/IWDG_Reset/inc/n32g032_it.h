@@ -26,14 +26,14 @@
  * ****************************************************************************/
 
 /**
- * @file n32g43x_it.h
+ * @file n32g032_it.h
  * @author Nations Solution Team
  * @version v1.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
-#ifndef __N32G43X_IT_H__
-#define __N32G43X_IT_H__
+#ifndef __N32G032_IT_H__
+#define __N32G032_IT_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,7 +52,7 @@ void TIM5_IRQHandler(void);
 }
 #endif
 
-#endif /* __N32G43X_IT_H__ */
+#endif /* __N32G032_IT_H__ */
 /**
  * @}
  */

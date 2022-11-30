@@ -730,7 +730,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\linker\Nations\N32G032\N32G032x8.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\Nations\N32G032\N32G032R8.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -967,6 +967,12 @@
     </settings>
   </configuration>
   <group>
+    <name>BSP</name>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\bsp\src\log.c</name>
+    </file>
+  </group>
+  <group>
     <name>CMSIS</name>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.c</name>
@@ -997,6 +1003,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rcc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_usart.c</name>
     </file>
   </group>
   <group>

@@ -52,26 +52,24 @@ typedef enum
 
 I2S_InitType I2S_InitStructure;
 SPI_InitType SPI_InitStructure;
-uint16_t I2S3_Buffer_Tx[BufferSize] = {0x0102, 0x0304, 0x0506, 0x0708, 0x090A, 0x0B0C, 0x0D0E, 0x0F10,
+uint16_t I2S_Buffer_Tx[BufferSize] = {0x0102, 0x0304, 0x0506, 0x0708, 0x090A, 0x0B0C, 0x0D0E, 0x0F10,
                                        0x1112, 0x1314, 0x1516, 0x1718, 0x191A, 0x1B1C, 0x1D1E, 0x1F20,
                                        0x2122, 0x2324, 0x2526, 0x2728, 0x292A, 0x2B2C, 0x2D2E, 0x2F30,
                                        0x3132, 0x3334, 0x3536, 0x3738, 0x393A, 0x3B3C, 0x3D3E, 0x3F40};
 
-uint16_t SPI3_Buffer_Tx[BufferSize] = {0x5152, 0x5354, 0x5556, 0x5758, 0x595A, 0x5B5C, 0x5D5E, 0x5F60,
+uint16_t SPI_Buffer_Tx[BufferSize] = {0x5152, 0x5354, 0x5556, 0x5758, 0x595A, 0x5B5C, 0x5D5E, 0x5F60,
                                        0x6162, 0x6364, 0x6566, 0x6768, 0x696A, 0x6B6C, 0x6D6E, 0x6F70,
                                        0x7172, 0x7374, 0x7576, 0x7778, 0x797A, 0x7B7C, 0x7D7E, 0x7F80,
                                        0x8182, 0x8384, 0x8586, 0x8788, 0x898A, 0x8B8C, 0x8D8E, 0x8F90};
 
-__IO uint16_t I2S2_Buffer_Rx[BufferSize];
-__IO uint16_t SPI2_Buffer_Rx[BufferSize];
+__IO uint16_t I2S_Buffer_Rx[BufferSize];
 __IO uint16_t TxIdx = 0, RxIdx = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 volatile TestStatus TransferStatus3 = FAILED;
-ErrorStatus HSEStartUpStatus;
 
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
-TestStatus Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t BufferLength);
+									   
 
 /**
  * @brief  Main program.
@@ -91,8 +89,8 @@ int main(void)
     /* GPIO configuration ------------------------------------------------------*/
     GPIO_Configuration();
 
-    /* Deinitializes the SPI1 peripheral registers --------------------*/
-    SPI_I2S_DeInit(SPI1);
+    /* Deinitializes the I2S_MASTER peripheral registers --------------------*/
+    SPI_I2S_DeInit(I2S_MASTER);
 
     /* I2S peripheral configuration */
     I2S_InitStructure.Standard       = I2S_STD_PHILLIPS;
@@ -100,23 +98,23 @@ int main(void)
     I2S_InitStructure.AudioFrequency = I2S_AUDIO_FREQ_48K;
     I2S_InitStructure.CLKPOL         = I2S_CLKPOL_LOW;
 
-    /* I2S3 Master Transmitter to I2S2 Slave Receiver communication ------------*/
-    /* I2S1 configuration */
+    /* I2S Master Transmitter to I2S Slave Receiver communication ------------*/
+    /* I2S_MASTER configuration */
     I2S_InitStructure.I2sMode = I2S_MODE_MASTER_TX;
-    I2S_Init(SPI1, &I2S_InitStructure);
+    I2S_Init(I2S_MASTER, &I2S_InitStructure);
 
-    /* Enable the I2S1 */
-    I2S_Enable(SPI1, ENABLE);
+    /* Enable the I2S_MASTER */
+    I2S_Enable(I2S_MASTER, ENABLE);
 
-    /* Begin the communication in I2S mode */
+    /* Begin the communication in I2S_MASTER mode */
     while (TxIdx < BufferSize)
     {
         /* Wait the Tx buffer to be empty */
-        while (SPI_I2S_GetStatus(SPI1, SPI_I2S_TE_FLAG) == RESET)
+        while (SPI_I2S_GetStatus(I2S_MASTER, SPI_I2S_TE_FLAG) == RESET)
         {
         }
-        /* Send a data from I2S1 */
-        SPI_I2S_TransmitData(SPI1, I2S3_Buffer_Tx[TxIdx++]);
+        /* Send a data from I2S_MASTER */
+        SPI_I2S_TransmitData(I2S_MASTER, I2S_Buffer_Tx[TxIdx++]);
 
     }
 
@@ -128,8 +126,8 @@ int main(void)
      /* Reset TxIdx, RxIdx indexes */
     TxIdx = 0;
     RxIdx = 0;
-    /* Switch to SPI mode communication ----------------------------------------*/
-    /* SPI1 configuration */
+    /* Switch to SPI_MASTER mode communication ----------------------------------------*/
+    /* SPI_MASTER configuration */
     SPI_InitStructure.DataDirection = SPI_DIR_SINGLELINE_TX;
     SPI_InitStructure.SpiMode       = SPI_MODE_MASTER;
     SPI_InitStructure.DataLen       = SPI_DATA_SIZE_16BITS;
@@ -139,26 +137,26 @@ int main(void)
     SPI_InitStructure.BaudRatePres  = SPI_BR_PRESCALER_16;
     SPI_InitStructure.FirstBit      = SPI_FB_MSB;
     SPI_InitStructure.CRCPoly       = 7;
-    SPI_Init(SPI1, &SPI_InitStructure);
+    SPI_Init(I2S_MASTER, &SPI_InitStructure);
 
-    /* Enable SPI1 */
-    SPI_Enable(SPI1, ENABLE);
+    /* Enable SPI_MASTER */
+    SPI_Enable(SPI_MASTER, ENABLE);
 
-    /* Begin the communication in SPI mode */
+    /* Begin the communication in SPI_MASTER mode */
     while (TxIdx < BufferSize)
     {
         /* Wait the Tx buffer to be empty */
-        while (SPI_I2S_GetStatus(SPI1, SPI_I2S_TE_FLAG) == RESET)
+        while (SPI_I2S_GetStatus(SPI_MASTER, SPI_I2S_TE_FLAG) == RESET)
         {
         }
-        /* Send a data from SPI3 */
-        SPI_I2S_TransmitData(SPI1, SPI3_Buffer_Tx[TxIdx++]);
+        /* Send a data from SPI_MASTER */
+        SPI_I2S_TransmitData(SPI_MASTER, SPI_Buffer_Tx[TxIdx++]);
     }
 
     /* Reset TxIdx, RxIdx indexes and receive table values */
     for (TxIdx = 0; TxIdx < BufferSize; TxIdx++)
     {
-        I2S2_Buffer_Rx[TxIdx] = 0;
+        I2S_Buffer_Rx[TxIdx] = 0;
     }
 
     TxIdx = 0;
@@ -167,27 +165,27 @@ int main(void)
     /* Slave Transmitter to Master Receiver communication ------------*/
     /* I2S1 configuration */
     I2S_InitStructure.I2sMode = I2S_MODE_SlAVE_TX;
-    I2S_Init(SPI1, &I2S_InitStructure);
+    I2S_Init(I2S_MASTER, &I2S_InitStructure);
 
     /* Wait the Tx buffer to be empty */
-    while (SPI_I2S_GetStatus(SPI1, SPI_I2S_TE_FLAG) == RESET)
+    while (SPI_I2S_GetStatus(I2S_MASTER, SPI_I2S_TE_FLAG) == RESET)
     {
     }
     /* Prepare the first data to be sent from the slave */
-    SPI_I2S_TransmitData(SPI1, I2S3_Buffer_Tx[TxIdx++]);
+    SPI_I2S_TransmitData(I2S_MASTER, I2S_Buffer_Tx[TxIdx++]);
 
     /* Enable the I2S1 */
-    I2S_Enable(SPI1, ENABLE);
+    I2S_Enable(I2S_MASTER, ENABLE);
 
     /* Begin the communication in I2S mode */
     while (TxIdx < BufferSize)
     {
         /* Wait the Tx buffer to be empty */
-        while (SPI_I2S_GetStatus(SPI1, SPI_I2S_TE_FLAG) == RESET)
+        while (SPI_I2S_GetStatus(I2S_MASTER, SPI_I2S_TE_FLAG) == RESET)
         {
         }
         /* Send a data from I2S1 */
-        SPI_I2S_TransmitData(SPI1, I2S3_Buffer_Tx[TxIdx++]);
+        SPI_I2S_TransmitData(I2S_MASTER, I2S_Buffer_Tx[TxIdx++]);
     }
 
     while (1)
@@ -200,53 +198,6 @@ int main(void)
  */
 void RCC_Configuration(void)
 {
-    #if 0   
-    /* RCC system reset(for debug purpose) */
-    RCC_DeInit();
-
-    /* Enable HSE */
-    RCC_ConfigHse(RCC_HSE_ENABLE);
-
-    /* Wait till HSE is ready */
-    HSEStartUpStatus = RCC_WaitHseStable();
-
-    if (HSEStartUpStatus == SUCCESS)
-    {
-//        /* Enable Prefetch Buffer */
-//        FLASH_PrefetchBufSet(FLASH_PrefetchBuf_EN);
-
-//        /* Flash 2 wait state */
-//        FLASH_SetLatency(FLASH_LATENCY_2);
-
-        /* HCLK = SYSCLK */
-        RCC_ConfigHclk(RCC_SYSCLK_DIV1);
-
-        /* PCLK2 = HCLK */
-        RCC_ConfigPclk2(RCC_HCLK_DIV1);
-
-        /* PCLK1 = HCLK/2 */
-        RCC_ConfigPclk1(RCC_HCLK_DIV2);
-
-        /* PLLCLK = 8MHz * 9 = 72 MHz */
-//        RCC_ConfigPll(RCC_PLL_SRC_HSE_DIV1, RCC_PLL_MUL_9);
-
-        /* Enable PLL */
-        RCC_EnablePll(ENABLE);
-
-//        /* Wait till PLL is ready */
-//        while (RCC_GetFlagStatus(RCC_FLAG_PLLRD) == RESET)
-//        {
-//        }
-
-        /* Select PLL as system clock source */
-        RCC_ConfigSysclk(RCC_SYSCLK_SRC_PLLCLK);
-
-        /* Wait till PLL is used as system clock source */
-        while (RCC_GetSysclkSrc() != 0x08)
-        {
-        }
-    }
-#endif
     /* Enable peripheral clocks --------------------------------------------------*/
     /* GPIOA and AFIO clocks enable */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA | RCC_APB2_PERIPH_AFIO, ENABLE);
@@ -264,37 +215,15 @@ void GPIO_Configuration(void)
 
     GPIO_InitStruct(&GPIO_InitStructure);
 
-    /* Configure SPI1 pins: CK, WS and SD ---------------------------------*/
-    GPIO_InitStructure.Pin        = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;
+    /* Configure I2S_MASTER pins: CK, WS and SD ---------------------------------*/
+    GPIO_InitStructure.Pin        = I2S_MASTER_PIN_CK | I2S_MASTER_PIN_SD | I2S_MASTER_PIN_WS;
     GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
     GPIO_InitStructure.GPIO_Pull = GPIO_NO_PULL;
     GPIO_InitStructure.GPIO_Speed = GPIO_SPEED_HIGH;
-    GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_SPI1;
+    GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_I2S1;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 }
 
-/**
- * @brief  Compares two buffers.
- * @param  pBuffer1, pBuffer2: buffers to be compared.
- * @param BufferLength buffer's length
- * @return PASSED: pBuffer1 identical to pBuffer2
- *         FAILED: pBuffer1 differs from pBuffer2
- */
-TestStatus Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t BufferLength)
-{
-    while (BufferLength--)
-    {
-        if (*pBuffer1 != *pBuffer2)
-        {
-            return FAILED;
-        }
-
-        pBuffer1++;
-        pBuffer2++;
-    }
-
-    return PASSED;
-}
 
 #ifdef USE_FULL_ASSERT
 

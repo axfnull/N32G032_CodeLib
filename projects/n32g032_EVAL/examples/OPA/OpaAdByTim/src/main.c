@@ -54,7 +54,7 @@ void TIM_DutySet(TIM_Module* TIMx, int16_t duty1, int16_t duty2, int16_t duty3);
 void TIM_Run(TIM_Module* TIMx, uint8_t* RunFlag);
 
 /**
- * @brief   Main program,Test PGA is work ok? Opa out Pin can view by scope
+ * @brief   Main program,test whether the PGA is working, Opa out Pin can view by oscilloscope
  */
 uint8_t Gain = 0, BakGain = 0;
 int main(void)
@@ -132,17 +132,19 @@ void TIM_Run(TIM_Module* TIMx, uint8_t* RunFlag)
  */
 void RCC_Configuration(void)
 {
-    /* Enable GPIOA, GPIOB, GPIOC and GPIOD clocks */
+    /* Enable GPIOA,GPIOB,GPIOC, GPIOD and GPIOF clocks */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_AFIO | RCC_APB2_PERIPH_GPIOA | RCC_APB2_PERIPH_GPIOB | RCC_APB2_PERIPH_GPIOC
-                                | RCC_APB2_PERIPH_GPIOD | RCC_APB2_PERIPH_GPIOF,ENABLE);
+                          | RCC_APB2_PERIPH_GPIOD | RCC_APB2_PERIPH_GPIOF,ENABLE);
 
 
     /* Enable COMP OPA clocks */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_COMP | RCC_APB1_PERIPH_OPAMP | RCC_APB1_PERIPH_COMPFILT, ENABLE);
 
-    /* Enable ADC clocks */
+    /* Enable ADC clock */
     RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_ADC ,ENABLE);
-    RCC_ConfigAdc1mClk(RCC_ADC1MCLK_SRC_HSE, RCC_ADC1MCLK_DIV8);  //selsect HSE as RCC ADC1M CLK Source	
+		/* Enable ADC1M clock. selsect HSI as RCC ADC1M CLK Source. 
+		 The HSI should be enabled when you want to configure HSE as RCC ADC1M CLK source.*/
+    RCC_ConfigAdc1mClk(RCC_ADC1MCLK_SRC_HSI, RCC_ADC1MCLK_DIV8);  
     /* RCC_ADCHCLK_DIV16*/
     RCC_ConfigAdcHclk(RCC_ADCHCLK_DIV16);
 
@@ -311,8 +313,9 @@ void ADC_SampleConfig(void)
         ;
 
     /*Enable Temp and Vrefint*/
-    ADC_EnableTempSensorVrefint(ENABLE);
-
+    ADC_EnableTempSensor(ENABLE);
+    ADC_EnableVrefint(ENABLE);
+	
     /*ADC1 Injected group of conversions end and Analog Watchdog interruptsenabling */
     ADC_ConfigInt(ADC, ADC_INT_JENDC | ADC_INT_AWD, ENABLE);
 }

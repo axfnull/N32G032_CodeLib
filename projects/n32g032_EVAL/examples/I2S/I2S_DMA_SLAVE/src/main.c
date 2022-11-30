@@ -62,7 +62,6 @@ const uint16_t I2S_MASTER_Buffer_Tx[BufferSize] = {0x0102, 0x0304, 0x0506, 0x070
                                                    0x3132, 0x3334, 0x3536, 0x3738, 0x393A, 0x3B3C, 0x3D3E, 0x3F40};
 uint16_t I2S_SLAVE_Buffer_Rx[BufferSize];
 volatile TestStatus TransferStatus = FAILED;
-ErrorStatus HSEStartUpStatus;
 
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
@@ -107,21 +106,21 @@ int main(void)
     DMA_Init(I2S_SLAVE_Rx_DMA_Channel, &DMA_InitStructure);
     DMA_RequestRemap(DMA_REMAP_SPI1_RX,DMA,I2S_SLAVE_Rx_DMA_Channel,ENABLE);
 
-    /* I2S peripheral configuration */
+    /* I2S1 peripheral configuration */
     I2S_InitStructure.Standard       = I2S_STD_PHILLIPS;
     I2S_InitStructure.DataFormat     = I2S_DATA_FMT_16BITS_EXTENDED;
     I2S_InitStructure.AudioFrequency = I2S_AUDIO_FREQ_48K;
     I2S_InitStructure.CLKPOL         = I2S_CLKPOL_LOW;
 
     /* Master Transmitter to Slave Receiver communication ------------*/
-    /* I2S1 configuration */
+    /* I2S_SLAVE configuration */
     I2S_InitStructure.I2sMode = I2S_MODE_SlAVE_RX;
     I2S_Init(I2S_SLAVE, &I2S_InitStructure);
 
     /* Enable I2S_SLAVE Rx request */
     SPI_I2S_EnableDma(I2S_SLAVE, SPI_I2S_DMA_RX, ENABLE);
 
-    /* Enable the I2S1 */
+    /* Enable the I2S_SLAVE */
     I2S_Enable(I2S_SLAVE, ENABLE);
 
     /* Enable DMA Channel2 */
@@ -159,14 +158,14 @@ int main(void)
     I2S_Enable(I2S_SLAVE, DISABLE);
     
     /* Master Transmitter to Slave Receiver communication ------------*/
-    /* I2S1 configuration */
+    /* I2S_SLAVE configuration */
     I2S_InitStructure.I2sMode = I2S_MODE_SlAVE_TX;
     I2S_Init(I2S_SLAVE, &I2S_InitStructure);
 
     /* Enable I2S_SLAVE Rx request */
     SPI_I2S_EnableDma(I2S_SLAVE, SPI_I2S_DMA_TX, ENABLE);
 
-    /* Enable the I2S1 */
+    /* Enable the I2S_SLAVE */
     I2S_Enable(I2S_SLAVE, ENABLE);
 
     /* Enable DMA Channel2 */
@@ -174,6 +173,10 @@ int main(void)
 
     /* Wait for DMA channel2 transfer complete */
     while (!DMA_GetFlagStatus(I2S_SLAVE_Tx_DMA_FLAG, DMA))
+    ;
+
+	/* Wait for I2S transfer complete */
+    while(SPI_I2S_GetStatus(I2S_SLAVE, SPI_I2S_BUSY_FLAG))
     ;
     
     if(TransferStatus == PASSED)
@@ -194,53 +197,6 @@ int main(void)
  */
 void RCC_Configuration(void)
 {
-#if 0   
-    /* RCC system reset(for debug purpose) */
-    RCC_DeInit();
-
-    /* Enable HSE */
-    RCC_ConfigHse(RCC_HSE_ENABLE);
-
-    /* Wait till HSE is ready */
-    HSEStartUpStatus = RCC_WaitHseStable();
-
-    if (HSEStartUpStatus == SUCCESS)
-    {
-//        /* Enable Prefetch Buffer */
-//        FLASH_PrefetchBufSet(FLASH_PrefetchBuf_EN);
-
-//        /* Flash 2 wait state */
-//        FLASH_SetLatency(FLASH_LATENCY_2);
-
-        /* HCLK = SYSCLK */
-        RCC_ConfigHclk(RCC_SYSCLK_DIV1);
-
-        /* PCLK2 = HCLK */
-        RCC_ConfigPclk2(RCC_HCLK_DIV1);
-
-        /* PCLK1 = HCLK/2 */
-        RCC_ConfigPclk1(RCC_HCLK_DIV2);
-
-        /* PLLCLK = 8MHz * 9 = 72 MHz */
-   //     RCC_ConfigPll(RCC_PLL_SRC_HSE_DIV1, RCC_PLL_MUL_9);
-
-        /* Enable PLL */
-        RCC_EnablePll(ENABLE);
-
-        /* Wait till PLL is ready */
-//        while (RCC_GetFlagStatus(RCC_FLAG_PLLRD) == RESET)
-//        {
-//        }
-
-        /* Select PLL as system clock source */
-        RCC_ConfigSysclk(RCC_SYSCLK_SRC_PLLCLK);
-
-        /* Wait till PLL is used as system clock source */
-        while (RCC_GetSysclkSrc() != 0x08)
-        {
-        }
-    }
-#endif
     /* Enable peripheral clocks --------------------------------------------------*/
     /* Enable I2S_SLAVE DMA clock */
     RCC_EnableAHBPeriphClk(I2S_SLAVE_DMA_CLK, ENABLE);
@@ -261,11 +217,11 @@ void GPIO_Configuration(void)
 
     GPIO_InitStruct(&GPIO_InitStructure);
 
-    /* Configure SPI1 pins: CK, WS and SD ---------------------------------*/
-    GPIO_InitStructure.Pin        = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Pull = GPIO_NO_PULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_SPEED_HIGH;
+    /* Configure I2S_SLAVE pins: CK, WS and SD ---------------------------------*/
+    GPIO_InitStructure.Pin            = I2S_SLAVE_PIN_WS | I2S_SLAVE_PIN_SD | I2S_SLAVE_PIN_CK;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.GPIO_Pull      = GPIO_NO_PULL;
+    GPIO_InitStructure.GPIO_Speed     = GPIO_SPEED_HIGH;
     GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_I2S1;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 }

@@ -27,7 +27,7 @@
 
 /**
  * @file main.h
- * @author Nations Solution Team
+ * @author Nations 
  * @version v1.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
@@ -39,7 +39,7 @@
 extern "C" {
 #endif
 
-#include "n32g45x.h"
+#include "n32g032.h"
 
 typedef enum
 {

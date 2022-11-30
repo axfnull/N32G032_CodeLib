@@ -28,7 +28,7 @@
 /**
  * @file n32g032_flash.c
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.3
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -56,7 +56,7 @@
  */
 
 /* Flash Access Control Register bits */
-#define AC_LATENCY_MSK  ((uint32_t)0x00000038)
+#define AC_LATENCY_MSK  ((uint32_t)0x0000003C)
 #define AC_PRFTBE_MSK   ((uint32_t)0x0000002F)
 
 /* Flash Access Control Register bits */
@@ -85,7 +85,7 @@
 
 /* FLASH Keys */
 #define L1_RDP_Key   ((uint32_t)0xFFFF00A5)
-#define RDP_USER_Key ((uint32_t)0xFFF000A5)
+#define RDP_USER_Key ((uint32_t)0xFFC000A5)
 #define L2_RDP_Key   ((uint32_t)0xFFFF33CC)
 #define FLASH_KEY1   ((uint32_t)0x45670123)
 #define FLASH_KEY2   ((uint32_t)0xCDEF89AB)
@@ -130,9 +130,9 @@
  * @note   This function can be used for N32G032 devices.
  * @param FLASH_Latency specifies the FLASH Latency value.
  *   This parameter can be one of the following values:
- *     @arg FLASH_LATENCY_0 FLASH Zero Latency cycle
- *     @arg FLASH_LATENCY_1 FLASH One Latency cycle
- *     @arg FLASH_LATENCY_2 FLASH Two Latency cycles
+ *     @arg FLASH_LATENCY_0 FLASH Zero Latency cycle , 0 < SYSCLK=18MHz
+ *     @arg FLASH_LATENCY_1 FLASH One Latency cycle , 18MHz < SYSCLK=36MHz
+ *     @arg FLASH_LATENCY_2 FLASH Two Latency cycles , 36MHz < SYSCLK=48MHz
  */
 void FLASH_SetLatency(uint32_t FLASH_Latency)
 {
@@ -173,8 +173,6 @@ void FLASH_PrefetchBufSet(uint32_t FLASH_PrefetchBuf)
 /**
  * @brief  Unlocks the FLASH Program Erase Controller.
  * @note   This function can be used for N32G032 devices.
- *         - For N32G032 devices this function unlocks Bank.
- *           to FLASH_Unlock function..
  */
 void FLASH_Unlock(void)
 {
@@ -186,8 +184,6 @@ void FLASH_Unlock(void)
 /**
  * @brief  Locks the FLASH Program Erase Controller.
  * @note   This function can be used for N32G032 devices.
- *         - For N32G032 devices this function Locks Bank.
- *           to FLASH_Lock function.
  */
 void FLASH_Lock(void)
 {
@@ -385,8 +381,8 @@ FLASH_STS FLASH_EraseOB(void)
  *     @arg 0x00 ~ 0xFF
  * @param WRP_Pages specifies the address of the pages to be write protected.
  *   This parameter can be:
- *     @arg For @b N32G032_devices: value between FLASH_WRPR_Pages0to1 and
- *       FLASH_WRPR_Pages62to63 or FLASH_WRPR_AllPages
+ *     @arg For @b N32G032_devices: value between FLASH_WRPR_Pages0to7 and
+ *       FLASH_WRPR_Pages120to127 or FLASH_WRPR_AllPages or FLASH_NO_WRPR_Pages
  * @param  OB_RDP2 
  *   This parameter can be one of the following values:
  *     @arg OB_RDP2_ENABLE
@@ -424,7 +420,7 @@ FLASH_STS FLASH_ConfigALLOptionByte(uint8_t OB_RDP1,     uint8_t OB_IWDG,    uin
     
     WRP_Pages      = (uint32_t)(~WRP_Pages);
     rdpuser_tmp    = (((uint32_t)OB_RDP1) | (((uint32_t)(OB_IWDG | OB_STOP | OB_PD | OB_nBOOT0 | OB_nBOOT1 | OB_nSWBOOT0)) << 16));
-    data0data1_tmp = (((uint32_t)OB_Data0) | (((uint32_t)OB_Data0) << 16));
+    data0data1_tmp = (((uint32_t)OB_Data0) | (((uint32_t)OB_Data1) << 16));
     wrp0wrp1_tmp   = ((WRP_Pages & FLASH_WRP0_WRP0) | ((WRP_Pages << 8) & FLASH_WRP1_WRP1));
     rdp2_tmp       = ((uint32_t)OB_RDP2);
 
@@ -889,7 +885,7 @@ FLASH_STS FLASH_ConfigUserOB(uint8_t OB_IWDG,   uint8_t OB_STOP,   uint8_t OB_PD
     /* Get the actual read protection Option Byte value */
     if (FLASH_GetReadOutProtectionSTS() != RESET)
     {
-        rdpuser_tmp = 0xFFF00000;
+        rdpuser_tmp = 0xFFC00000;
     }
 
     /* Authorize the small information block programming */
@@ -1033,8 +1029,9 @@ FlagStatus FLASH_GetPrefetchBufSTS(void)
  * @note   This function can be used for N32G032 devices.
  * @param FLASH_INT specifies the FLASH interrupt sources to be enabled or disabled.
  *   This parameter can be any combination of the following values:
- *     @arg FLASH_IT_ERROR   FLASH Error Interrupt
+ *     @arg FLASH_INT_ERR    FLASH Error Interrupt
  *     @arg FLASH_INT_EOP    FLASH end of operation Interrupt
+ *     @arg FLASH_INT_ECC    ECC Error Interrupt
  * @param Cmd new state of the specified Flash interrupts.
  *   This parameter can be: ENABLE or DISABLE.
  */
@@ -1065,6 +1062,7 @@ void FLASH_INTConfig(uint32_t FLASH_INT, FunctionalState Cmd)
  *     @arg FLASH_FLAG_PGERR FLASH Program error flag
  *     @arg FLASH_FLAG_WRPERR FLASH Write protected error flag
  *     @arg FLASH_FLAG_EOP FLASH End of Operation flag
+ *     @arg FLASH_FLAG_ECC FLASH ECC error flag
  *     @arg FLASH_FLAG_OBERR FLASH Option Byte error flag
  * @return The new state of FLASH_FLAG (SET or RESET).
  */
@@ -1109,6 +1107,7 @@ FlagStatus FLASH_GetFlagSTS(uint32_t FLASH_FLAG)
  *     @arg FLASH_FLAG_PGERR FLASH Program error flag
  *     @arg FLASH_FLAG_WRPERR FLASH Write protected error flag
  *     @arg FLASH_FLAG_EOP FLASH End of Operation flag
+ *     @arg FLASH_FLAG_ECC FLASH ECC error flag
  */
 void FLASH_ClearFlag(uint32_t FLASH_FLAG)
 {
@@ -1116,16 +1115,14 @@ void FLASH_ClearFlag(uint32_t FLASH_FLAG)
     assert_param(IS_FLASH_CLEAR_FLAG(FLASH_FLAG));
 
     /* Clear the flags */
-    FLASH->STS |= FLASH_FLAG;
+    FLASH->STS = FLASH_FLAG;
 }
 
 /**
  * @brief  Returns the FLASH Status.
- * @note   This function can be used for N32G032 devices, it is equivalent
- *         to FLASH_GetBank1Status function.
+ * @note   This function can be used for N32G032 devices.
  * @return FLASH Status: The returned value can be: FLASH_BUSY,
- *         FLASH_ERR_PG, FLASH_ERR_WRP, FLASH_COMPL,
- *         FLASH_ERR_STS or FLASH_TIMEOUT.
+ *         FLASH_ERR_PG, FLASH_ERR_WRP, FLASH_COMPL.
  */
 FLASH_STS FLASH_GetSTS(void)
 {
@@ -1160,12 +1157,10 @@ FLASH_STS FLASH_GetSTS(void)
 
 /**
  * @brief  Waits for a Flash operation to complete or a TIMEOUT to occur.
- * @note   This function can be used for N32G032 devices,
- *         it is equivalent to FLASH_WaitForLastBank1Operation..
+ * @note   This function can be used for N32G032 devices.
  * @param Timeout FLASH programming Timeout
  * @return FLASH Status: The returned value can be: FLASH_BUSY,
- *         FLASH_ERR_PG, FLASH_ERR_WRP, FLASH_COMPL,
- *         FLASH_ERR_STS or FLASH_TIMEOUT.
+ *         FLASH_ERR_PG, FLASH_ERR_WRP, FLASH_COMPL, FLASH_TIMEOUT.
  */
 FLASH_STS FLASH_WaitForLastOpt(uint32_t Timeout)
 {

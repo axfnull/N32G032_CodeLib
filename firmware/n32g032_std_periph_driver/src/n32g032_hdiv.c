@@ -28,7 +28,7 @@
 /**
  * @file n32g032_hdiv.c
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.2
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -94,15 +94,19 @@
  */
 void HDIV_ConfigInt(FunctionalState Cmd)
 {
+    uint32_t tmpreg = 0x00;
     assert_param(IS_FUNCTIONAL_STATE(Cmd));
 
+    tmpreg = HDIV->CTRLSTS;
     if (Cmd != DISABLE)
     {
-        HDIV->CTRLSTS |= HDIV_INT_ENABLE;
+        tmpreg = (tmpreg | HDIV_INT_ENABLE) & HDIV_FLAG_INTF_MASK;
+        HDIV->CTRLSTS = tmpreg;
     }
     else
     {
-        HDIV->CTRLSTS &= (~HDIV_INT_ENABLE);
+        tmpreg = (tmpreg & (~HDIV_INT_ENABLE)) & HDIV_FLAG_INTF_MASK;
+        HDIV->CTRLSTS = tmpreg;
     }
 }
 
@@ -248,15 +252,20 @@ uint32_t HDIV_GetREMAINDER_Data(void)
  */
 void HDIV_Start(FunctionalState Cmd)
 {
+    uint32_t tmpreg = 0x00;
+    
+    tmpreg = HDIV->CTRLSTS;
     if (Cmd != DISABLE)
     {
+        tmpreg = (tmpreg | HDIV_ENABLE | HDIV_START_ENABLE) & HDIV_FLAG_INTF_MASK;
         /* Start HDIV Calculation */
-        HDIV->CTRLSTS |= (HDIV_ENABLE | HDIV_START_ENABLE);
+        HDIV->CTRLSTS = tmpreg;
     }
     else
     {
+        tmpreg = tmpreg & (~(HDIV_ENABLE | HDIV_START_ENABLE)) & HDIV_FLAG_INTF_MASK;
         /* End HDIV Calculation */
-        HDIV->CTRLSTS &= (~(HDIV_ENABLE | HDIV_START_ENABLE));
+        HDIV->CTRLSTS = tmpreg;
     }
 }
 

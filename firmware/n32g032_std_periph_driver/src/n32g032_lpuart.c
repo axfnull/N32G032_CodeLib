@@ -157,7 +157,7 @@ void LPUART_Init(LPUART_Module* LPUARTx, LPUART_InitType* LPUART_InitStruct)
 
     lpuartxbase = (uint32_t)LPUARTx;
 
-    // 时钟源判断，波特率范围    
+    // check clock source ,  Baud rate range
 
     /*---------------------------- LPUART CTRL Configuration -----------------------*/
     tmpregister = LPUARTx->CTRL;

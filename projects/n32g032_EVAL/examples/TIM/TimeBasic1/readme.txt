@@ -6,7 +6,7 @@
 3、使用说明
     系统配置；
         1、时钟源：
-                    HSE=8M,PLL=48M,AHB=48M,APB1=48M,APB2=48M,TIM1 CLK=48M
+                    HSE=8M,PLL=48M,AHB=48M,APB1=48M,APB2=12M,TIM1 CLK=24M
         2、中断：
                     TIM1 更新中断打开，优先级1
         3、端口配置：

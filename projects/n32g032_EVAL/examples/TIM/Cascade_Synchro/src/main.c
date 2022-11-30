@@ -55,29 +55,6 @@ int main(void)
     /* GPIO Configuration */
     GPIO_Configuration();
 
-    /* Timers synchronisation in cascade mode ----------------------------
-     1/TIM3 is configured as Master Timer:
-     - PWM Mode is used
-     - The TIM3 Update event is used as Trigger Output
-
-     2/TIM4 is slave for TIM3,
-     - PWM Mode is used
-     - The ITR1(TIM3) is used as input trigger
-     - Gated mode is used, so start and stop of slave counter
-      are controlled by the Master trigger output signal(TIM3 update event).
-
-     * The TIMxCLK is fixed to 48 MHz, the TIM3 counter clock is 48 MHz.
-  
-       The Master Timer TIM3 is running at TIM3 frequency :
-       TIM3 frequency = (TIM3 counter clock)/ (TIM3 period + 1) = 187.5 KHz
-       and the duty cycle = TIM3_CCR1/(TIM3_ARR + 1) = 25%.
-
-       The TIM4 is running:
-       - At (TIM3 frequency)/ (TIM4 period + 1) = 46.875 KHz and a duty cycle
-         equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
-
-    -------------------------------------------------------------------- */
-
     /* Time base configuration */
     TIM_TimeBaseStructure.Period    = 255;
     TIM_TimeBaseStructure.Prescaler = 0;

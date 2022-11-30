@@ -26,14 +26,14 @@
  * ****************************************************************************/
 
 /**
- * @file n32g45x_it.h
- * @author Nations Solution Team
+ * @file n32g032_it.h
+ * @author Nations 
  * @version v1.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
-#ifndef __N32G43X_IT_H__
-#define __N32G43X_IT_H__
+#ifndef __N32G032_IT_H__
+#define __N32G032_IT_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,7 +51,7 @@ void SysTick_Handler(void);
 }
 #endif
 
-#endif /* __N32G43X_IT_H__ */
+#endif /* __N32G032_IT_H__ */
 /**
  * @}
  */

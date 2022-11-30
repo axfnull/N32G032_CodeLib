@@ -15,7 +15,7 @@
         3、LPTIM：
                     LPTIM非正交编码器模式，利用内部LSI时钟连续计数IN1 IN2下升沿个数
     使用方法：
-        1、编译后打开调试模式，连接PB0和PA4，PB1和PA5，将变量encCNT添加到watch窗口
-        2、程序运行后，PB0 PB1输出20个脉冲周期，encCNT等于20
+        1、编译后打开调试模式，连接PB0和PA4，PB1和PA5，将变量NencCNT添加到watch窗口
+        2、程序运行后，PB0 PB1输出20个脉冲周期，NencCNT等于20
 4、注意事项
     无

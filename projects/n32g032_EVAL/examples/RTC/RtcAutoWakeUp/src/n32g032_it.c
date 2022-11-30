@@ -26,7 +26,7 @@
  * ****************************************************************************/
 
 /**
- * @file n32g43x_it.c
+ * @file n32g032_it.c
  * @author Nations Solution Team
  * @version v1.0.0
  *
@@ -36,11 +36,12 @@
 #include "n32g032.h"
 #include "main.h"
 #include "log.h"
-/** @addtogroup N32G43X_StdPeriph_Template
+/** @addtogroup N32G032_StdPeriph_Template
  * @{
  */
 
-extern __IO uint32_t CurrDataCounterEnd;
+uint8_t Delay_100Ms_Cnt = 0;
+extern volatile uint32_t RTC_Delay_Flag;
 
 /******************************************************************************/
 /*            Cortex-M0 Processor Exceptions Handlers                         */
@@ -64,7 +65,6 @@ void HardFault_Handler(void)
     }
 }
 
-
 /**
  * @brief  This function handles SVCall exception.
  */
@@ -73,13 +73,42 @@ void SVC_Handler(void)
 }
 
 
+#ifdef RTC_DELAY_USE_TIM6
+/**
+ * @brief  This function handles TIM6 global interrupt request.
+ */
+void LPTIM_TIM6_IRQHandler(void)
+{
+    if (TIM_GetIntStatus(TIM6, TIM_INT_UPDATE) != RESET)
+    {
+		Delay_100Ms_Cnt++;
+
+		if(Delay_100Ms_Cnt == 11)
+		{
+			RTC_Delay_Flag = 1;
+			Delay_100Ms_Cnt = 0;
+			/* Disable the TIM6 Counter */
+			TIM6->CTRL1 &= (uint32_t)(~((uint32_t)TIM_CTRL1_CNTEN));
+		}
+        TIM_ClrIntPendingBit(TIM6, TIM_INT_UPDATE);
+    }
+}
+#else
 /**
  * @brief  This function handles SysTick Handler.
  */
 void SysTick_Handler(void)
-{
+{	
+	Delay_100Ms_Cnt++;
+	if(Delay_100Ms_Cnt == 11)
+	{
+		RTC_Delay_Flag = 1;
+		Delay_100Ms_Cnt = 0;
+		/* Disable the SysTick Counter */
+		SysTick->CTRL &= (~SysTick_CTRL_ENABLE_Msk);
+	}
 }
-
+#endif
 
 /**
  * @brief  This function handles RTC WakeUp interrupt request.
@@ -98,10 +127,10 @@ void RTC_IRQHandler(void)
     }
 }
 /******************************************************************************/
-/*                 N32G43X Peripherals Interrupt Handlers                     */
+/*                 N32G032 Peripherals Interrupt Handlers                     */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_n32g43x.s).                                                 */
+/*  file (startup_n32g032.s).                                                 */
 /******************************************************************************/
 
 /**

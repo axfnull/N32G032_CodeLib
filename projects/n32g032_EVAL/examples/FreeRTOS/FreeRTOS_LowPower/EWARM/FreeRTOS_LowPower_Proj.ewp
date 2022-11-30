@@ -728,11 +728,11 @@
         </option>
         <option>
           <name>IlinkIcfOverride</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\linker\Nations\N32G032\N32G032x8.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\Nations\N32G032\N32G032R8.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>

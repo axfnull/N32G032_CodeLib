@@ -28,7 +28,7 @@
 /**
  * @file n32g032_spi.c
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.2
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -179,23 +179,23 @@ void SPI_Init(SPI_Module* SPIx, SPI_InitType* SPI_InitStruct)
     /*---------------------------- SPIx CTRL1 Configuration ------------------------*/
     /* Get the SPIx CTRL1 value */
     tmpregister = SPIx->CTRL1;
-    /* Clear BIDIMode, BIDIOE, RxONLY, SSM, SSI, LSBFirst, BR, MSTR, CPOL and CPHA bits */
+    /* Clear BIDIRMODE, BIDIROEN, RONLY, SSMEN, SSEL, LSBFF, BR, MSEL, CLKPOL and CLKPHA bits */
     tmpregister &= CTRL1_CLR_MASK;
     /* Configure SPIx: direction, NSS management, first transmitted bit, BaudRate prescaler
-       master/salve mode, CPOL and CPHA */
-    /* Set BIDImode, BIDIOE and RxONLY bits according to DataDirection value */
-    /* Set SSM, SSI and MSTR bits according to SpiMode and NSS values */
-    /* Set LSBFirst bit according to FirstBit value */
+       master/salve mode, CLKPOL and CLKPHA */
+    /* Set BIDIRMODE, BIDIROEN, RONLY bits according to DataDirection value */
+    /* Set SSMEN, SSEL and MSEL bits according to SpiMode and NSS values */
+    /* Set LSBFF bit according to FirstBit value */
     /* Set BR bits according to BaudRatePres value */
-    /* Set CPOL bit according to CLKPOL value */
-    /* Set CPHA bit according to CLKPHA value */
+    /* Set CLKPOL bit according to CLKPOL value */
+    /* Set CLKPHA bit according to CLKPHA value */
     tmpregister |= (uint16_t)((uint32_t)SPI_InitStruct->DataDirection | SPI_InitStruct->SpiMode
                               | SPI_InitStruct->DataLen | SPI_InitStruct->CLKPOL | SPI_InitStruct->CLKPHA
                               | SPI_InitStruct->NSS | SPI_InitStruct->BaudRatePres | SPI_InitStruct->FirstBit);
     /* Write to SPIx CTRL1 */
     SPIx->CTRL1 = tmpregister;
 
-    /* Activate the SPI mode (Reset I2SMOD bit in I2SCFG register) */
+    /* Activate the SPI mode (Reset MODSEL bit in I2SCFG register) */
     SPIx->I2SCFG &= SPI_MODE_ENABLE;
 
     /*---------------------------- SPIx CRCPOLY Configuration --------------------*/
@@ -204,12 +204,12 @@ void SPI_Init(SPI_Module* SPIx, SPI_InitType* SPI_InitStruct)
 }
 
 /**
- * @brief  Initializes the SPIx peripheral according to the specified
+ * @brief  Initializes the I2Sx peripheral according to the specified
  *         parameters in the I2S_InitStruct.
- * @param SPIx where x can be 1 select the SPI peripheral
+ * @param SPIx where x can be 1 to select the I2S peripheral
  *         (configured in I2S mode).
  * @param I2S_InitStruct pointer to an I2S_InitType structure that
- *         contains the configuration information for the specified SPI peripheral
+ *         contains the configuration information for the specified I2S peripheral
  *         configured in I2S mode.
  * @note
  *  The function calculates the optimal prescaler needed to obtain the most
@@ -291,17 +291,17 @@ void I2S_Init(SPI_Module* SPIx, I2S_InitType* I2S_InitStruct)
         i2sodd = 0;
     }
 
-    /* Write to SPIx I2SPREDIV register the computed value */
+    /* Write to SPI_I2SPREDIV register the computed value */
     SPIx->I2SPREDIV = (uint16_t)(i2sdiv | (uint16_t)(i2sodd));
 
-    /* Configure the I2S with the SPI_InitStruct values */
+    /* Configure the I2S with the I2S_InitStruct values */
     tmpregister |= (uint16_t)(
         I2S_MODE_ENABLE
         | (uint16_t)(I2S_InitStruct->I2sMode
                      | (uint16_t)(I2S_InitStruct->Standard
                                   | (uint16_t)(I2S_InitStruct->DataFormat | (uint16_t)I2S_InitStruct->CLKPOL))));
 
-    /* Write to SPIx I2SCFG */
+    /* Write to SPI_I2SCFG */
     SPIx->I2SCFG = tmpregister;
 }
 
@@ -379,9 +379,9 @@ void SPI_Enable(SPI_Module* SPIx, FunctionalState Cmd)
 }
 
 /**
- * @brief  Enables or disables the specified SPI peripheral (in I2S mode).
- * @param SPIx where x can be 1 to select the SPI peripheral.
- * @param Cmd new state of the SPIx peripheral.
+ * @brief  Enables or disables the specified I2S peripheral.
+ * @param SPIx where x can be 1 to select the I2S peripheral.
+ * @param Cmd new state of the I2S peripheral.
  *   This parameter can be: ENABLE or DISABLE.
  */
 void I2S_Enable(SPI_Module* SPIx, FunctionalState Cmd)
@@ -391,12 +391,12 @@ void I2S_Enable(SPI_Module* SPIx, FunctionalState Cmd)
     assert_param(IS_FUNCTIONAL_STATE(Cmd));
     if (Cmd != DISABLE)
     {
-        /* Enable the selected SPI peripheral (in I2S mode) */
+        /* Enable the selected I2S peripheral */
         SPIx->I2SCFG |= I2SCFG_I2SEN_ENABLE;
     }
     else
     {
-        /* Disable the selected SPI peripheral (in I2S mode) */
+        /* Disable the selected I2S peripheral */
         SPIx->I2SCFG &= I2SCFG_I2SEN_DISABLE;
     }
 }
@@ -563,9 +563,9 @@ void SPI_ConfigDataLen(SPI_Module* SPIx, uint16_t DataLen)
     /* Check the parameters */
     assert_param(IS_SPI_PERIPH(SPIx));
     assert_param(IS_SPI_DATASIZE(DataLen));
-    /* Clear DFF bit */
+    /* Clear DATFF bit */
     SPIx->CTRL1 &= (uint16_t)~SPI_DATA_SIZE_16BITS;
-    /* Set new DFF bit value */
+    /* Set new DATFF bit value */
     SPIx->CTRL1 |= DataLen;
 }
 
@@ -734,7 +734,7 @@ void SPI_I2S_ClrCRCErrFlag(SPI_Module* SPIx, uint16_t SPI_I2S_FLAG)
     assert_param(IS_SPI_I2S_CLR_FLAG(SPI_I2S_FLAG));
 
     /* Clear the selected SPI CRC Error (CRCERR) flag */
-    SPIx->STS = (uint16_t)~SPI_I2S_FLAG;
+    SPIx->STS = ((uint16_t)~SPI_I2S_FLAG) & (SPI_STS_RESERVED_MASK);
 }
 
 /**
@@ -816,7 +816,7 @@ void SPI_I2S_ClrITPendingBit(SPI_Module* SPIx, uint8_t SPI_I2S_IT)
     itpos = 0x01 << (SPI_I2S_IT & 0x0F);
 
     /* Clear the selected SPI CRC Error (CRCERR) interrupt pending bit */
-    SPIx->STS = (uint16_t)~itpos;
+    SPIx->STS = ((uint16_t)~itpos) & (SPI_STS_RESERVED_MASK);
 }
 /**
  * @}

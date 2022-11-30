@@ -76,7 +76,7 @@ int main(void)
 void TIM_Configuration(void)
 {
     /* Compute the prescaler value */
-    PrescalerValue = 0; //(uint16_t) (SystemCoreClock / 12000000) - 1;
+    PrescalerValue = 0;
 
     /* Time base configuration */
     TIM_TimeBaseStructure.Period    = 65535;

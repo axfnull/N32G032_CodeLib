@@ -164,7 +164,7 @@ int main(void)
     /* Enable WWDG clock */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_WWDG, ENABLE);
 
-    /* WWDG clock counter = (PCLK1(48MHz)/4096)/8 = (~680 us)  */
+    /* WWDG Tcount = (Tpclk1(1/48MHz)*4096)*8 = (~682.667 us)  */
     WWDG_SetPrescalerDiv(WWDG_PRESCALER_DIV8);
 
     /* Set Window value to 80; WWDG counter should be refreshed only when the counter
@@ -172,8 +172,8 @@ int main(void)
     WWDG_SetWValue(80);
 
     /*
-      Enable WWDG and set counter value to 127, WWDG timeout = ~680 us * 64 = 43.52 ms
-      In this case the refresh window is: ~680 us * (127-80) = 31.96 ms < refresh window < ~680 us * 64 = 43.52ms
+      Enable WWDG and set counter value to 127, WWDG timeout = ~682.667 us * 64 = 43.69 ms
+      In this case the refresh window is: ~682.667 us * (127-80) = 32.08 ms < refresh window < ~682.667 us * 64 = 43.69ms
     */
     WWDG_Enable(127);
 

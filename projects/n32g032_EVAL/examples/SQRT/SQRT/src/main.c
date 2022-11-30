@@ -28,7 +28,7 @@
 /**
  * @file main.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -56,8 +56,8 @@ int main(void)
     /* Config SQRT */
     SQRT_ConfigInt(ENABLE);
 
-    /* 123456 / 123 =  1003 R 87*/
-    SQRT_SetRADICANT_Data(0x1E240);
+    /* 123456  = 0x1E240*/
+    SQRT_SetRADICAND_Data(0x1E240);
 
     /* Start Calculating */
     SQRT_Start(ENABLE);

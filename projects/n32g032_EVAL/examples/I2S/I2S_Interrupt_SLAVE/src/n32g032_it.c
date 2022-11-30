@@ -33,6 +33,7 @@
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
 #include "n32g032_it.h"
+#include "main.h"
 
 /** @addtogroup N32G032_StdPeriph_Template
  * @{
@@ -95,10 +96,10 @@ void SysTick_Handler(void)
 void SPI1_IRQHandler(void)
 {
     /* Check the interrupt source */
-    if (SPI_I2S_GetIntStatus(SPI1, SPI_I2S_INT_RNE) == SET)
+    if (SPI_I2S_GetIntStatus(I2S_SLAVE, SPI_I2S_INT_RNE) == SET)
     {
         /* Store the I2S1 received data in the relative data table */
-        I2S2_Buffer_Rx[RxIdx++] = SPI_I2S_ReceiveData(SPI1);
+        I2S2_Buffer_Rx[RxIdx++] = SPI_I2S_ReceiveData(I2S_SLAVE);
     }
 }
 

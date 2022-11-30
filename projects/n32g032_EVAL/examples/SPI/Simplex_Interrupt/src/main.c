@@ -151,19 +151,19 @@ void GPIO_Configuration(void)
     GPIO_InitStruct(&GPIO_InitStructure);
     /* Configure SPI1 pins: SCK, MISO and MOSI ---------------------------------*/
     /* Confugure SCK , MISO and MOSI pins as Alternate Function Push Pull */
-    GPIO_InitStructure.Pin        = GPIO_PIN_5 | GPIO_PIN_7;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Pull = GPIO_NO_PULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_SPEED_HIGH;
+    GPIO_InitStructure.Pin            = GPIO_PIN_5 | GPIO_PIN_7;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.GPIO_Pull      = GPIO_NO_PULL;
+    GPIO_InitStructure.GPIO_Speed     = GPIO_SPEED_HIGH;
     GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_SPI1;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 
     /* Configure SPI2 pins: SCK, MISO and MOSI ---------------------------------*/
     /* Confugure SCK and MOSI pins as Input Floating */
-    GPIO_InitStructure.Pin        = GPIO_PIN_13 | GPIO_PIN_14;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Pull = GPIO_NO_PULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_SPEED_HIGH;
+    GPIO_InitStructure.Pin            = GPIO_PIN_13 | GPIO_PIN_14;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.GPIO_Pull      = GPIO_NO_PULL;
+    GPIO_InitStructure.GPIO_Speed     = GPIO_SPEED_HIGH;
     GPIO_InitStructure.GPIO_Alternate = GPIO_AF8_SPI2;
     GPIO_InitPeripheral(GPIOB, &GPIO_InitStructure);
 
@@ -183,7 +183,7 @@ void NVIC_Configuration(void)
     NVIC_Init(&NVIC_InitStructure);
 
     /* Configure and enable SPI_SLAVE interrupt --------------------------------*/
-    NVIC_InitStructure.NVIC_IRQChannel                   = SPI2_3_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannel                   = SPI_SLAVE_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority           = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
     NVIC_Init(&NVIC_InitStructure);

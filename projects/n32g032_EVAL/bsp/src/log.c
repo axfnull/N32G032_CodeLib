@@ -73,10 +73,10 @@ void log_init(void)
     USART_InitStructure.HardwareFlowControl = USART_HFCTRL_NONE;
     USART_InitStructure.Mode                = USART_MODE_RX | USART_MODE_TX;
 
-    // init uart
+    /* Initialize USART*/
     USART_Init(LOG_USARTx, &USART_InitStructure);
 
-    // enable uart
+    /* ENABLE USART */ 
     USART_Enable(LOG_USARTx, ENABLE);
 }
 

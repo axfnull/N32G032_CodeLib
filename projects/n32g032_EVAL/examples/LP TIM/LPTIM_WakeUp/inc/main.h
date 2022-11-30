@@ -46,10 +46,17 @@ extern "C" {
 #define LED1           GPIO_PIN_7
 #define LED2           GPIO_PIN_1
 #define LED3           GPIO_PIN_5
-#define KEY_INPUT_PORT GPIOA
-#define KEY_INPUT_PIN  GPIO_PIN_0
+#define PORT_GROUP     GPIOB
 
 void Ledlink(uint16_t Pin);
+void LedInit(GPIO_Module* GPIOx, uint16_t Pin);
+void LedOn(GPIO_Module *GPIOx, uint16_t Pin);
+void LedOff(GPIO_Module* GPIOx, uint16_t Pin);
+void LedBlink(GPIO_Module* GPIOx, uint16_t Pin);
+void delay(vu32 nCount);
+void LPTIMNVIC_Config(FunctionalState Cmd);
+void SYSCLKConfig(uint32_t RCC_PLLMULL);
+
 #ifdef __cplusplus
 }
 #endif

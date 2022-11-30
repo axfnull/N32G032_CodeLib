@@ -56,39 +56,6 @@ int main(void)
     /* GPIO Configuration */
     GPIO_Configuration();
 
-    /* TIM1 and Timers(TIM3 and TIM4) synchronisation in parallel mode -----------
-     1/TIM1 is configured as Master Timer:
-     - PWM Mode is used
-     - The TIM1 Update event is used as Trigger Output
-
-     2/TIM3 and TIM4 are slaves for TIM1,
-     - PWM Mode is used
-     - The ITR0(TIM1) is used as input trigger for both slaves
-     - Gated mode is used, so starts and stops of slaves counters
-       are controlled by the Master trigger output signal(update event).
-
-    For N32G032 devices:
-    The TIMxCLK is fixed to 48 MHz, Prescaler = 0 so the TIM1 counter clock is 48 MHz.
-
-    The Master Timer TIM1 is running at:
-    TIM1 frequency = TIM1 counter clock / (TIM1_Period + 1) = 187.5 KHz
-    and the duty cycle is equal to: TIM1_CCR1/(TIM1_ARR + 1) = 50%
-
-    The TIM3 is running at:
-    (TIM1 frequency)/ ((TIM3 period +1)* (Repetition_Counter+1)) = 12.5 KHz and
-    a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
-
-    The TIM4 is running at:
-    (TIM1 frequency)/ ((TIM4 period +1)* (Repetition_Counter+1)) = 18.75 KHz and
-    a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
-
-    For N32G032 devices:
-    The TIMxCLK is fixed to 48 MHz, Prescaler = 0 so the TIM1 counter clock is 48 MHz.
-    TIM1 frequency = 62.5  KHz
-    TIM3 frequency = 4.17  KHz
-    TIM4 frequency = 6.25 KHz
-    --------------------------------------------------------------------------- */
-
     /* TIM3 Peripheral Configuration ----------------------------------------*/
     /* TIM3 Slave Configuration: PWM1 Mode */
     TIM_TimeBaseStructure.Period    = 2;

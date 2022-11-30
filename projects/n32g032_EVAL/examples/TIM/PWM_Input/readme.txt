@@ -13,9 +13,9 @@
                     PA7选择为TIM3的CH2输入
                     PA3选择为IO输出
         4、TIM：
-                    TIM3 CH1下降沿捕获CH2信号，CH2上升沿捕获CH2信号
+                    TIM3 CH1捕获CH2信号的下降沿。TIM3 CH2捕获CH2信号的上升沿
     使用方法：
         1、编译后打开调试模式，连接PA3和PA7，将Frequency、DutyCycle、gOnePulsEn添加到watch窗口
-        2、程序运行后，默认gOnePulsEn=0，每次手动给gOnePulsEn=1，此时可以看到被捕获到的周期和频率的值分别存储在DutyCycle和Frequency变量
+        2、程序运行后，默认gOnePulsEn=0，每次手动给gOnePulsEn=1，此时可以看到被捕获到的占空比和频率的值分别存储在DutyCycle和Frequency变量
 4、注意事项
     无

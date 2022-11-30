@@ -26,17 +26,17 @@
  * ****************************************************************************/
 
 /**
- * @file n32g45x_algo_common.h
+ * @file n32g032_algo_common.h
  * @author Nations Solution Team
  * @version v1.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
-#ifndef __N32G45X_ALGO_COMMON_H__
-#define __N32G45X_ALGO_COMMON_H__
+#ifndef __N32G032_ALGO_COMMON_H__
+#define __N32G032_ALGO_COMMON_H__
 
 #include <stdint.h>
-/** @addtogroup N32G45X_Algorithm_Library
+/** @addtogroup N32G032_Algorithm_Library
  * @{
  */
 enum{

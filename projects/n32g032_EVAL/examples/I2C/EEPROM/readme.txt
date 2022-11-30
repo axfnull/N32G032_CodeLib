@@ -18,7 +18,7 @@
     3¡¢I2C1 ÅäÖÃ£º
             SCL   -->  PB6          
             SDA   -->  PB7         
-            CLOCK:100KHz
+            CLOCK:400KHz
             
     4¡¢USART1ÅäÖÃ£º
             TX  -->  PA9   

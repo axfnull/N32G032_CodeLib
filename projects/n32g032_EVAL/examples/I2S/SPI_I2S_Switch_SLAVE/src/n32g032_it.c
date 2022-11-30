@@ -33,7 +33,6 @@
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
 #include "n32g032_it.h"
-#include "main.h"
 
 /** @addtogroup N32G032_StdPeriph_Template
  * @{

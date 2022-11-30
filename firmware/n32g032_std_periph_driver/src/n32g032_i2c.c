@@ -28,7 +28,7 @@
 /**
  * @file n32g032_i2c.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -1209,7 +1209,7 @@ void I2C_ClrFlag(I2C_Module* I2Cx, uint32_t I2C_FLAG)
     /* Get the I2C flag position */
     flagpos = I2C_FLAG & FLAG_MASK;
     /* Clear the selected I2C flag */
-    I2Cx->STS1 = (uint16_t)~flagpos;
+    I2Cx->STS1 = ((uint16_t)~flagpos)&I2C_STS1_RESERVED_MASK;
 }
 
 /**
@@ -1303,7 +1303,7 @@ void I2C_ClrIntPendingBit(I2C_Module* I2Cx, uint32_t I2C_IT)
     /* Get the I2C flag position */
     flagpos = I2C_IT & FLAG_MASK;
     /* Clear the selected I2C flag */
-    I2Cx->STS1 = (uint16_t)~flagpos;
+    I2Cx->STS1 = ((uint16_t)~flagpos)&I2C_STS1_RESERVED_MASK;
 }
 
 /**

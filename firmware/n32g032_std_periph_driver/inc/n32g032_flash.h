@@ -28,7 +28,7 @@
 /**
  * @file n32g032_flash.h
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.2
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -215,6 +215,7 @@ typedef enum
                                   Write protection of page 120 to 127 */
 
 #define FLASH_WRPR_AllPages ((uint32_t)0x0000FFFF) /*!< Write protection of all Pages */
+#define FLASH_NO_WRPR_Pages ((uint32_t)0x00000000) /*!< No write protection of all Pages */
 
 #define IS_FLASH_WRPR_PAGE(PAGE) (((PAGE) <= FLASH_WRPR_AllPages))
 
@@ -326,8 +327,9 @@ typedef enum
  */
 #define FLASH_INT_ERR      ((uint32_t)0x00000400) /*!< PGERR WRPRTERR ERROR error interrupt source */
 #define FLASH_INT_EOP      ((uint32_t)0x00001000) /*!< End of FLASH Operation Interrupt source */
+#define FLASH_INT_ECC      ((uint32_t)0x00002000) /*!< ECCERR ERROR Interrupt source */
 
-#define IS_FLASH_INT(IT) ((((IT) & (uint32_t)0xFFFFEBFF) == 0x00000000) && (((IT) != 0x00000000)))
+#define IS_FLASH_INT(IT) ((((IT) & (uint32_t)0xFFFFCBFF) == 0x00000000) && (((IT) != 0x00000000)))
 
 /**
  * @}
@@ -340,13 +342,14 @@ typedef enum
 #define FLASH_FLAG_PGERR    ((uint32_t)0x00000004) /*!< FLASH Program error flag */
 #define FLASH_FLAG_WRPERR   ((uint32_t)0x00000010) /*!< FLASH Write protected error flag */
 #define FLASH_FLAG_EOP      ((uint32_t)0x00000020) /*!< FLASH End of Operation flag */
+#define FLASH_FLAG_ECC      ((uint32_t)0x00000080) /*!< FLASH ECC ERROR flag */
 #define FLASH_FLAG_OBERR    ((uint32_t)0x00000001) /*!< FLASH Option Byte error flag */
 
-#define IS_FLASH_CLEAR_FLAG(FLAG) (((FLAG & ((uint32_t)0x00000034)) != 0) && ((FLAG & ((uint32_t)0xFFFFFFCB)) == 0))
+#define IS_FLASH_CLEAR_FLAG(FLAG) (((FLAG & ((uint32_t)0x000000B4)) != 0) && ((FLAG & ((uint32_t)0xFFFFFF4B)) == 0))
 
 #define IS_FLASH_GET_FLAG(FLAG)                                                                                      \
     (((FLAG) == FLASH_FLAG_BUSY) || ((FLAG) == FLASH_FLAG_PGERR) || ((FLAG) == FLASH_FLAG_WRPERR)                    \
-  || ((FLAG) == FLASH_FLAG_EOP)  || ((FLAG) == FLASH_FLAG_OBERR))
+  || ((FLAG) == FLASH_FLAG_EOP)  || ((FLAG) == FLASH_FLAG_ECC) || ((FLAG) == FLASH_FLAG_OBERR))
 
 /**
  * @}

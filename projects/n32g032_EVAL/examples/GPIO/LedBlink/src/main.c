@@ -84,7 +84,7 @@ void Delay(uint32_t count)
 }
 /**
  * @brief  Configures LED GPIO.
- * @param GPIOx x can be A to G to select the GPIO port.
+ * @param GPIOx x can be A to F to select the GPIO port.
  * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
 void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
@@ -132,7 +132,7 @@ void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
 
 /**
  * @brief  Turns selected Led on.
- * @param GPIOx x can be A to G to select the GPIO port.
+ * @param GPIOx x can be A to F to select the GPIO port.
  * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
 void LedOn(GPIO_Module *GPIOx, uint16_t Pin)
@@ -142,7 +142,7 @@ void LedOn(GPIO_Module *GPIOx, uint16_t Pin)
 
 /**
  * @brief  Turns selected Led Off.
- * @param GPIOx x can be A to G to select the GPIO port.
+ * @param GPIOx x can be A to F to select the GPIO port.
  * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
 void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
@@ -152,7 +152,7 @@ void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
 
 /**
  * @brief  Toggles the selected Led.
- * @param GPIOx x can be A to G to select the GPIO port.
+ * @param GPIOx x can be A to F to select the GPIO port.
  * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
 void LedBlink(GPIO_Module* GPIOx, uint16_t Pin)

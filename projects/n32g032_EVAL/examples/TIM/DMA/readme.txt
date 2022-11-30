@@ -13,7 +13,7 @@
         3、TIM：
                     TIM1 CH3 CH3N互补输出，每6个周期触发一次DMA传输
         4、DMA：
-                    DMA1_CH5通道回环模式搬运3个半字SRC_Buffer[3]变量到TIM1 CC3寄存器
+                    DMA1_CH5通道回环模式搬运3个半字SRC_Buffer[3]变量到TIM1 CCDAT3寄存器
     使用方法：
         1、编译后打开调试模式，用示波器或者逻辑分析仪观察TIM1 CH3 CH3N的波形
         2、TIM1的6个周期改变一次CH3 CH3N的占空比，循环改变

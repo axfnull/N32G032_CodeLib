@@ -28,7 +28,7 @@
 /**
  * @file n32g032_usart.h
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -300,6 +300,7 @@ typedef struct
  * @}
  */
 
+#define USART_STS_RESERVED_MASK  ((uint16_t)0x03FF)
 /** @addtogroup USART_Flags
  * @{
  */

@@ -755,7 +755,7 @@ typedef struct
 typedef struct
 {
     __IO uint32_t CTRLSTS;
-    __IO uint32_t RADICANT;
+    __IO uint32_t RADICAND;
     __IO uint32_t ROOT;
 } SQRT_Module;
 
@@ -973,10 +973,10 @@ typedef struct
 #define PWR_CTRLSTS_WKUPF                     ((uint16_t)0x0001)     /*!< on DBGPD mode,wakeup pin occurs wakeup event,hardware setup*/
 #define PWR_CTRLSTS_DBGPDF                    ((uint16_t)0x0002)     /*!< DBGPD state flag */
 #define PWR_CTRLSTS_PVDO                      ((uint16_t)0x0004)     /*!< Power voltage detector output */
-#define PWR_CTRLSTS_WKUP0EN                   ((uint16_t)0x0010)     /*!< wakeup enable ,PA0  */
-#define PWR_CTRLSTS_WKUP1EN                   ((uint16_t)0x0020)     /*!< wakeup enable ,PC13  */
-#define PWR_CTRLSTS_WKUP2EN                   ((uint16_t)0x0040)     /*!< wakeup enable ,PA2  */
-#define PWR_CTRLSTS_WKUPPOL                   ((uint16_t)0x0080)     /*!< wakeup polarity select  */
+#define PWR_CTRLSTS_WKUP0EN                   ((uint16_t)0x0100)     /*!< wakeup enable ,PA0  */
+#define PWR_CTRLSTS_WKUP1EN                   ((uint16_t)0x0200)     /*!< wakeup enable ,PC13  */
+#define PWR_CTRLSTS_WKUP2EN                   ((uint16_t)0x0400)     /*!< wakeup enable ,PA2  */
+#define PWR_CTRLSTS_WKUPPOL                   ((uint16_t)0x0800)     /*!< wakeup polarity select  */
 /********************  Bit definition for PWR_CTRL2 register  ********************/
 #define PWR_CTRL2_IWDGRSTEN                   ((uint16_t)0x0400)     /*!< IWDG reset enable */
 /********************  Bit definition for PWR_CTRL3 register  ********************/
@@ -1036,7 +1036,7 @@ typedef struct
 
 /*******************  Bit definition for RCC_CFG register  *******************/
 /*!< SCLKSW configuration */
-#define RCC_CFG_SCLKSW   ((uint32_t)0x00000003) /*!< SCLKSW[1:0] bits (System clock Switch) */
+#define RCC_CFG_SCLKSW   ((uint32_t)0x00000007) /*!< SCLKSW[1:0] bits (System clock Switch) */
 #define RCC_CFG_SCLKSW_0 ((uint32_t)0x00000001) /*!< Bit 0 */
 #define RCC_CFG_SCLKSW_1 ((uint32_t)0x00000002) /*!< Bit 1 */
 #define RCC_CFG_SCLKSW_2 ((uint32_t)0x00000004) /*!< Bit 2 */
@@ -2737,10 +2737,10 @@ typedef struct
 #define TIM_CCMOD1_OC1FEN ((uint16_t)0x0004) /*!< Output Compare 1 Fast enable */
 #define TIM_CCMOD1_OC1PEN ((uint16_t)0x0008) /*!< Output Compare 1 Preload enable */
 
-#define TIM_CCMOD1_OC1M   ((uint16_t)0x0070) /*!< OC1M[2:0] bits (Output Compare 1 Mode) */
-#define TIM_CCMOD1_OC1M_0 ((uint16_t)0x0010) /*!< Bit 0 */
-#define TIM_CCMOD1_OC1M_1 ((uint16_t)0x0020) /*!< Bit 1 */
-#define TIM_CCMOD1_OC1M_2 ((uint16_t)0x0040) /*!< Bit 2 */
+#define TIM_CCMOD1_OC1MD   ((uint16_t)0x0070) /*!< OC1MD[2:0] bits (Output Compare 1 Mode) */
+#define TIM_CCMOD1_OC1MD_0 ((uint16_t)0x0010) /*!< Bit 0 */
+#define TIM_CCMOD1_OC1MD_1 ((uint16_t)0x0020) /*!< Bit 1 */
+#define TIM_CCMOD1_OC1MD_2 ((uint16_t)0x0040) /*!< Bit 2 */
 
 #define TIM_CCMOD1_OC1CEN ((uint16_t)0x0080) /*!< Output Compare 1Clear Enable */
 
@@ -2751,10 +2751,10 @@ typedef struct
 #define TIM_CCMOD1_OC2FEN ((uint16_t)0x0400) /*!< Output Compare 2 Fast enable */
 #define TIM_CCMOD1_OC2PEN ((uint16_t)0x0800) /*!< Output Compare 2 Preload enable */
 
-#define TIM_CCMOD1_OC2M   ((uint16_t)0x7000) /*!< OC2M[2:0] bits (Output Compare 2 Mode) */
-#define TIM_CCMOD1_OC2M_0 ((uint16_t)0x1000) /*!< Bit 0 */
-#define TIM_CCMOD1_OC2M_1 ((uint16_t)0x2000) /*!< Bit 1 */
-#define TIM_CCMOD1_OC2M_2 ((uint16_t)0x4000) /*!< Bit 2 */
+#define TIM_CCMOD1_OC2MD   ((uint16_t)0x7000) /*!< OC2MD[2:0] bits (Output Compare 2 Mode) */
+#define TIM_CCMOD1_OC2MD_0 ((uint16_t)0x1000) /*!< Bit 0 */
+#define TIM_CCMOD1_OC2MD_1 ((uint16_t)0x2000) /*!< Bit 1 */
+#define TIM_CCMOD1_OC2MD_2 ((uint16_t)0x4000) /*!< Bit 2 */
 
 #define TIM_CCMOD1_OC2CEN ((uint16_t)0x8000) /*!< Output Compare 2 Clear Enable */
 
@@ -2788,7 +2788,7 @@ typedef struct
 #define TIM_CCMOD2_OC3FEN ((uint16_t)0x0004) /*!< Output Compare 3 Fast enable */
 #define TIM_CCMOD2_OC3PEN ((uint16_t)0x0008) /*!< Output Compare 3 Preload enable */
 
-#define TIM_CCMOD2_OC3MD   ((uint16_t)0x0070) /*!< OC3M[2:0] bits (Output Compare 3 Mode) */
+#define TIM_CCMOD2_OC3MD   ((uint16_t)0x0070) /*!< OC3MD[2:0] bits (Output Compare 3 Mode) */
 #define TIM_CCMOD2_OC3MD_0 ((uint16_t)0x0010) /*!< Bit 0 */
 #define TIM_CCMOD2_OC3MD_1 ((uint16_t)0x0020) /*!< Bit 1 */
 #define TIM_CCMOD2_OC3MD_2 ((uint16_t)0x0040) /*!< Bit 2 */
@@ -2802,7 +2802,7 @@ typedef struct
 #define TIM_CCMOD2_OC4FEN ((uint16_t)0x0400) /*!< Output Compare 4 Fast enable */
 #define TIM_CCMOD2_OC4PEN ((uint16_t)0x0800) /*!< Output Compare 4 Preload enable */
 
-#define TIM_CCMOD2_OC4MD   ((uint16_t)0x7000) /*!< OC4M[2:0] bits (Output Compare 4 Mode) */
+#define TIM_CCMOD2_OC4MD   ((uint16_t)0x7000) /*!< OC4MD[2:0] bits (Output Compare 4 Mode) */
 #define TIM_CCMOD2_OC4MD_0 ((uint16_t)0x1000) /*!< Bit 0 */
 #define TIM_CCMOD2_OC4MD_1 ((uint16_t)0x2000) /*!< Bit 1 */
 #define TIM_CCMOD2_OC4MD_2 ((uint16_t)0x4000) /*!< Bit 2 */
@@ -2835,7 +2835,7 @@ typedef struct
 #define TIM_CCMOD3_OC5FEN ((uint16_t)0x0004) /*!< Output Compare 5 Fast enable */
 #define TIM_CCMOD3_OC5PEN ((uint16_t)0x0008) /*!< Output Compare 5 Preload enable */
 
-#define TIM_CCMOD3_OC5MD   ((uint16_t)0x0070) /*!< OC5M[2:0] bits (Output Compare 5 Mode) */
+#define TIM_CCMOD3_OC5MD   ((uint16_t)0x0070) /*!< OC5MD[2:0] bits (Output Compare 5 Mode) */
 #define TIM_CCMOD3_OC5MD_0 ((uint16_t)0x0010) /*!< Bit 0 */
 #define TIM_CCMOD3_OC5MD_1 ((uint16_t)0x0020) /*!< Bit 1 */
 #define TIM_CCMOD3_OC5MD_2 ((uint16_t)0x0040) /*!< Bit 2 */
@@ -2845,7 +2845,7 @@ typedef struct
 #define TIM_CCMOD3_OC6FEN ((uint16_t)0x0400) /*!< Output Compare 6 Fast enable */
 #define TIM_CCMOD3_OC6PEN ((uint16_t)0x0800) /*!< Output Compare 6 Preload enable */
 
-#define TIM_CCMOD3_OC6MD   ((uint16_t)0x7000) /*!< OC6M[2:0] bits (Output Compare 6 Mode) */
+#define TIM_CCMOD3_OC6MD   ((uint16_t)0x7000) /*!< OC6MD[2:0] bits (Output Compare 6 Mode) */
 #define TIM_CCMOD3_OC6MD_0 ((uint16_t)0x1000) /*!< Bit 0 */
 #define TIM_CCMOD3_OC6MD_1 ((uint16_t)0x2000) /*!< Bit 1 */
 #define TIM_CCMOD3_OC6MD_2 ((uint16_t)0x4000) /*!< Bit 2 */
@@ -5140,8 +5140,8 @@ typedef struct
 #define SQRT_CTRLSTS_SQRTIF            ((uint32_t)0x00000010) /*!< SQRT interrupt flag */
 #define SQRT_CTRLSTS_SQRTIEN           ((uint32_t)0x00000020) /*!< SQRT interrupt enable */
 
-/******************  Bit definition for SQRT_RADICANT register  ******************/
-#define SQRT_RADICANT_RADICANT         ((uint32_t)0xFFFFFFFF) /*!< 32bit unsigned interger squared */
+/******************  Bit definition for SQRT_RADICAND register  ******************/
+#define SQRT_RADICAND_RADICAND         ((uint32_t)0xFFFFFFFF) /*!< 32bit unsigned interger squared */
 
 /******************  Bit definition for SQRT_ROOT register  ******************/
 #define SQRT_ROOT_ROOT                 ((uint32_t)0x0000FFFF) /*!< 16bit Square root output */

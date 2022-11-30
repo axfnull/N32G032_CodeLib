@@ -28,7 +28,7 @@
 /**
  * @file n32g032_rcc.c
  * @author Nations Solution Team
- * @version v1.0.2
+ * @version v1.0.3
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -134,7 +134,7 @@
 
 /* CTRLSTS register bit mask */
 #define CSR_RMRSTF_SET ((uint32_t)0x00000001)
-#define CSR_RMRSTF_Reset ((uint32_t)0xfeffffff)
+#define CSR_RMRSTF_Reset ((uint32_t)0xfffffffe)
 
 /* RCC Flag Mask */
 #define FLAG_MASK ((uint8_t)0x1F)
@@ -375,6 +375,8 @@ void RCC_EnableHsi(FunctionalState Cmd)
  * @param RCC_PLLOUTDIV specifies the PLL Out divider clock.
  *   this parameter can be one of the following values:
  *     this parameter can be RCC_PLLOUT_DIV_x where x:[1,4]
+ * @note FIN/N must be set in 4MHz to 20MHz.
+ *       FIN/N*M must be set in 48MHz to 72MHz
  */
 void RCC_ConfigPll(uint32_t RCC_PLLSource, uint32_t RCC_PLLMul, uint32_t RCC_PLLPRE, uint32_t RCC_PLLOUTDIV)
 {
@@ -396,7 +398,7 @@ void RCC_ConfigPll(uint32_t RCC_PLLSource, uint32_t RCC_PLLMul, uint32_t RCC_PLL
     /* Set the PLL configuration bits */
     if((RCC_PLLSource == RCC_PLL_SRC_HSI) || (RCC_PLLSource == RCC_PLL_SRC_HSE))
     {
-        tmpregister |= (RCC_PLLMul | RCC_PLLPRE | RCC_PLLOUTDIV);
+        tmpregister |= (RCC_PLLSource | RCC_PLLMul | RCC_PLLPRE | RCC_PLLOUTDIV);
     }
     /* (RCC_PLLSource == RCC_PLL_SRC_BP) */
     else
@@ -679,6 +681,7 @@ void RCC_ConfigRngcClk(uint32_t RCC_RNGCCLKPrescaler, uint32_t RNGCCLKCmd)
  *               ...
  *     @arg RCC_ADC1MCLK_DIV31 ADC1M clock = RCC_ADC1MCLKSource_xxx/31
  *     @arg RCC_ADC1MCLK_DIV32 ADC1M clock = RCC_ADC1MCLKSource_xxx/32
+ * @note The HSI should be enabled when you want to configure HSE as RCC ADC1M CLK source.
  */
 void RCC_ConfigAdc1mClk(uint32_t RCC_ADC1MCLKSource, uint32_t RCC_ADC1MPrescaler)
 {
@@ -754,7 +757,7 @@ void RCC_ConfigAdcPllClk(uint32_t RCC_ADCPLLCLKPrescaler, FunctionalState Cmd)
  *   This parameter can be on of the following values:
  *     @arg RCC_ADCHCLK_DIV1 ADCHCLKPRE[3:0] = 0000, HCLK Clock Divided By 1
  *     @arg RCC_ADCHCLK_DIV2 ADCHCLKPRE[3:0] = 0001, HCLK Clock Divided By 2
- *     @arg RCC_ADCHCLK_DIV4 ADCHCLKPRE[3:0] = 0010, HCLK Clock Divided By 3
+ *     @arg RCC_ADCHCLK_DIV3 ADCHCLKPRE[3:0] = 0010, HCLK Clock Divided By 3
  *     @arg RCC_ADCHCLK_DIV4 ADCHCLKPRE[3:0] = 0011, HCLK Clock Divided By 4
  *     @arg RCC_ADCHCLK_DIV6 ADCHCLKPRE[3:0] = 0100, HCLK Clock Divided By 6
  *     @arg RCC_ADCHCLK_DIV8 ADCHCLKPRE[3:0] = 0101, HCLK Clock Divided By 8

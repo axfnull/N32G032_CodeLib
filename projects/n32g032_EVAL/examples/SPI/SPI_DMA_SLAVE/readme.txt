@@ -4,17 +4,15 @@
 
 2、使用环境
 
-
-
-        /* 硬件环境：工程对应的开发硬件平台 */
-        开发板：N32G032R8L7_STB V1.0
+    软件开发环境： KEIL MDK-ARM V5.34.0.0
+	硬件环境：    基于N32G032R8L7_STB V1.0开发
 
 3、使用说明
 	
 	/* 描述相关模块配置方法；例如:时钟，I/O等 */
         SystemClock：48MHz
         GPIO：（主模式 DEMO 板）SPI1: SCK--PA5、 MISO--PA6、MOSI--PA7,
-	      （从模式 DEMO 板）SPI1: SCK--PA5、 MISO--PA6、MOSI--PA7,
+	          （从模式 DEMO 板）SPI1: SCK--PA5、 MISO--PA6、MOSI--PA7,
 	
 	日志打印：从模式 DEMO 板 PA9(TX)，波特率：115200
 	

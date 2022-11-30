@@ -28,7 +28,7 @@
 /**
  * @file n32g032_can.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -616,13 +616,13 @@ void CAN_CancelTransmitMessage(CAN_Module* CANx, uint8_t Mailbox)
     switch (Mailbox)
     {
     case (CAN_TXMAILBOX_0):
-        CANx->TSTS |= CAN_TSTS_ABRQM0;
+        CANx->TSTS = CAN_TSTS_ABRQM0;
         break;
     case (CAN_TXMAILBOX_1):
-        CANx->TSTS |= CAN_TSTS_ABRQM1;
+        CANx->TSTS = CAN_TSTS_ABRQM1;
         break;
     case (CAN_TXMAILBOX_2):
-        CANx->TSTS |= CAN_TSTS_ABRQM2;
+        CANx->TSTS = CAN_TSTS_ABRQM2;
         break;
     default:
         break;
@@ -956,6 +956,7 @@ uint8_t CAN_GetLSBTransmitErrCounter(CAN_Module* CANx)
  *                 - CAN_INT_FOV1,
  *                 - CAN_INT_EWG,
  *                 - CAN_INT_EPV,
+ *                 - CAN_INT_BOF,
  *                 - CAN_INT_LEC,
  *                 - CAN_INT_ERR,
  *                 - CAN_INT_WKU or

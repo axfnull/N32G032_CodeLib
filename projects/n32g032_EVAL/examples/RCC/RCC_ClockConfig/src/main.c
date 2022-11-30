@@ -27,8 +27,8 @@
 
 /**
  * @file main.c
- * @author Nations Solution Team
- * @version v1.0.0
+ * @author Nations 
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -71,34 +71,33 @@ void DumpClock(const char* msg)
 
 int main(void)
 {
-    RCC_ClocksType RCC_temp;
-    log_init();
-    log_info("-----------------\nRCC_ClockConfig Demo.\n");
 
-//    DumpClock("After reset");
-//  RCC_GetClocksFreqValue(&RCC_temp);
+      DumpClock("After reset");
+	
+///*** Select one of the following configuration methods ***///
+  /* Method 1  */	
 //    SetSysClockToHSI();
-//    RCC_GetClocksFreqValue(&RCC_temp);
 //    DumpClock("HSI, 8MHz");
+
+  /* Method 2  */		
 //    SetSysClockToHSE();
-//    RCC_GetClocksFreqValue(&RCC_temp);
 //    DumpClock("HSE, 8MHz");
-//
+
+	/* Method 3  */	
 //    SetSysClock_LSI();
-//    RCC_GetClocksFreqValue(&RCC_temp);
 //    DumpClock("LSI, 30K");
-//  
+
+	/* Method 4  */	
 //    SetSysClock_LSE();
-//    RCC_GetClocksFreqValue(&RCC_temp);
-//DumpClock("LSE, 32.768K");
+//    DumpClock("LSE, 32.768K");
 
-
-//    SetSysClockToPLL(32000000, SYSCLK_USE_HSE);
-//    DumpClock("HSE->PLL, 32M");
-
-    SetSysClockToPLL(48000000, SYSCLK_USE_HSI);
-    RCC_GetClocksFreqValue(&RCC_temp);
-    DumpClock("HSE->PLL, 48M");
+  /* Method 5  */	
+    SetSysClockToPLL(32000000, SYSCLK_USE_HSE);
+    DumpClock("HSE->PLL, 32M");
+		
+  /* Method 6  */	
+//    SetSysClockToPLL(48000000, SYSCLK_USE_HSI);
+//    DumpClock("HSE->PLL, 48M");
 
     /* Enable Clock Security System(CSS): this will generate an NMI exception
        when HSE clock fails */
@@ -118,7 +117,8 @@ int main(void)
     GPIO_InitStructure.GPIO_Alternate  = GPIO_AF11_MCO;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 
-    RCC_ConfigMcoClkPre(RCC_MCO_CLK_DIV2);
+    RCC_ConfigMcoClkPre(RCC_MCO_CLK_DIV8);
+///*** Select the corresponding MCO clock source ***///
     RCC_ConfigMco(RCC_MCO_PLLCLK_PRES);
 
     while (1);
@@ -239,6 +239,8 @@ void SetSysClockToHSE(void)
 /**
  * @brief  Selects PLL clock as System clock source and configure HCLK, PCLK2
  *         and PCLK1 prescalers.
+* @note FIN/N must be set in 4MHz to 20MHz.
+ *       FIN/N*M must be set in 48MHz to 72MHz
  */
 void SetSysClockToPLL(uint32_t freq, uint8_t src)
 {
@@ -247,7 +249,7 @@ void SetSysClockToPLL(uint32_t freq, uint8_t src)
     uint32_t latency;
     uint32_t pclk1div, pclk2div;
 
-    if (HSE_VALUE != 8000000)
+    if ((src == SYSCLK_USE_HSE)&&(HSE_VALUE != 8000000))
     {
         /* HSE_VALUE == 8000000 is needed in this project! */
         while (1);
@@ -303,29 +305,17 @@ void SetSysClockToPLL(uint32_t freq, uint8_t src)
     {
         case 32000000:
             latency  = FLASH_LATENCY_1;
-            if(src == SYSCLK_USE_HSI)
-            {
-                pllmul = RCC_PLL_MUL_8;
-            }
-            else if(src == SYSCLK_USE_HSE)
-            {
-                pllmul = RCC_PLL_MUL_8;
-            }
+            pllmul = RCC_PLL_MUL_16;
             pclk1div = RCC_HCLK_DIV2;
             pclk2div = RCC_HCLK_DIV1;
+            plldiv = RCC_PLLOUT_DIV_2;
             break;
         case 48000000:
             latency  = FLASH_LATENCY_2;
-            if(src == SYSCLK_USE_HSI)
-            {
-              pllmul = RCC_PLL_MUL_12;
-            }
-            else if(src == SYSCLK_USE_HSE)
-            {
-               pllmul = RCC_PLL_MUL_12;
-            }
+		    pllmul = RCC_PLL_MUL_12;
             pclk1div = RCC_HCLK_DIV2;
             pclk2div = RCC_HCLK_DIV1;
+		    plldiv = RCC_PLLOUT_DIV_1;
             break;
         default:
             while (1);

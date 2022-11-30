@@ -86,7 +86,7 @@ int main(void)
     /* GPIO configuration ------------------------------------------------------*/
     GPIO_Configuration();
 
-    SPI_I2S_DeInit(SPI1);
+    SPI_I2S_DeInit(I2S_SLAVE);
 
     /* I2S peripheral configuration */
     I2S_InitStructure.Standard       = I2S_STD_PHILLIPS;
@@ -97,13 +97,13 @@ int main(void)
     /*  Master Transmitter to Slave Receiver communication -----------*/
     /* I2S1 configuration */
     I2S_InitStructure.I2sMode = I2S_MODE_SlAVE_RX;
-    I2S_Init(SPI1, &I2S_InitStructure);
+    I2S_Init(I2S_SLAVE, &I2S_InitStructure);
 
     /* Enable the I2S1 RNE interrupt */
-    SPI_I2S_EnableInt(SPI1, SPI_I2S_INT_RNE, ENABLE);
+    SPI_I2S_EnableInt(I2S_SLAVE, SPI_I2S_INT_RNE, ENABLE);
 
     /* Enable the I2S1 */
-    I2S_Enable(SPI1, ENABLE);
+    I2S_Enable(I2S_SLAVE, ENABLE);
 
     /* Wait the end of communication */
     while (RxIdx < 32)
@@ -124,7 +124,7 @@ int main(void)
     TxIdx = 0;
     RxIdx = 0;
 
-    SPI_I2S_DeInit(SPI1);
+    SPI_I2S_DeInit(I2S_SLAVE);
 
     /* I2S peripheral configuration */
     I2S_InitStructure.Standard       = I2S_STD_PHILLIPS;
@@ -135,13 +135,13 @@ int main(void)
     /* Master Transmitter to Slave Receiver communication -----------*/
     /* I2S1 configuration */
     I2S_InitStructure.I2sMode = I2S_MODE_SlAVE_RX;
-    I2S_Init(SPI1, &I2S_InitStructure);
+    I2S_Init(I2S_SLAVE, &I2S_InitStructure);
 
     /* Enable the I2S1 RNE interrupt */
-    SPI_I2S_EnableInt(SPI1, SPI_I2S_INT_RNE, ENABLE);
+    SPI_I2S_EnableInt(I2S_SLAVE, SPI_I2S_INT_RNE, ENABLE);
 
     /* Enable the I2S1 */
-    I2S_Enable(SPI1, ENABLE);
+    I2S_Enable(I2S_SLAVE, ENABLE);
 
     /* Wait the end of communication */
     while (RxIdx < 32)
@@ -164,58 +164,11 @@ int main(void)
  */
 void RCC_Configuration(void)
 {
-#if 0   
-    /* RCC system reset(for debug purpose) */
-    RCC_DeInit();
-
-    /* Enable HSE */
-    RCC_ConfigHse(RCC_HSE_ENABLE);
-
-    /* Wait till HSE is ready */
-    HSEStartUpStatus = RCC_WaitHseStable();
-
-    if (HSEStartUpStatus == SUCCESS)
-    {
-//        /* Enable Prefetch Buffer */
-//        FLASH_PrefetchBufSet(FLASH_PrefetchBuf_EN);
-
-//        /* Flash 2 wait state */
-//        FLASH_SetLatency(FLASH_LATENCY_2);
-
-        /* HCLK = SYSCLK */
-        RCC_ConfigHclk(RCC_SYSCLK_DIV1);
-
-        /* PCLK2 = HCLK */
-        RCC_ConfigPclk2(RCC_HCLK_DIV1);
-
-        /* PCLK1 = HCLK/2 */
-        RCC_ConfigPclk1(RCC_HCLK_DIV2);
-
-//        /* PLLCLK = 8MHz * 9 = 72 MHz */
-//        RCC_ConfigPll(RCC_PLL_SRC_HSE_DIV1, RCC_PLL_MUL_9);
-
-        /* Enable PLL */
-        RCC_EnablePll(ENABLE);
-
-//        /* Wait till PLL is ready */
-//        while (RCC_GetFlagStatus(RCC_FLAG_PLLRD) == RESET)
-//        {
-//        }
-
-        /* Select PLL as system clock source */
-        RCC_ConfigSysclk(RCC_SYSCLK_SRC_PLLCLK);
-
-        /* Wait till PLL is used as system clock source */
-        while (RCC_GetSysclkSrc() != 0x08)
-        {
-        }
-    }
-#endif
     /* Enable peripheral clocks ------------------------------------------------*/
     /* GPIOA and AFIO clocks enable */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA | RCC_APB2_PERIPH_AFIO, ENABLE);
 
-    /* SPI1 clocks enable */
+    /* I2S1 clocks enable */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_SPI1, ENABLE);
 }
 
@@ -228,12 +181,12 @@ void GPIO_Configuration(void)
 
     GPIO_InitStruct(&GPIO_InitStructure);
 
-    /* Configure SPI1 pins: CK, WS and SD ---------------------------------*/
-    GPIO_InitStructure.Pin        = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Pull = GPIO_NO_PULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_SPEED_HIGH;
-    GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_SPI1;
+    /* Configure I2S1 pins: CK, WS and SD ---------------------------------*/
+    GPIO_InitStructure.Pin            = I2S_SLAVE_PIN_CK | I2S_SLAVE_PIN_SD | I2S_SLAVE_PIN_WS;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.GPIO_Pull      = GPIO_NO_PULL;
+    GPIO_InitStructure.GPIO_Speed     = GPIO_SPEED_HIGH;
+    GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_I2S1;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 
 }
@@ -245,7 +198,7 @@ void NVIC_Configuration(void)
 {
     NVIC_InitType NVIC_InitStructure;
 
-    /* SPI1 IRQ Channel configuration */
+    /* I2S1 IRQ Channel configuration */
     NVIC_InitStructure.NVIC_IRQChannel                   = SPI1_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority           = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;

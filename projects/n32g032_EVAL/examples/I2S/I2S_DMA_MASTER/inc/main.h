@@ -38,36 +38,17 @@
 #include "n32g032.h"
 #include "n32g032_conf.h"
 
-#define I2S_MASTER        SPI1
-#define I2S_MASTER_CLK    RCC_APB2_PERIPH_SPI1
-#define I2S_MASTER_PIN_CK GPIO_PIN_5
-#define I2S_MASTER_PIN_SD GPIO_PIN_7
-#define I2S_MASTER_PIN_WS GPIO_PIN_4
+#define I2S_MASTER                      SPI1
+#define I2S_MASTER_CLK                  RCC_APB2_PERIPH_SPI1
+#define I2S_MASTER_PIN_CK               GPIO_PIN_5
+#define I2S_MASTER_PIN_SD               GPIO_PIN_7
+#define I2S_MASTER_PIN_WS               GPIO_PIN_4
 
-#define I2S_MASTER_DMA            DMA
-#define I2S_MASTER_DMA_CLK        RCC_AHB_PERIPH_DMA
-#define I2S_MASTER_Rx_DMA_Channel DMA_CH2
-#define I2S_MASTER_Rx_DMA_FLAG    DMA_FLAG_TC2
-#define I2S_MASTER_Tx_DMA_Channel DMA_CH3
-#define I2S_MASTER_Tx_DMA_FLAG    DMA_FLAG_TC3
-
-
-/* Uncomment the line corresponding to the desired System clock (SYSCLK)
-   frequency (after reset the HSI is used as SYSCLK source) */
-//#define SYSCLK_HSI
-//#define SYSCLK_HSE
-#define SYSCLK_PLLHSI_FREQ_24MHz
-//#define SYSCLK_PLLHSI_FREQ_36MHz
-//#define SYSCLK_PLLHSI_FREQ_48MHz
-//#define SYSCLK_PLLHSI_FREQ_56MHz
-//#define SYSCLK_PLLHSI_FREQ_72MHz
-//#define SYSCLK_PLLHSI_FREQ_96MHz
-//#define SYSCLK_PLLHSE_FREQ_24MHz
-//#define SYSCLK_PLLHSE_FREQ_36MHz
-//#define SYSCLK_PLLHSE_FREQ_48MHz
-//#define SYSCLK_PLLHSE_FREQ_56MHz
-//#define SYSCLK_PLLHSE_FREQ_72MHz
-//#define SYSCLK_PLLHSE_FREQ_96MHz
-//#define SYSCLK_PLLHSE_FREQ_144MHz
+#define I2S_MASTER_DMA                  DMA
+#define I2S_MASTER_DMA_CLK              RCC_AHB_PERIPH_DMA
+#define I2S_MASTER_Rx_DMA_Channel       DMA_CH2
+#define I2S_MASTER_Rx_DMA_FLAG          DMA_FLAG_TC2
+#define I2S_MASTER_Tx_DMA_Channel       DMA_CH3
+#define I2S_MASTER_Tx_DMA_FLAG          DMA_FLAG_TC3
 
 #endif /* __MAIN_H__ */

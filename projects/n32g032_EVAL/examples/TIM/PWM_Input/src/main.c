@@ -34,7 +34,7 @@
  */
 #include "main.h"
 
-/** @addtogroup N32G43x_StdPeriph_Examples
+/** @addtogroup N32G032_StdPeriph_Examples
  * @{
  */
 
@@ -55,9 +55,9 @@ int main(void)
 {
     /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
-       file (startup_n32g43x.s) before to branch to application main.
+       file (startup_n32g032.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
-       system_n32g43x.c file
+       system_n32g032.c file
      */
 
     /* System Clocks Configuration */

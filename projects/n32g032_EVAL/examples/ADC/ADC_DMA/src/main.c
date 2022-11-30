@@ -27,7 +27,7 @@
 
 /**
  * @file main.c
- * @author Nations Solution Team
+ * @author Nations 
  * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
@@ -109,6 +109,7 @@ int main(void)
  */
 void RCC_Configuration(void)
 {
+    ErrorStatus HSIStartUpStatus;
     /* Enable peripheral clocks ------------------------------------------------*/
     /* Enable DMA clocks */
     RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_DMA, ENABLE);
@@ -119,6 +120,19 @@ void RCC_Configuration(void)
     RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_ADC, ENABLE);
     /* enable ADC 1M clock */
     RCC_EnableHsi(ENABLE);
+    /* Wait til1 HSI is ready*/
+    HSIStartUpStatus = RCC_WaitHsiStable(); 
+    if(HSIStartUpStatus == SUCCESS)
+    {
+    }
+    else
+    {
+        /* If HSI fails to start-up, the application will have wrong clock configuration. User can add here some code to deal with this error*/
+        /* Go to infinitel1oop*/
+        while(1)
+        {
+        }
+    }
     RCC_ConfigAdc1mClk(RCC_ADC1MCLK_SRC_HSI, RCC_ADC1MCLK_DIV8);
     /* RCC_ADCHCLK_DIV16*/
     ADC_ConfigClk(ADC_CTRL3_CKMOD_AHB, RCC_ADCHCLK_DIV16);

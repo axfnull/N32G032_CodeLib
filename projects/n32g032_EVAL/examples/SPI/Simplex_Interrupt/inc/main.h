@@ -52,14 +52,14 @@ extern "C" {
 #define SPI_MASTER_PIN_MOSI         GPIO_PIN_7
 #define SPI_MASTER_IRQn             SPI1_IRQn
 
-#define SPI_SLAVE          SPI2
-#define SPI_SLAVE_CLK      RCC_APB1_PERIPH_SPI2
-#define SPI_SLAVE_GPIO     GPIOB
-#define SPI_SLAVE_GPIO_CLK RCC_APB2_PERIPH_GPIOB
-#define SPI_SLAVE_PIN_SCK  GPIO_PIN_13
-#define SPI_SLAVE_PIN_MISO GPIO_PIN_14
-#define SPI_SLAVE_PIN_MOSI GPIO_PIN_15
-#define SPI_SLAVE_IRQn     SPI2_3_IRQn
+#define SPI_SLAVE                   SPI2
+#define SPI_SLAVE_CLK               RCC_APB1_PERIPH_SPI2
+#define SPI_SLAVE_GPIO              GPIOB
+#define SPI_SLAVE_GPIO_CLK          RCC_APB2_PERIPH_GPIOB
+#define SPI_SLAVE_PIN_SCK           GPIO_PIN_13
+#define SPI_SLAVE_PIN_MISO          GPIO_PIN_14
+#define SPI_SLAVE_PIN_MOSI          GPIO_PIN_15
+#define SPI_SLAVE_IRQn              SPI2_3_IRQn
 
 #ifdef __cplusplus
 }

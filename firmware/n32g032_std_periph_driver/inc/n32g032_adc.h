@@ -28,7 +28,7 @@
 /**
  * @file n32g032_adc.h
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.3
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -298,6 +298,7 @@ typedef struct
 /** @addtogroup ADC_flags_definition
  * @{
  */
+#define ADC_STS_RESERVE_MASK ((uint32_t)0x0000007F)
 
 #define ADC_FLAG_AWDG      ((uint8_t)0x01)
 #define ADC_FLAG_ENDC      ((uint8_t)0x02)
@@ -424,6 +425,9 @@ typedef struct
 #define ADC_CTRL3_VREFEN_MSK    ((uint32_t)0x1L << 1)
 #define ADC_CTRL3_REFSEL_MSK    ((uint32_t)0x1L << 0)
 
+#define ADC_CLOCK_PLL           ((uint32_t)ADC_CTRL3_CKMOD_MSK)
+#define ADC_CLOCK_AHB           ((uint32_t)(~ADC_CTRL3_CKMOD_MSK))
+
 typedef enum
 {
     ADC_CTRL3_CKMOD_AHB = 0,
@@ -493,7 +497,10 @@ uint16_t ADC_GetInjectedConversionDat(ADC_Module* ADCx, uint8_t ADC_InjectedChan
 void ADC_ConfigAnalogWatchdogWorkChannelType(ADC_Module* ADCx, uint32_t ADC_AnalogWatchdog);
 void ADC_ConfigAnalogWatchdogThresholds(ADC_Module* ADCx, uint16_t HighThreshold, uint16_t LowThreshold);
 void ADC_ConfigAnalogWatchdogSingleChannel(ADC_Module* ADCx, uint8_t ADC_Channel);
-void ADC_EnableTempSensorVrefint(FunctionalState Cmd);
+void ADC_EnableTempSensor(FunctionalState Cmd);
+void ADC_EnableVrefint(FunctionalState Cmd);
+void ADC_AHB_Clock_Mode_Config(ADC_Module* ADCx);
+void ADC_PLL_Clock_Mode_Config(ADC_Module* ADCx);
 FlagStatus ADC_GetFlagStatus(ADC_Module* ADCx, uint8_t ADC_FLAG);
 void ADC_ClearFlag(ADC_Module* ADCx, uint8_t ADC_FLAG);
 INTStatus ADC_GetIntStatus(ADC_Module* ADCx, uint16_t ADC_IT);

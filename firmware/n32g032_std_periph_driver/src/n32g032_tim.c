@@ -28,7 +28,7 @@
 /**
  * @file n32g032_tim.c
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.2
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -278,7 +278,7 @@ void TIM_InitOc1(TIM_Module* TIMx, OCInitType* TIM_OCInitStruct)
     tmpccmrx = TIMx->CCMOD1;
 
     /* Reset the Output Compare Mode Bits */
-    tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CCMOD1_OC1M));
+    tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CCMOD1_OC1MD));
     tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CCMOD1_CC1SEL));
 
     /* Select the Output Compare Mode */
@@ -361,7 +361,7 @@ void TIM_InitOc2(TIM_Module* TIMx, OCInitType* TIM_OCInitStruct)
     tmpccmrx = TIMx->CCMOD1;
 
     /* Reset the Output Compare mode and Capture/Compare selection Bits */
-    tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CCMOD1_OC2M));
+    tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CCMOD1_OC2MD));
     tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CCMOD1_CC2SEL));
 
     /* Select the Output Compare Mode */
@@ -1033,8 +1033,7 @@ void TIM_GenerateEvent(TIM_Module* TIMx, uint16_t TIM_EventSource)
  *          TIM_DMABASE_CNT, TIM_DMABASE_PSC, TIM_DMABASE_AR,
  *          TIM_DMABASE_REPCNT, TIM_DMABASE_CAPCMPDAT1, TIM_DMABASE_CAPCMPDAT2,
  *          TIM_DMABASE_CAPCMPDAT3, TIM_DMABASE_CAPCMPDAT4, TIM_DMABASE_BKDT,
- *          TIM_DMABASE_CAPCMPMOD3, TIM_DMABASE_CAPCMPDAT5, TIM_DMABASE_CAPCMPDAT6,
- *          TIM_DMABASE_DMACTRL.
+ *          TIM_DMABASE_DMACTRL. 
  * @param TIM_DMABurstLength DMA Burst length.
  *   This parameter can be one value between:
  *   TIM_DMABURST_LENGTH_1TRANSFER and TIM_DMABURST_LENGTH_18TRANSFERS.
@@ -1420,8 +1419,8 @@ void TIM_ConfigForcedOc1(TIM_Module* TIMx, uint16_t TIM_ForcedAction)
     assert_param(IsTimList8Module(TIMx));
     assert_param(IsTimForceActive(TIM_ForcedAction));
     tmpccmr1 = TIMx->CCMOD1;
-    /* Reset the OC1M Bits */
-    tmpccmr1 &= (uint16_t) ~((uint16_t)TIM_CCMOD1_OC1M);
+    /* Reset the OC1MD Bits */
+    tmpccmr1 &= (uint16_t) ~((uint16_t)TIM_CCMOD1_OC1MD);
     /* Configure The Forced output Mode */
     tmpccmr1 |= TIM_ForcedAction;
     /* Write to TIMx CCMOD1 register */
@@ -1443,8 +1442,8 @@ void TIM_ConfigForcedOc2(TIM_Module* TIMx, uint16_t TIM_ForcedAction)
     assert_param(IsTimList6Module(TIMx));
     assert_param(IsTimForceActive(TIM_ForcedAction));
     tmpccmr1 = TIMx->CCMOD1;
-    /* Reset the OC2M Bits */
-    tmpccmr1 &= (uint16_t) ~((uint16_t)TIM_CCMOD1_OC2M);
+    /* Reset the OC2MD Bits */
+    tmpccmr1 &= (uint16_t) ~((uint16_t)TIM_CCMOD1_OC2MD);
     /* Configure The Forced output Mode */
     tmpccmr1 |= (uint16_t)(TIM_ForcedAction << 8);
     /* Write to TIMx CCMOD1 register */
@@ -1466,7 +1465,7 @@ void TIM_ConfigForcedOc3(TIM_Module* TIMx, uint16_t TIM_ForcedAction)
     assert_param(IsTimList3Module(TIMx));
     assert_param(IsTimForceActive(TIM_ForcedAction));
     tmpccmr2 = TIMx->CCMOD2;
-    /* Reset the OC1M Bits */
+    /* Reset the OC1MD Bits */
     tmpccmr2 &= (uint16_t) ~((uint16_t)TIM_CCMOD2_OC3MD);
     /* Configure The Forced output Mode */
     tmpccmr2 |= TIM_ForcedAction;
@@ -1489,7 +1488,7 @@ void TIM_ConfigForcedOc4(TIM_Module* TIMx, uint16_t TIM_ForcedAction)
     assert_param(IsTimList3Module(TIMx));
     assert_param(IsTimForceActive(TIM_ForcedAction));
     tmpccmr2 = TIMx->CCMOD2;
-    /* Reset the OC2M Bits */
+    /* Reset the OC2MD Bits */
     tmpccmr2 &= (uint16_t) ~((uint16_t)TIM_CCMOD2_OC4MD);
     /* Configure The Forced output Mode */
     tmpccmr2 |= (uint16_t)(TIM_ForcedAction << 8);
@@ -1512,7 +1511,7 @@ void TIM_ConfigForcedOc5(TIM_Module* TIMx, uint16_t TIM_ForcedAction)
     assert_param(IsTimList1Module(TIMx));
     assert_param(IsTimForceActive(TIM_ForcedAction));
     tmpccmr3 = TIMx->CCMOD3;
-    /* Reset the OC2M Bits */
+    /* Reset the OC2MD Bits */
     tmpccmr3 &= (uint16_t) ~((uint16_t)TIM_CCMOD3_OC5MD);
     /* Configure The Forced output Mode */
     tmpccmr3 |= (uint16_t)(TIM_ForcedAction);
@@ -1535,7 +1534,7 @@ void TIM_ConfigForcedOc6(TIM_Module* TIMx, uint16_t TIM_ForcedAction)
     assert_param(IsTimList1Module(TIMx));
     assert_param(IsTimForceActive(TIM_ForcedAction));
     tmpccmr3 = TIMx->CCMOD3;
-    /* Reset the OC2M Bits */
+    /* Reset the OC2MD Bits */
     tmpccmr3 &= (uint16_t) ~((uint16_t)TIM_CCMOD3_OC6MD);
     /* Configure The Forced output Mode */
     tmpccmr3 |= (uint16_t)(TIM_ForcedAction << 8);
@@ -2367,7 +2366,7 @@ void TIM_SelectOcMode(TIM_Module* TIMx, uint16_t Channel, uint16_t OcMode)
         tmp += (Channel >> 1);
 
         /* Reset the OCxM bits in the CCMRx register */
-        *(__IO uint32_t*)tmp &= (uint32_t) ~((uint32_t)TIM_CCMOD1_OC1M);
+        *(__IO uint32_t*)tmp &= (uint32_t) ~((uint32_t)TIM_CCMOD1_OC1MD);
 
         /* Configure the OCxM bits in the CCMRx register */
         *(__IO uint32_t*)tmp |= OcMode;
@@ -2377,7 +2376,7 @@ void TIM_SelectOcMode(TIM_Module* TIMx, uint16_t Channel, uint16_t OcMode)
         tmp += (uint16_t)(Channel - (uint16_t)4) >> (uint16_t)1;
 
         /* Reset the OCxM bits in the CCMRx register */
-        *(__IO uint32_t*)tmp &= (uint32_t) ~((uint32_t)TIM_CCMOD1_OC2M);
+        *(__IO uint32_t*)tmp &= (uint32_t) ~((uint32_t)TIM_CCMOD1_OC2MD);
 
         /* Configure the OCxM bits in the CCMRx register */
         *(__IO uint32_t*)tmp |= (uint16_t)(OcMode << 8);
@@ -2935,7 +2934,7 @@ void TIM_ClearFlag(TIM_Module* TIMx, uint32_t TIM_FLAG)
     assert_param(IsTimClrFlag(TIM_FLAG));
 
     /* Clear the flags */
-    TIMx->STS &= (uint32_t)~TIM_FLAG;
+    TIMx->STS = (uint32_t)~TIM_FLAG;
 }
 
 /**
@@ -3003,7 +3002,7 @@ void TIM_ClrIntPendingBit(TIM_Module* TIMx, uint32_t TIM_IT)
     assert_param(IsTimAllModule(TIMx));
     assert_param(IsTimInt(TIM_IT));
     /* Clear the IT pending Bit */
-    TIMx->STS &= (uint32_t)~TIM_IT;
+    TIMx->STS = (uint32_t)~TIM_IT;
 }
 
 /**

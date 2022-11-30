@@ -28,7 +28,7 @@
 /**
  * @file main.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -65,24 +65,21 @@ int main(void)
        */
     /* Enable PWR Clock */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_PWR, ENABLE);
-    /* Initialize LEDs on n32g032-EVAL board */
+    /* Initialize LOG port */
     log_init();
     log_info(" PWR_STOP INIT\n");
     /* Initialize Key button Interrupt to wakeUp stop */
     KeyInputExtiInit(KEY_INPUT_PORT, KEY_INPUT_PIN);
 
-    /* Clear the EXIT Interrupt flag */
-    // EXTI_ClrITPendBit(EXTI_LINE0);
     /*  Enable the DBG_STOP to keep debug in low power  */
     DBG_ConfigPeriph(DBG_STOP, ENABLE);
     while (1)
     {
-
         /* Insert a long delay */
         delay(50);
 
         log_info("STOP ENTRY\n");
-        PWR_EnterSTOPMode(PWR_STOPPLUSE_ENABLE,PWR_STOPENTRY_WFI);
+        PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
         SetSysClockToPLL(48000000,SYSCLK_USE_HSI);
         log_info("STOP EXIT\n");
     }
@@ -248,11 +245,12 @@ void SetSysClockToPLL(uint32_t freq, uint8_t src)
             {
                pllmul = RCC_PLL_MUL_12;
             }
-            pclk1div = RCC_HCLK_DIV2;
+            pclk1div = RCC_HCLK_DIV1;
             pclk2div = RCC_HCLK_DIV1;
             break;
         default:
             while (1);
+
     }
 
     FLASH_SetLatency(latency);

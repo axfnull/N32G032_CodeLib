@@ -38,13 +38,9 @@
  * @{
  */
 
-ADC_InitType ADC_InitStructure;
-DMA_InitType DMA_InitStructure;
-
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
 void OPAMP_Configuration(void);
-void NVIC_Configuration(void);
 
 /**
  * @brief   Main program,Test PGA is work ok? Opa out Pin can view by scope
@@ -59,6 +55,7 @@ int main(void)
 
     /* OPAMP configuration ------------------------------------------------------*/
     OPAMP_Configuration();
+
     while (1)
     {
         ;
@@ -70,16 +67,18 @@ int main(void)
  */
 void OPAMP_Configuration(void)
 {
-    OPAMP_InitType OPAMP_Initial;
-    OPAMP_StructInit(&OPAMP_Initial);
-    OPAMP_Initial.Gain = OPAMP_CS_PGA_GAIN_2;
+    OPAMP_InitType OPAMP_InitStructure;
+    OPAMP_StructInit(&OPAMP_InitStructure);
+	
+    OPAMP_InitStructure.Gain = OPAMP_CS_PGA_GAIN_2;
     /*configure opamp1*/
-    OPAMP_Init(&OPAMP_Initial);
+    OPAMP_Init(&OPAMP_InitStructure);
+	
     OPAMP_SetVpSel(OPAMP_CS_VPSEL_PA1);
     OPAMP_SetVmSel(OPAMP_CS_VMSEL_FLOATING2);
     OPAMP_Enable(ENABLE);
-    // OPAMP output pin enable pix pin when OPAMPx En.not to remap or select output pin
 }
+
 
 /**
  * @brief  Configures the different system clocks.
@@ -88,9 +87,9 @@ void RCC_Configuration(void)
 {
     /* Enable COMPE clocks */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_COMP | RCC_APB1_PERIPH_OPAMP | RCC_APB1_PERIPH_COMPFILT, ENABLE);
-    /* Enable GPIOA, GPIOB, GPIOC and GPIOD clocks */
+    /* Enable GPIOA, GPIOB, GPIOC, GPIOD and GPIOF clocks */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_AFIO | RCC_APB2_PERIPH_GPIOA | RCC_APB2_PERIPH_GPIOB | RCC_APB2_PERIPH_GPIOC
-                                | RCC_APB2_PERIPH_GPIOD , ENABLE);
+                          | RCC_APB2_PERIPH_GPIOD | RCC_APB2_PERIPH_GPIOF, ENABLE);
 }
 
 /**
@@ -101,10 +100,10 @@ void GPIO_Configuration(void)
     GPIO_InitType GPIO_InitStructure;
 
     GPIO_InitStruct(&GPIO_InitStructure);
-    /* Configure OPAMP_VP,PA1 as analog inputs */
-    GPIO_InitStructure.GPIO_Mode = GPIO_MODE_ANALOG;
+    /* Configure OPAMP_VPSEL,PA1 as analog inputs */
+    GPIO_InitStructure.GPIO_Mode    = GPIO_MODE_ANALOG;
     GPIO_InitStructure.GPIO_Current = GPIO_DC_HIGH;
-    GPIO_InitStructure.Pin       = GPIO_PIN_1;
+    GPIO_InitStructure.Pin          = GPIO_PIN_1;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 
     // OPAMP output pin enable pix pin when OPAMPx En.not to remap or select output pin

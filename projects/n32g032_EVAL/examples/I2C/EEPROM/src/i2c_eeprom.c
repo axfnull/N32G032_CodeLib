@@ -27,8 +27,8 @@
 
 /**
  * @file i2c_eeprom.c
- * @author Nations Solution Team
- * @version v1.0.0
+ * @author Nations 
+ * @version v1.0.2
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -116,17 +116,12 @@ void I2C_EE_Init(void)
     I2C_Init(I2Cx, &I2C_InitStructure);
 #if PROCESS_MODE == 1 /* interrupt */
     /** I2C NVIC configuration */
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-    NVIC_InitStructure.NVIC_IRQChannel                   = I2C1_EV_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannel                   = I2C1_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority           = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
-    NVIC_InitStructure.NVIC_IRQChannel                   = I2C1_ER_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPriority           = 0;
-    NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
 #elif PROCESS_MODE == 2 /* DMA */
-    RCC_EnableAHBPeriphClk(RCC_AHBPERIPH_DMA1, ENABLE);
+    RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_DMA, ENABLE);
 #endif
 }
 
@@ -284,11 +279,11 @@ void I2C_EE_PageWrite(u8* pBuffer, u16 WriteAddr, u16 NumByteToWrite)
     BufCount           = 0;
     Int_NumByteToWrite = NumByteToWrite;
     I2C_ConfigAck(I2C1, ENABLE);
-    I2C_INTConfig(I2C1, I2C_INT_EVT | I2C_INT_BUF | I2C_INT_ERR, ENABLE);
+    I2C_ConfigInt(I2C1, I2C_INT_EVENT | I2C_INT_BUF | I2C_INT_ERR, ENABLE);
 
     /** Send START condition */
     sEETimeout = sEE_LONG_TIMEOUT;
-    while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSYF))
+    while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSY))
     {
         if ((sEETimeout--) == 0)
             sEE_TIMEOUT_UserCallback();
@@ -301,30 +296,32 @@ void I2C_EE_PageWrite(u8* pBuffer, u16 WriteAddr, u16 NumByteToWrite)
     DMA_InitType DMA_InitStructure;
     NVIC_InitType NVIC_InitStructure;
     /** DMA initialization */
-    DMA_Reset(DMA1_CH6);
-    DMA_InitStructure.PeriphAddr              = (u32)&I2Cx->DT;            /// (u32)I2C1_DR_Address;
-    DMA_InitStructure.MemAddr                 = (u32)pBuffer;              /// from function input parameter
-    DMA_InitStructure.DMA_Direction           = DMA_DIR_PERIPHERALDST;     /// fixed for send function
-    DMA_InitStructure.BufSize                 = NumByteToWrite;            /// from function input parameter
-    DMA_InitStructure.PeriphInc               = DMA_PERIPHERALINC_DISABLE; // fixed
-    DMA_InitStructure.DMA_MemoryInc           = DMA_MEMORYINC_ENABLE;      /// fixed
-    DMA_InitStructure.DMA_PeripheralDataWidth = DMA_MEMORYDATAWIDTH_BYTE;  /// fixed
-    DMA_InitStructure.DMA_MemoryDataWidth     = DMA_MEMORYDATAWIDTH_BYTE;  /// fixed
-    DMA_InitStructure.CircularMode            = DMA_MODE_NORMAL;           /// fixed
-    DMA_InitStructure.Priority                = DMA_PRIORITY_VERYHIGH;     /// up to user
-    DMA_InitStructure.DMA_MTOM                = DMA_MEMTOMEM_DISABLE;      /// fixed
+    DMA_DeInit(DMA_CH6);
+    DMA_InitStructure.PeriphAddr     = (u32)&I2Cx->DAT;          /// (u32)I2C1_DR_Address;
+    DMA_InitStructure.MemAddr        = (u32)pBuffer;             /// from function input parameter
+    DMA_InitStructure.Direction      = DMA_DIR_PERIPH_DST;       /// fixed for send function
+    DMA_InitStructure.BufSize        = NumByteToWrite;           /// from function input parameter
+    DMA_InitStructure.PeriphInc      = DMA_PERIPH_INC_DISABLE;   // fixed
+    DMA_InitStructure.DMA_MemoryInc  = DMA_MEM_INC_ENABLE;       /// fixed
+    DMA_InitStructure.PeriphDataSize = DMA_PERIPH_DATA_SIZE_BYTE;/// fixed
+    DMA_InitStructure.MemDataSize    = DMA_MemoryDataSize_Byte;  /// fixed
+    DMA_InitStructure.CircularMode   = DMA_MODE_NORMAL;          /// fixed
+    DMA_InitStructure.Priority       = DMA_PRIORITY_VERY_HIGH;   /// up to user
+    DMA_InitStructure.Mem2Mem        = DMA_M2M_DISABLE;          /// fixed
+    DMA_Init(DMA_CH6, &DMA_InitStructure);
+		
+		DMA_RequestRemap(DMA_REMAP_I2C1_TX,DMA,DMA_CH6,ENABLE);
+		
+    DMA_ConfigInt(DMA_CH6, DMA_INT_TXC, ENABLE);
 
-    DMA_Init(DMA1_CH6, &DMA_InitStructure);
-    DMA_INTConfig(DMA1_CH6, DMA_INT_TC, ENABLE);
-
-    NVIC_InitStructure.NVIC_IRQChannel                   = DMA1_Channel6_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannel                   = DMA_Channel5_6_7_8_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority           = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
     i2c_comm_state = COMM_PRE;
     sEETimeout     = sEE_LONG_TIMEOUT;
-    while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSYF))
+    while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSY))
     {
         if ((sEETimeout--) == 0)
             sEE_TIMEOUT_UserCallback();
@@ -333,16 +330,16 @@ void I2C_EE_PageWrite(u8* pBuffer, u16 WriteAddr, u16 NumByteToWrite)
     I2C_GenerateStart(I2Cx, ENABLE);
     /** Test on EV5 and clear it */
     sEETimeout = sEE_LONG_TIMEOUT;
-    while (!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_START_GENERATED))
+    while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_MODE_FLAG))
     {
         if ((sEETimeout--) == 0)
             sEE_TIMEOUT_UserCallback();
     }
     /** Send EEPROM address for write */
-    I2C_SendAddr7bit(I2Cx, EEPROM_ADDRESS, I2C_Direction_Transmit);
+    I2C_SendAddr7bit(I2Cx, EEPROM_ADDRESS, I2C_DIRECTION_SEND);
     /** Test on EV6 and clear it */
     sEETimeout = sEE_LONG_TIMEOUT;
-    while (!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_ADDRESS_WITH_TRANSMITTER))
+    while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_TXMODE_FLAG))
     {
         if ((sEETimeout--) == 0)
             sEE_TIMEOUT_UserCallback();
@@ -351,14 +348,14 @@ void I2C_EE_PageWrite(u8* pBuffer, u16 WriteAddr, u16 NumByteToWrite)
     I2C_SendData(I2Cx, WriteAddr);
     /** Test on EV8 and clear it */
     sEETimeout = sEE_LONG_TIMEOUT;
-    while (!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_DATA_TRANSMITTED))
+    while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_DATA_SENDED))
     {
         if ((sEETimeout--) == 0)
             sEE_TIMEOUT_UserCallback();
     }
 
     I2C_EnableDMA(I2C1, ENABLE);
-    DMA_ChannelEnable(DMA1_CH6, ENABLE);
+    DMA_EnableChannel(DMA_CH6, ENABLE);
     sEETimeout = sEE_LONG_TIMEOUT;
     while (i2c_comm_state != COMM_IN_PROCESS)
     {
@@ -395,6 +392,10 @@ void I2C_EE_ReadBuffer(u8* pBuffer, u16 ReadAddr, u16 NumByteToRead)
             if ((sEETimeout--) == 0)
                     sEE_TIMEOUT_UserCallback();
     }
+    
+    I2C_ConfigPecLocation(I2Cx, I2C_PEC_POS_CURRENT);
+    I2C_ConfigAck(I2Cx, ENABLE);
+    
     /** Send START condition */
     I2C_GenerateStart(I2Cx, ENABLE);
     /** Test on EV5 and clear it */
@@ -442,35 +443,115 @@ void I2C_EE_ReadBuffer(u8* pBuffer, u16 ReadAddr, u16 NumByteToRead)
         if ((sEETimeout--) == 0)
             sEE_TIMEOUT_UserCallback();
     }
-        
-    /* While there is data to be read */
+
+    /** While there is data to be read */
+    if (NumByteToRead == 1)
+    {
+        /** Disable Acknowledgement */
+        I2C_ConfigAck(I2Cx, DISABLE);
+        /** clear ADDR */
+        (void)(I2Cx->STS1); 
+        (void)(I2Cx->STS2);
+        /** Generates START condition to close communication */
+        I2C_GenerateStart(I2Cx, ENABLE);
+    }
+    else
+    {
+        /** clear ADDR */
+        (void)(I2Cx->STS1); 
+        (void)(I2Cx->STS2);
+    }
+    
     while (NumByteToRead)
     {
-        /** One byte */
-        if (NumByteToRead == 1)
+        if (NumByteToRead <= 2)
         {
-                /** Disable Acknowledgement */
-                I2C_ConfigAck(I2Cx, DISABLE);
-                /** Send STOP Condition */
-                I2C_GenerateStop(I2Cx, ENABLE);
-        }
-        /** Test on EV7 and clear it */
-        sEETimeout = sEE_LONG_TIMEOUT;
-        while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_DATA_RECVD_FLAG))
-        {
-                if ((sEETimeout--) == 0)
+            /** One byte */
+            if (NumByteToRead == 1)
+            {
+                /** Wait until RXNE flag is set */
+                sEETimeout = sEE_LONG_TIMEOUT;
+                while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_DATA_RECVD_FLAG))
+                {
+                    if ((sEETimeout--) == 0)
                         sEE_TIMEOUT_UserCallback();
+                }
+                /** Read data from DAT */
+                *pBuffer = I2C_RecvData(I2Cx);
+                /** Point to the next location where the byte read will be saved */
+                pBuffer++;
+                /** Decrement the read bytes counter */
+                NumByteToRead--;
+                 /** Generates STOP condition to release SCL/SDA line */
+                I2C_GenerateStop(I2Cx, ENABLE);   
+             
+            }
+            /** 2 Last bytes */
+            else
+            {   
+                /** Wait until RXNE flag is set */
+                sEETimeout = sEE_LONG_TIMEOUT;
+                while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_DATA_RECVD_FLAG))
+                {
+                    if ((sEETimeout--) == 0)
+                        sEE_TIMEOUT_UserCallback();
+                }
+                /** Disable Acknowledgement */ 
+                I2C_ConfigAck(I2Cx, DISABLE);
+                               
+                /** Read data from DAT */
+                *pBuffer = I2C_RecvData(I2Cx);
+                /** Point to the next location where the byte read will be saved */
+                pBuffer++;
+                /** Decrement the read bytes counter */
+                NumByteToRead--;
+                
+                /** Generates START condition to close communication */
+                I2C_GenerateStart(I2Cx, ENABLE);
+                
+                while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_DATA_RECVD_FLAG))
+                {
+                    if ((sEETimeout--) == 0)
+                        sEE_TIMEOUT_UserCallback();
+                }                                                 
+                /** Read data from DAT */
+                *pBuffer = I2C_RecvData(I2Cx);              
+                /** Point to the next location where the byte read will be saved */
+                pBuffer++;
+                /** Decrement the read bytes counter */
+                NumByteToRead--;
+                
+                /** Generates STOP condition to release SCL/SDA line */
+                I2C_GenerateStop(I2Cx, ENABLE);
+            }
         }
-        /** Read data from DAT */
-        *pBuffer = I2C_RecvData(I2Cx);
-        /** Point to the next location where the byte read will be saved */
-        pBuffer++;
-        /** Decrement the read bytes counter */
-        NumByteToRead--;
+        else
+        {
+            /** Test on EV7 and clear it */
+            sEETimeout = sEE_LONG_TIMEOUT;
+            while (!I2C_CheckEvent(I2Cx, I2C_EVT_MASTER_DATA_RECVD_FLAG))
+            {
+                if ((sEETimeout--) == 0)
+                    sEE_TIMEOUT_UserCallback();
+            }
+            /** Read a byte from the EEPROM */
+            *pBuffer = I2C_RecvData(I2Cx);
+            /** Point to the next location where the byte read will be saved */
+            pBuffer++;
+            /** Decrement the read bytes counter */
+            NumByteToRead--;
+            if (I2C_GetFlag(I2Cx, I2C_FLAG_BYTEF))
+            {
+                /** Read a byte from the EEPROM */
+                *pBuffer = I2C_RecvData(I2Cx);
+                /** Point to the next location where the byte read will be saved */
+                pBuffer++;
+                /** Decrement the read bytes counter */
+                NumByteToRead--;
+            }
+        }
     }
-        /* Enable Acknowledgement to be ready for another reception */
-        I2C_ConfigAck(I2C1, ENABLE);
-        
+    
 }
 
 /**
@@ -489,7 +570,7 @@ void I2C_EE_WaitOperationIsCompleted(void)
 /**
  * @brief  I2c1 event interrupt Service Routines.
  */
-void i2c1_evt_handle(void)
+void I2C1_IRQHandler(void)
 {
     uint32_t lastevent = I2C_GetLastEvent(I2C1);
     switch (lastevent)
@@ -580,14 +661,8 @@ void i2c1_evt_handle(void)
         }
         break;
     }
-}
-
-/**
- * @brief  I2c1 error interrupt Service Routines.
- */
-void i2c1_err_handle(void)
-{
-    if (I2C_GetFlag(I2C1, I2C_FLAG_ACKFAIL))
+		
+		 if (I2C_GetFlag(I2C1, I2C_FLAG_ACKFAIL))
     {
         if (check_begin) /// EEPROM write busy
         {
@@ -612,10 +687,11 @@ void i2c1_err_handle(void)
     }
 }
 
+
 /**
  * @brief  I2c1 dma send interrupt Service Routines.
  */
-void i2c1_send_dma_handle()
+void DMA_Channel5_6_7_8_IRQHandler()
 {
     if (DMA_GetFlagStatus(DMA_FLAG_TC6, DMA))
     {
@@ -648,33 +724,7 @@ void i2c1_send_dma_handle()
     }
 }
 
-/**
- * @brief  I2c1 dma receive interrupt Service Routines.
- */
-void i2c1_receive_dma_handle(void)
-{
-    if (DMA_GetFlagStatus(DMA_FLAG_TC7, DMA))
-    {
-        if (I2Cx->STS2 & 0x01) /// master receive DMA finish
-        {
-            I2C_EnableDMA(I2Cx, DISABLE);
-            I2C_GenerateStop(I2Cx, ENABLE);
-            i2c_comm_state = COMM_DONE;
-        }
-        else /// slave receive DMA finish
-        {
-        }
-        DMA_ClearFlag(DMA_FLAG_TC7, DMA);
-    }
-    if (DMA_GetFlagStatus(DMA_FLAG_GL7, DMA))
-    {
-        DMA_ClearFlag(DMA_FLAG_GL7, DMA);
-    }
-    if (DMA_GetFlagStatus(DMA_FLAG_HT7, DMA))
-    {
-        DMA_ClearFlag(DMA_FLAG_HT7, DMA);
-    }
-}
+
 
 /**
  * @brief  Wait eeprom standby state.

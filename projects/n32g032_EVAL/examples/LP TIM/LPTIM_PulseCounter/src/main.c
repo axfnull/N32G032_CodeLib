@@ -41,18 +41,7 @@
  */
 
 
-void LedBlink(GPIO_Module* GPIOx, uint16_t Pin);
-void LEDInit(uint16_t Pin);
-void LedOn(uint16_t Pin);
-void LedOff(uint16_t Pin);
-void Ledlink(uint16_t Pin);
-void delay(vu32 nCount);
-
-void LPTIM_InputIoInit(void);
-void PWM_Out(uint16_t Pin,uint8_t cnt);
-
-uint16_t tempCNT = 0;
-
+uint16_t tempCNT;
 /**
  * @brief  Main program.
  */
@@ -67,7 +56,7 @@ int main(void)
        */
 
   /* Init LED GPIO */
-    LEDInit(LED1);
+    LedInit(PORT_GROUP, LED1);
     /* Enable the LSI source */
     RCC_EnableLsi(ENABLE);
     RCC_ConfigLPTIMClk(RCC_LPTIMCLK_SRC_LSI);  
@@ -86,15 +75,15 @@ int main(void)
     LPTIM_StartCounter(LPTIM,LPTIM_OPERATING_MODE_CONTINUOUS);  //start with the continue mode  
     /* Great 10 square waves ,and tempCNT should be equal to 10*/
     delay(10);
-    PWM_Out(LED1,10);    
+    PWM_Out(LED1,10);
     tempCNT = LPTIM->CNT;
     
-    /* In order to make the tempCNT variable can be seen in the watch window of IAR*/
+    //In order to make tempcnt visible in the watch window of debugging interface
     if(10 == tempCNT)
     {
         delay(10);
     }
-
+   
     while (1)
     {
    
@@ -102,62 +91,76 @@ int main(void)
 }
 
 /**
- * @brief  Toggles the selected Led.
- * @param Led Specifies the Led to be toggled.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
- */
-void Ledlink(uint16_t Pin)
-{
-    GPIOB->POD ^= Pin;
-}
-/**
  * @brief  Turns selected Led on.
- * @param Led Specifies the Led to be set on.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-void LedOn(uint16_t Pin)
+void LedOn(GPIO_Module *GPIOx, uint16_t Pin)
 {
-    GPIOB->PBC = Pin;
+    GPIO_SetBits(GPIOx, Pin);
 }
+
 /**
  * @brief  Turns selected Led Off.
- * @param Led Specifies the Led to be set off.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-void LedOff(uint16_t Pin)
+void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
 {
-    GPIOB->PBSC = Pin;
+    GPIO_ResetBits(GPIOx, Pin);
 }
+
+/**
+ * @brief  Toggles the selected Led.
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
+ */
+void LedBlink(GPIO_Module* GPIOx, uint16_t Pin)
+{
+    GPIO_TogglePin(GPIOx, Pin);
+}
+
 /**
  * @brief  Configures LED GPIO.
- * @param Led Specifies the Led to be configured.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-
-void LEDInit(uint16_t Pin)
+void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
 {
     GPIO_InitType GPIO_InitStructure;
+
+    /* Check the parameters */
+    assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+
+    /* Enable the GPIO Clock */
+    if (GPIOx == GPIOA)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
+    }
+    else if (GPIOx == GPIOB)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
+    }
+    else if (GPIOx == GPIOC)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOC, ENABLE);
+    }
+    else if (GPIOx == GPIOF)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOF, ENABLE);
+    }
+    else
+    {
+        return;
+    }
+
     GPIO_InitStruct(&GPIO_InitStructure);
-    /* Enable the GPIO_LED Clock */
-    RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
-
-    /* Configure the GPIO_LED pin */
-    GPIO_InitStructure.Pin        = Pin;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_OUTPUT_PP;
-
-    GPIO_InitPeripheral(GPIOB, &GPIO_InitStructure);
+    GPIO_InitStructure.Pin = Pin;
+    GPIO_InitStructure.GPIO_Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitPeripheral(GPIOx, &GPIO_InitStructure);
 }
+
+
 void delay(vu32 nCount)
 {
     vu32 index = 0;
@@ -175,9 +178,9 @@ void PWM_Out(uint16_t Pin,uint8_t cnt)
     uint8_t i;
     for (i = 0; i< cnt;i++)
     {
-        LedOff(Pin);
+        LedOn(PORT_GROUP, Pin);
         delay(10);
-        LedOn(Pin);    
+        LedOff(PORT_GROUP, Pin);    
         delay(10);
     }
 
@@ -192,14 +195,14 @@ void PWM_Out(uint16_t Pin,uint8_t cnt)
 void LPTIM_InputIoInit(void)
 {
     GPIO_InitType GPIO_InitStructure;
-
+    GPIO_InitStruct(&GPIO_InitStructure);
     /* Enable the GPIOClock */
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
 
     /* Configure the GPIO pin */
-    GPIO_InitStructure.Pin        = GPIO_PIN_4;
+    GPIO_InitStructure.Pin        = GPIO_PIN_0;
     GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Alternate = GPIO_AF11_LPTIM;
+    GPIO_InitStructure.GPIO_Alternate = GPIO_AF7_LPTIM;
     GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 }
 

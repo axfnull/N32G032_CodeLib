@@ -28,7 +28,7 @@
 /**
  * @file n32g032_pwr.h
  * @author Nations Solution Team
- * @version v1.1.0
+ * @version v2.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -71,20 +71,6 @@ extern "C" {
 /**
   * @}
   */
-
-
-
-/** @defgroup Regulator_state_is_STOP_mode 
-  * @{
-  */
-
-#define PWR_STOPPLUSE_ENABLE          ((uint32_t)0x00000400)
-#define PWR_STOPPLUSE_DISABLE         ((uint32_t)0x00000000)
-#define IS_STOPPLUSE(pluse) (((pluse) == PWR_STOPPLUSE_ENABLE) || \
-                                     ((pluse) == PWR_STOPPLUSE_DISABLE))
-/**
- * @}
- */
 
 /** @defgroup SLEEP_mode_entry 
   * @{
@@ -151,7 +137,7 @@ extern "C" {
  * @{
  */
 
-
+#define DBG_SLEEP             ((uint32_t)0x00000001)
 #define DBG_STOP              ((uint32_t)0x00000002)
 #define DBG_PD                ((uint32_t)0x00000004)
 #define DBG_IWDG_STOP         ((uint32_t)0x00000100)
@@ -188,7 +174,7 @@ void PWR_PVDLevelConfig(uint8_t PWR_PVDLevel);
 void PWR_WakeUpPinEnable(uint8_t num,FunctionalState Cmd);
 void PWR_WakeUpPinPolarity(uint8_t polarity);
 void PWR_EnterSLEEPMode(uint8_t SLEEPONEXIT, uint8_t PWR_STOPEntry);
-void PWR_EnterSTOPMode(uint32_t PWR_STOPeFlash, uint8_t PWR_STOPEntry);
+void PWR_EnterSTOPMode(uint8_t PWR_STOPEntry);
 void PWR_EnterLowPowerRunMode(uint32_t PWR_LPRUNeFlash,uint8_t clk);
 void PWR_ExitLowPowerRunMode(void);
 void PWR_EnterPDMode(uint8_t PWR_PDEntry);

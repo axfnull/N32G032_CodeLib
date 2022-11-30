@@ -28,7 +28,7 @@
 /**
  * @file n32g032_sqrt.h
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.3
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -85,6 +85,8 @@ extern "C" {
  * @{
  */
 
+#define SQRT_FLAG_INTF_MASK    ((uint32_t)0xFFFFFFEF) 
+
 #define SQRT_FLAG_BUSY    ((uint32_t)0x00000004)
 #define SQRT_FLAG_DF      ((uint32_t)0x00000008)
 #define SQRT_FLAG_INTF    ((uint32_t)0x00000010)
@@ -124,8 +126,8 @@ void SQRT_ConfigInt(FunctionalState Cmd);
 void SQRT_ClrIntPendingBit(void);
 INTStatus SQRT_GetIntStatus(void);
 FlagStatus SQRT_GetFlagStatus(uint32_t SQRT_FLAG);
-void SQRT_SetRADICANT_Data(uint32_t data);
-uint32_t SQRT_GetRADICANT_Data(void);
+void SQRT_SetRADICAND_Data(uint32_t data);
+uint32_t SQRT_GetRADICAND_Data(void);
 uint32_t SQRT_GetROOT_Data(void);
 void SQRT_Start(FunctionalState Cmd);
 

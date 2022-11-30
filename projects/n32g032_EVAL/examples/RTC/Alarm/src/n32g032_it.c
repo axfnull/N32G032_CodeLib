@@ -40,7 +40,8 @@
  * @{
  */
 
-extern __IO uint32_t CurrDataCounterEnd;
+uint8_t Delay_100Ms_Cnt = 0;
+extern volatile uint32_t RTC_Delay_Flag;
 
 /******************************************************************************/
 /*            Cortex-M0 Processor Exceptions Handlers                         */
@@ -71,18 +72,42 @@ void SVC_Handler(void)
 {
 }
 
+#ifdef RTC_DELAY_USE_TIM6
+/**
+ * @brief  This function handles TIM6 global interrupt request.
+ */
+void LPTIM_TIM6_IRQHandler(void)
+{
+    if (TIM_GetIntStatus(TIM6, TIM_INT_UPDATE) != RESET)
+    {
+		Delay_100Ms_Cnt++;
 
+		if(Delay_100Ms_Cnt == 11)
+		{
+			RTC_Delay_Flag = 1;
+			Delay_100Ms_Cnt = 0;
+			/* Disable the TIM6 Counter */
+			TIM6->CTRL1 &= (uint32_t)(~((uint32_t)TIM_CTRL1_CNTEN));
+		}
+        TIM_ClrIntPendingBit(TIM6, TIM_INT_UPDATE);
+    }
+}
+#else
 /**
  * @brief  This function handles SysTick Handler.
  */
 void SysTick_Handler(void)
-{
+{	
+	Delay_100Ms_Cnt++;
+	if(Delay_100Ms_Cnt == 11)
+	{
+		RTC_Delay_Flag = 1;
+		Delay_100Ms_Cnt = 0;
+		/* Disable the SysTick Counter */
+		SysTick->CTRL &= (~SysTick_CTRL_ENABLE_Msk);
+	}
 }
-
-
-/**
- * @brief  This function handles the PVD Output interrupt request defined in main.h .
- */
+#endif
 
 /**
  * @brief  This function handles RTC Alarms interrupt request.

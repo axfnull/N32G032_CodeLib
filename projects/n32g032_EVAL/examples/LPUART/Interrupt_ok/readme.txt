@@ -48,3 +48,5 @@ USARTz发送TxBuffer2数据至LPUART，LPUART接收数据存至RxBuffer1。
 
 
 4、注意事项
+
+    需先将开发板NS-LINK的MCU_TX和MCU_RX跳线帽断开

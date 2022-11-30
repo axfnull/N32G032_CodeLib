@@ -26,18 +26,18 @@
  * ****************************************************************************/
 
 /**
- * @file n32g45x_rng.h
+ * @file n32g032_rng.h
  * @author Nations Solution Team
  * @version v1.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
-#ifndef __N32G45X_RNG_H__
-#define __N32G45X_RNG_H__
+#ifndef __N32G032_RNG_H__
+#define __N32G032_RNG_H__
 
 #include <stdint.h>
 
-/** @addtogroup N32G45X_Algorithm_Library
+/** @addtogroup N32G032_Algorithm_Library
  * @{
  */
 

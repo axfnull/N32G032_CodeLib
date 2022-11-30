@@ -8,8 +8,8 @@
 	软件开发环境：KEIL MDK-ARM V5.25
 
         硬件环境：
-		1、基于评估板N32G032C8L7-STB V1.1开发
-		2、MCU：N32G032C8L7
+		1、基于评估板N32G032R8L7-STB V1.1开发
+		2、MCU：N32G032R8L7
 
 
 3、使用说明
@@ -26,7 +26,7 @@
 
 
 	使用方法：
-		1、在KEIL下编译后烧录到评估板，上电后，给PC13传入高电平，串口打印输出Tamper interrupt。
+		1、在KEIL下编译后烧录到评估板，上电后，PC13外接上拉，再给PC13传入低电平，串口打印输出Tamper interrupt。
                 
                 
 

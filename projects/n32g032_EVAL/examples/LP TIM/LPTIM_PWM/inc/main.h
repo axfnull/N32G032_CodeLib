@@ -41,15 +41,7 @@ extern "C" {
 
 #include "n32g032.h"
 
-/*Led1-PE6,Led2-PE7,Led3-PF6,Led4-PF7,Led5-PF8*/
 
-#define LED1           GPIO_PIN_7
-#define LED2           GPIO_PIN_1
-#define LED3           GPIO_PIN_5
-#define KEY_INPUT_PORT GPIOA
-#define KEY_INPUT_PIN  GPIO_PIN_0
-
-void Ledlink(uint16_t Pin);
 #ifdef __cplusplus
 }
 #endif

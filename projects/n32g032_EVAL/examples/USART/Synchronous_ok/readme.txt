@@ -58,3 +58,5 @@ RXDNE检测标志接收数据，将其存入RxBuffer2。
 
 
 4、注意事项
+
+    需先将开发板NS-LINK的MCU_TX和MCU_RX跳线帽断开

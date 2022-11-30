@@ -28,7 +28,7 @@
 /**
  * @file n32g032_rcc.h
  * @author Nations Solution Team
- * @version v1.0.2
+ * @version v1.0.3
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -338,7 +338,7 @@ typedef struct
      
 
 #define RCC_ADC1MCLK_SRC_HSI         ((uint32_t)0x00000000)
-#define RCC_ADC1MCLK_SRC_HSE         ((uint32_t)0x00020000)
+#define RCC_ADC1MCLK_SRC_HSE         ((uint32_t)0x00000400)
 #define IS_RCC_ADC1MCLKSRC(ADC1MCLK) (((ADC1MCLK) == RCC_ADC1MCLK_SRC_HSI) || ((ADC1MCLK) == RCC_ADC1MCLK_SRC_HSE))
 
 #define RCC_ADC1MCLK_DIV1  ((uint32_t)0x00000000)

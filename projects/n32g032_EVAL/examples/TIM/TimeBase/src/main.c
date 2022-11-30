@@ -64,15 +64,6 @@ int main(void)
     /* GPIO Configuration */
     GPIO_Configuration();
 
-    /* ---------------------------------------------------------------
-    TIM2 Configuration: Output Compare Timing Mode:
-    TIM2 counter clock at 6 MHz
-    CC1 update rate = TIM3 counter clock / CCR1_Val = 146.48 Hz
-    CC2 update rate = TIM3 counter clock / CCR2_Val = 219.7 Hz
-    CC3 update rate = TIM3 counter clock / CCR3_Val = 439.4 Hz
-    CC4 update rate = TIM3 counter clock / CCR4_Val = 878.9 Hz
-    --------------------------------------------------------------- */
-
     /* Compute the prescaler value */
     PrescalerValue = (uint16_t)(SystemCoreClock / 12000000) - 1;
 

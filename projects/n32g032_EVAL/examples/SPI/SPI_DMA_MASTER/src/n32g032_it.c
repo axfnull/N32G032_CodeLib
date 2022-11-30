@@ -26,7 +26,7 @@
  * ****************************************************************************/
 
 /**
- * @file n32g43x_it.c
+ * @file n32g032_it.c
  * @author Nations Solution Team
  * @version v1.0.0
  *
@@ -35,7 +35,7 @@
 #include "n32g032_it.h"
 #include "n32g032.h"
 
-/** @addtogroup N32G43X_StdPeriph_Template
+/** @addtogroup N32G032_StdPeriph_Template
  * @{
  */
 
@@ -83,10 +83,10 @@ void SysTick_Handler(void)
 }
 
 /******************************************************************************/
-/*                 N32G43X Peripherals Interrupt Handlers                     */
+/*                 N32G4032 Peripherals Interrupt Handlers                     */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_n32g43x.s).                                                 */
+/*  file (startup_n32g032.s).                                                 */
 /******************************************************************************/
 
 /**

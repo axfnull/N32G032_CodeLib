@@ -38,25 +38,11 @@
 #include "n32g032.h"
 #include "n32g032_conf.h"
 
-/* Uncomment the line corresponding to the desired System clock (SYSCLK)
-   frequency (after reset the HSI is used as SYSCLK source) */
-//#define SYSCLK_HSI
-//#define SYSCLK_HSE
-#define SYSCLK_PLLHSI_FREQ_24MHz
-//#define SYSCLK_PLLHSI_FREQ_36MHz
-//#define SYSCLK_PLLHSI_FREQ_48MHz
-//#define SYSCLK_PLLHSI_FREQ_56MHz
-//#define SYSCLK_PLLHSI_FREQ_72MHz
-//#define SYSCLK_PLLHSI_FREQ_96MHz
-//#define SYSCLK_PLLHSE_FREQ_24MHz
-//#define SYSCLK_PLLHSE_FREQ_36MHz
-//#define SYSCLK_PLLHSE_FREQ_48MHz
-//#define SYSCLK_PLLHSE_FREQ_56MHz
-//#define SYSCLK_PLLHSE_FREQ_72MHz
-//#define SYSCLK_PLLHSE_FREQ_96MHz
-//#define SYSCLK_PLLHSE_FREQ_144MHz
-
-uint32_t IsBackupRegReset(void);
-void LedOff(GPIO_Module* GPIOx, uint16_t Pin);
+#define SPI_SLAVE                       SPI1
+#define I2S_SLAVE                       SPI1
+#define I2S_SLAVE_CLK                   RCC_APB2_PERIPH_SPI1
+#define I2S_SLAVE_PIN_CK                GPIO_PIN_5
+#define I2S_SLAVE_PIN_SD                GPIO_PIN_7
+#define I2S_SLAVE_PIN_WS                GPIO_PIN_4
 
 #endif /* __MAIN_H__ */

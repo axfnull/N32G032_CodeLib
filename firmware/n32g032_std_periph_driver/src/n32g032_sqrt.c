@@ -28,7 +28,7 @@
 /**
  * @file n32g032_sqrt.c
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.3
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -94,15 +94,19 @@
  */
 void SQRT_ConfigInt(FunctionalState Cmd)
 {
+    uint32_t tmpreg = 0x00;
     assert_param(IS_FUNCTIONAL_STATE(Cmd));
 
+    tmpreg = SQRT->CTRLSTS;
     if (Cmd != DISABLE)
     {
-        SQRT->CTRLSTS |= SQRT_INT_ENABLE;
+        tmpreg = (tmpreg | SQRT_INT_ENABLE) & SQRT_FLAG_INTF_MASK;
+        SQRT->CTRLSTS = tmpreg;
     }
     else
     {
-        SQRT->CTRLSTS &= (~SQRT_INT_ENABLE);
+        tmpreg = tmpreg & (~SQRT_INT_ENABLE) & SQRT_FLAG_INTF_MASK;
+        SQRT->CTRLSTS = tmpreg;
     }
 }
 
@@ -163,24 +167,24 @@ FlagStatus SQRT_GetFlagStatus(uint32_t SQRT_FLAG)
 }
 
 /**
- * @brief  Set 32bit unsigned interger dividend data through the SQRT peripheral.
+ * @brief  Set 32bit unsigned interger radicand data through the SQRT peripheral.
  * @param  Data The data to set.
  */
-void SQRT_SetRADICANT_Data(uint32_t data)
+void SQRT_SetRADICAND_Data(uint32_t data)
 {
-    /* 32bit unsigned interger dividend Data */
-    SQRT->RADICANT = data;
+    /* 32bit unsigned interger radicand Data */
+    SQRT->RADICAND = data;
 }
 
 /**
- * @brief  Get 32bit unsigned interger dividend data through the SQRT peripheral.
+ * @brief  Get 32bit unsigned interger radicand data through the SQRT peripheral.
  * @param  None.
  * @return The register data.
  */
-uint32_t SQRT_GetRADICANT_Data(void)
+uint32_t SQRT_GetRADICAND_Data(void)
 {
-    /* 32bit unsigned interger dividend Data */
-    return SQRT->RADICANT;
+    /* 32bit unsigned interger radicand Data */
+    return SQRT->RADICAND;
 }
 
 /**
@@ -190,7 +194,7 @@ uint32_t SQRT_GetRADICANT_Data(void)
  */
 uint32_t SQRT_GetROOT_Data(void)
 {
-    /* Remainder calculated by the divider */
+    /* square root calculated */
     return SQRT->ROOT;
 }
 
@@ -201,15 +205,20 @@ uint32_t SQRT_GetROOT_Data(void)
  */
 void SQRT_Start(FunctionalState Cmd)
 {
+    uint32_t tmpreg = 0x00;
+    
+    tmpreg = SQRT->CTRLSTS;
     if (Cmd != DISABLE)
     {
+        tmpreg = (tmpreg | (SQRT_ENABLE | SQRT_START_ENABLE)) & SQRT_FLAG_INTF_MASK;
         /* Start SQRT Calculation */
-        SQRT->CTRLSTS |= (SQRT_ENABLE | SQRT_START_ENABLE);
+        SQRT->CTRLSTS = tmpreg;
     }
     else
     {
+        tmpreg = tmpreg & (~(SQRT_ENABLE | SQRT_START_ENABLE)) & SQRT_FLAG_INTF_MASK;
         /* End SQRT Calculation */
-        SQRT->CTRLSTS &= (~(SQRT_ENABLE | SQRT_START_ENABLE));
+        SQRT->CTRLSTS = tmpreg;
     }
 }
 

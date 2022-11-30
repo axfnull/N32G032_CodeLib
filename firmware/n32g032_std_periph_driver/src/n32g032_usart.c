@@ -28,7 +28,7 @@
 /**
  * @file n32g032_usart.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -831,7 +831,7 @@ void USART_ClrFlag(USART_Module* USARTx, uint16_t USART_FLAG)
         assert_param(IS_USART_12_PERIPH(USARTx));
     }
 
-    USARTx->STS = (uint16_t)~USART_FLAG;
+    USARTx->STS = ((uint16_t)~USART_FLAG)&USART_STS_RESERVED_MASK;
 }
 
 /**
@@ -940,7 +940,7 @@ void USART_ClrIntPendingBit(USART_Module* USARTx, uint16_t USART_INT)
 
     bitpos      = USART_INT >> 0x08;
     itmask      = ((uint16_t)0x01 << (uint16_t)bitpos);
-    USARTx->STS = (uint16_t)~itmask;
+    USARTx->STS = ((uint16_t)~itmask)&USART_STS_RESERVED_MASK;
 }
 /**
  * @}

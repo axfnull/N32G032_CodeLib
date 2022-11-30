@@ -59,26 +59,6 @@ int main(void)
     /* Configure the GPIO ports */
     GPIO_Configuration();
 
-    /* TIM4 configuration: One Pulse mode ------------------------
-     The external signal is connected to TIM4_CH2 pin (PA.07),
-     The Rising edge is used as active edge,
-     The One Pulse signal is output on TIM4_CH1 pin (PA.04)
-     The Pulse defines the delay value
-     The (Period -  Pulse) defines the One Pulse value.
-     TIM2CLK = SystemCoreClock, we want to get TIM2 counter clock at 24 MHz:
-     - Prescaler = (TIM2CLK / TIM2 counter clock) - 1
-     The Autoreload value is 65535 (TIM4->AR), so the maximum frequency value
-     to trigger the TIM4 input is 24000000/65535 = 300 Hz.
-
-     The Pulse defines the delay value, the delay value is fixed
-     to 682.6 us:
-     delay =  CCDAT1/TIM4 counter clock = 682.6 us.
-     The (Period - Pulse) defines the One Pulse value,
-     the pulse value is fixed to 2.048 ms:
-     One Pulse value = (Period - Pulse) / TIM4 counter clock = 2.048 ms.
-
-    ------------------------------------------------------------ */
-
     /* Compute the prescaler value */
     PrescalerValue = (uint16_t)(SystemCoreClock / 24000000) - 1;
     /* Time base configuration */

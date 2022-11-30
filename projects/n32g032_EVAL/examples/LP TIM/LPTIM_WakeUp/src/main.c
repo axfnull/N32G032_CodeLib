@@ -36,19 +36,11 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "n32g032_lptim.h"
-/** @addtogroup PWR_PVD
+
+/** @addtogroup
  * @{
  */
 
-
-void LedBlink(GPIO_Module* GPIOx, uint16_t Pin);
-void LEDInit(uint16_t Pin);
-void LedOn(uint16_t Pin);
-void LedOff(uint16_t Pin);
-void Ledlink(uint16_t Pin);
-void delay(vu32 nCount);
-void LPTIMNVIC_Config(FunctionalState Cmd);
-void SYSCLKConfig(uint32_t RCC_PLLMULL);
 /**
  * @brief  Main program.
  */
@@ -63,7 +55,8 @@ int main(void)
         /* Enable PWR Clock */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_PWR, ENABLE);
     /* Init LED GPIO */
-    LEDInit(LED1);
+    LedInit(PORT_GROUP, LED1);
+	LedOn(PORT_GROUP, LED1);
     /* Enable the LSI source */
     RCC_EnableLsi(ENABLE);
     LPTIMNVIC_Config(ENABLE);
@@ -80,82 +73,81 @@ int main(void)
     DBG_ConfigPeriph(DBG_STOP, ENABLE);
     while (1)
     {
-        //PWR_EnterSLEEPMode(0, PWR_SLEEPENTRY_WFI); 
-        //PWR_EnterSTOP2Mode(PWR_STOPENTRY_WFI,PWR_CTRL3_RAM1RET);
-        // 
-        //  *     @arg PWR_STOPPLUSE_ENABLE: Enable keep a low power when system enters STOP mode
-        //  *     @arg PWR_STOPPLUSE_DISABLE: Disable keep a low power when system enters STOP mode
-        //  * @param  PWR_STOPEntry: specifies if STOP mode in entered with WFI or WFE instruction.
-        //  *   This parameter can be one of the following values:
-        //  *     @arg PWR_STOPEntry_WFI: enter STOP mode with WFI instruction
-        //  *     @arg PWR_STOPEntry_WFE: enter STOP mode with WFE instruction
-        //  * @retval None
-        //  */
-        PWR_EnterSTOPMode(PWR_STOPPLUSE_ENABLE, PWR_STOPENTRY_WFI);
-        Ledlink(LED1);
+        PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
+        LedBlink(PORT_GROUP, LED1);
         delay(30);
     }
 }
 
 /**
- * @brief  Toggles the selected Led.
- * @param Led Specifies the Led to be toggled.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
- */
-void Ledlink(uint16_t Pin)
-{
-    GPIOB->POD ^= Pin;
-}
-/**
  * @brief  Turns selected Led on.
- * @param Led Specifies the Led to be set on.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-void LedOn(uint16_t Pin)
+void LedOn(GPIO_Module *GPIOx, uint16_t Pin)
 {
-    GPIOB->PBC = Pin;
+    GPIO_SetBits(GPIOx, Pin);
 }
+
 /**
  * @brief  Turns selected Led Off.
- * @param Led Specifies the Led to be set off.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-void LedOff(uint16_t Pin)
+void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
 {
-    GPIOB->PBSC = Pin;
+    GPIO_ResetBits(GPIOx, Pin);
 }
+
+/**
+ * @brief  Toggles the selected Led.
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
+ */
+void LedBlink(GPIO_Module* GPIOx, uint16_t Pin)
+{
+    GPIO_TogglePin(GPIOx, Pin);
+}
+
 /**
  * @brief  Configures LED GPIO.
- * @param Led Specifies the Led to be configured.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
+ * @param GPIOx x can be A to G to select the GPIO port.
+ * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-
-void LEDInit(uint16_t Pin)
+void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
 {
     GPIO_InitType GPIO_InitStructure;
 
+    /* Check the parameters */
+    assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+
+    /* Enable the GPIO Clock */
+    if (GPIOx == GPIOA)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
+    }
+    else if (GPIOx == GPIOB)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
+    }
+    else if (GPIOx == GPIOC)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOC, ENABLE);
+    }
+    else if (GPIOx == GPIOF)
+    {
+        RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOF, ENABLE);
+    }
+    else
+    {
+        return;
+    }
     GPIO_InitStruct(&GPIO_InitStructure);
-    /* Enable the GPIO_LED Clock */
-    RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
-
-    /* Configure the GPIO_LED pin */
-    GPIO_InitStructure.Pin        = Pin;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_OUTPUT_PP;
-  
-
-    GPIO_InitPeripheral(GPIOB, &GPIO_InitStructure);
+    GPIO_InitStructure.Pin = Pin;
+    GPIO_InitStructure.GPIO_Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitPeripheral(GPIOx, &GPIO_InitStructure);
 }
+
 void delay(vu32 nCount)
 {
     vu32 index = 0;
@@ -203,7 +195,7 @@ void SYSCLKConfig(uint32_t RCC_PLLMULL)
 
     RCC_ConfigHse(RCC_HSE_ENABLE);
     HSEStartUpStatus = RCC_WaitHseStable();
-    
+
     if (HSEStartUpStatus == SUCCESS)
     {
 //----------------------------------------------------------------------//

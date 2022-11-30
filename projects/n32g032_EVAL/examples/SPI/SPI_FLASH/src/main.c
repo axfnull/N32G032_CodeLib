@@ -53,8 +53,8 @@ typedef enum
 #define FLASH_ReadAddress   FLASH_WriteAddress
 #define FLASH_SectorToErase FLASH_WriteAddress
 
-#define LED1 GPIO_PIN_4
-#define LED2 GPIO_PIN_5
+#define LED1 GPIO_PIN_1
+#define LED2 GPIO_PIN_6
 
 #define sFLASH_ID sFLASH_W25Q128_ID
 
@@ -114,7 +114,6 @@ void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
         GPIO_InitStructure.Pin        = Pin;
         GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_OUTPUT_PP;
         GPIO_InitPeripheral(GPIOx, &GPIO_InitStructure);
-        // GPIOx->PBSC = Pin;
     }
 }
 
@@ -156,8 +155,8 @@ int main(void)
          system_n32g032.c file
        */
 
-    LedInit(GPIOF, LED1 | LED2);
-    LedOff(GPIOF, LED1 | LED2);
+    LedInit(GPIOB, LED1 | LED2);
+    LedOff(GPIOB, LED1 | LED2);
 
     /* Initialize the SPI FLASH driver */
     sFLASH_Init();
@@ -169,7 +168,7 @@ int main(void)
     if (FlashID == sFLASH_ID)
     {
         /* OK: Turn on LED1 */
-        LedOn(GPIOF, LED1);
+        LedOn(GPIOB, LED1);
         /* Perform a write in the Flash followed by a read of the written data */
         /* Erase SPI FLASH Sector to write on */
         sFLASH_EraseSector(FLASH_SectorToErase);
@@ -208,7 +207,7 @@ int main(void)
     else
     {
         /* Error: Turn on LED2 */
-        LedOn(GPIOF, LED2);
+        LedOn(GPIOB, LED2);
     }
 
     while (1)

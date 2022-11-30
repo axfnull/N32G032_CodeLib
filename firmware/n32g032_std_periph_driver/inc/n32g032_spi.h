@@ -28,7 +28,7 @@
 /**
  * @file n32g032_spi.h
  * @author Nations Solution Team
- * @version v1.0.1
+ * @version v1.0.2
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -350,6 +350,7 @@ typedef struct
 /** @addtogroup SPI_I2S_interrupts_definition
  * @{
  */
+#define SPI_STS_RESERVED_MASK     ((uint16_t)0x00FF)
 
 #define SPI_I2S_INT_TE            ((uint8_t)0x71)
 #define SPI_I2S_INT_RNE           ((uint8_t)0x60)

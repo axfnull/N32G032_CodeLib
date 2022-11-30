@@ -38,7 +38,7 @@
 
 #include <string.h>
 
-/** @addtogroup N32G43X_StdPeriph_Examples
+/** @addtogroup N32G032_StdPeriph_Examples
  * @{
  */
 

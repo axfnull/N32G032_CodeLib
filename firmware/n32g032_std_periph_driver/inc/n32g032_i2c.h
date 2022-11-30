@@ -28,7 +28,7 @@
 /**
  * @file n32g032_i2c.h
  * @author Nations 
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -244,6 +244,8 @@ typedef struct
  * @{
  */
 
+
+#define I2C_STS1_RESERVED_MASK  ((uint16_t)0xDFDF)
 /**
  * @brief  STS2 register flags
  */
@@ -305,6 +307,8 @@ typedef struct
  * released on the I2C bus (the bus is free, no other devices is communicating).
  *
  */
+ /* Master mode */
+#define I2C_ROLE_MASTER ((uint32_t)0x00010000) /* MSMODE */
 /* --EV5 */
 #define I2C_EVT_MASTER_MODE_FLAG ((uint32_t)0x00030001) /* BUSY, MSL and SB flag */
 

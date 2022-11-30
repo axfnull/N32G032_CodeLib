@@ -46,7 +46,6 @@ extern "C" {
 
 #define LED1_PIN GPIO_PIN_0
 
-void LedBlink(GPIO_Module* GPIOx, uint16_t Pin);
 void RTC_TimeShow(void);
 void RTC_DateShow(void);
 #ifdef __cplusplus

@@ -28,7 +28,7 @@
 /**
  * @file main.c
  * @author Nations
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -89,7 +89,7 @@ int main(void)
     /* Enable MCU Wake-up by LPUARTx */
     LPUART_EnableWakeUpStop(LPUARTx, ENABLE);
     /* Enter STOP Mode */
-    PWR_EnterSTOPMode(PWR_STOPPLUSE_DISABLE, PWR_STOPENTRY_WFI);
+    PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
     /* ... STOP Mode ... */
     /* Wake Up based on Start Bit Detection successful */
     LPUART_EnableWakeUpStop(LPUARTx, DISABLE);
@@ -110,7 +110,7 @@ int main(void)
     /* Enable MCU Wake-Up by LPUARTx */
     LPUART_EnableWakeUpStop(LPUARTx, ENABLE);
     /* Enter STOP Mode */
-    PWR_EnterSTOPMode(PWR_STOPPLUSE_DISABLE, PWR_STOPENTRY_WFI);
+    PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
     /* ... STOP Mode ... */
     /* Wake Up based on RXNE Detection successful */
     LPUART_EnableWakeUpStop(LPUARTx, DISABLE);
@@ -133,7 +133,7 @@ int main(void)
     /* Enable MCU Wake-Up by LPUARTx */
     LPUART_EnableWakeUpStop(LPUARTx, ENABLE);
     /* Enter STOP Mode */
-    PWR_EnterSTOPMode(PWR_STOPPLUSE_DISABLE, PWR_STOPENTRY_WFI);
+    PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
     /* ... STOP Mode ... */
     /* Wake Up based on a Configurable Received Byte Match successful */
     LPUART_EnableWakeUpStop(LPUARTx, DISABLE);
@@ -156,7 +156,7 @@ int main(void)
     /* Enable MCU Wake-Up by LPUARTx */
     LPUART_EnableWakeUpStop(LPUARTx, ENABLE);
     /* Enter STOP Mode */
-    PWR_EnterSTOPMode(PWR_STOPPLUSE_DISABLE, PWR_STOPENTRY_WFI);
+    PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
     /* ... STOP Mode ... */
     /* Wake Up based on a Programmed 4-Byte Frame Match successful */
     LPUART_EnableWakeUpStop(LPUARTx, DISABLE);    

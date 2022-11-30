@@ -33,6 +33,7 @@
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
 #include "n32g032_it.h"
+#include "main.h"
 
 /** @addtogroup N32G032_StdPeriph_Template
  * @{
@@ -95,17 +96,17 @@ void SysTick_Handler(void)
 void SPI1_IRQHandler(void)
 {
     /* Check the interrupt source */
-    if (SPI_I2S_GetIntStatus(SPI1, SPI_I2S_INT_TE) == SET)
+    if (SPI_I2S_GetIntStatus(I2S_MASTER, SPI_I2S_INT_TE) == SET)
     {
         /* Send a data from I2S1 */
-        SPI_I2S_TransmitData(SPI1, I2S3_Buffer_Tx[TxIdx++]);
+        SPI_I2S_TransmitData(I2S_MASTER, I2S3_Buffer_Tx[TxIdx++]);
     }
 
     /* Check the end of buffer transfer */
     if (TxIdx == 32)
     {
         /* Disable the I2S1 TE interrupt to end the communication */
-        SPI_I2S_EnableInt(SPI1, SPI_I2S_INT_TE, DISABLE);
+        SPI_I2S_EnableInt(I2S_MASTER, SPI_I2S_INT_TE, DISABLE);
     }
 }
 

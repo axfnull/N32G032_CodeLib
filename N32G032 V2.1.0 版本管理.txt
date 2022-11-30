@@ -1,0 +1,42 @@
+Nationstech.N32G032_Library.2.0.1版本：
+1.增加IAR工程
+2.调整代码格式
+
+Nationstech.N32G032_Library.2.1.0版本：
+1.RCC驱动修改ADC的1M时钟宏定义，CSR_RMRSTF_Reset宏定义
+2.I2C驱动修改清标志函数，例程修改eeprom单字节读取问题、中断DMA模式问题，导入复位机制、重入判断
+3.LPUART例程修改stop唤醒例程
+4.RTC驱动添加闹钟秒匹配唤醒低功耗失败问题的软件规避方法（RTC_ConfigTime函数）、头文件添加RTC_INT_FLAG_RESERVED_MASK宏用于修改清除标志函数、RTC驱动添加delay_ms（）延时函数用于修改RTC_WaitForSynchro(void)函数
+5.NVIC例程增加消抖
+6.SQRT模块驱动函数将RADICANT改为RADICAND
+7.CAN模块的取消发送函数修改
+8.LPTIM各demo优化LED相关函数写法（除LPTIM_PWM例程，该例程中不需要LED，故删掉了相关代码）
+9.PWR_LPRUN demo新增进出低功耗打印信息、PWR_SLEEP demo添加退出低功耗打印信息,添加DBG_SLEEP、PWR_STOP demo中PCLK1分频系数改为1（即：pclk1div = RCC_HCLK_DIV1）
+10.修改SPI/I2S驱动中关于寄存器位的注释，与用户手册能对应上，I2S的Demo中与I2S相关的引脚、名称用宏定义和删除#if 0中的代码，删除IS2主机通过中断发数据和主模式IS2/SPI切换发送数据的Demo中不用的函数Buffercmp()
+11.OPAMP的Demo中时钟使能添加上GPIOF的时钟使能
+12.ADC 温度传感器及BG通道使能改写
+13.ADC Demo中HSI使能后应等到稳定
+14.ADC驱动文件添加对ADC_CTRL3的CKMODE操作
+15.修改TIM例程中的readme
+16.TIM驱动中OCxM的名字改成OCxMD
+17.RTC日历初始化驱动由3个函数合为1个函数，并在函数内新增可开启和关闭的1秒延时功能，延时计数调用TIM6和SysTick模块，可根据宏切换
+18.基于新版日历初始化驱动函数，RTC各demo中相关配置代码均有同步更新和优化
+19.修改SPI_Flash Demo里的W25Q扇区擦除指令为0x20
+20.ADC增加内部通道Vrefint的采样demo
+21.RCC_CFG_SCLKSW改称0x00000007
+22.OpaAdByTim的demo修改ADC1M时钟源为HSI
+23.LPUART的WakeUpFromStop_OK例程中main.c文件中调用PWR_EnterSTOPMode修改
+24.TIM的DMA Burst的功能只对TIMx_DCTRL以及之前的寄存器有效。修改TIM驱动C文件中TIM_ConfigDma函数的注释，以及TIM驱动头文件TIM_DMABASE的宏定义
+25. 删除TSC的Demo
+26.STOP+功能删除，n32g032_pwr.c和 n32g032_pwr.h修改相应代码。LPTIM的Wakeup的Demo，LPUART的WakeUpFromStopOK的Demo，PWR的Stop的Demo，修改进入STOP的函数调用
+27. 修改FLASH驱动及注释
+1）修改AC_LATENCY_MSK、RDP_USER_Key宏定义值
+2）FLASH_SetLatency函数增加注释描述，增加latency对应的时钟范围
+3）删除FLASH_Unlock、FLASH_Lock、FLASH_GetSTS、FLASH_WaitForLastOpt函数多余注释
+4）修改FLASH_ConfigALLOptionByte函数参数WRP_Pages注释及data移位操作，新增FLASH_NO_WRPR_Pages宏定义
+5）修改FLASH_ConfigUserOB的参数rdpuser_tmp赋值的值
+6）修改FLASH_INTConfig、FLASH_GetFlagSTS函数的输入参数及新增ECC错误相关参数，并修改检查宏定义
+28. 删除多余的adc驱动函数void ADC_EnableTempSensorVrefint(FunctionalState Cmd)
+29.修改system_n32g031.c文件中的系统时钟配置宏定义方式
+30.修改RCC驱动中的RCC_ConfigPll函数，添加RCC_PLLSource寄存器配置
+31.修改RCC_ClockConfig例程中的pll配置代码，PLLOUT要在48~72M范围内，并优化部分注释

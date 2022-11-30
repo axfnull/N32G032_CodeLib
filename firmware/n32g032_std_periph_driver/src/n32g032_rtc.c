@@ -28,12 +28,13 @@
 /**
  * @file n32g032_rtc.c
  * @author Nations Solution Team
- * @version v1.1.0
+ * @version v1.1.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
 #include "n32g032_rtc.h"
 #include "n32g032_rcc.h"
+#include <stdio.h>
 
 /** @addtogroup N32G032_StdPeriph_Driver
  * @{
@@ -58,6 +59,15 @@
 #define SYNCHRO_TIMEOUT  ((uint32_t)0x00008000)
 #define RECALPF_TIMEOUT  ((uint32_t)0x00001000)
 #define SHPF_TIMEOUT     ((uint32_t)0x00002000)
+
+#ifdef RTC_DELAY_USE_TIM6
+#define RTC_DELAY_1S_PRESCALER_VALUE_TIM6 (100)
+#define RTC_DELAY_1S_RELOAD_VALUE_TIM6    (SystemCoreClock/1000)
+#else
+#define RTC_DELAY_1S_RELOAD_VALUE_SYSTICK (SystemCoreClock/10)
+#endif
+
+volatile uint32_t RTC_Delay_Flag = 0;
 
 static uint8_t RTC_ByteToBcd2(uint8_t Value);
 static uint8_t RTC_Bcd2ToByte(uint8_t Value);
@@ -181,57 +191,6 @@ ErrorStatus RTC_DeInit(void)
 }
 
 /**
- * @brief  Initializes the RTC registers according to the specified parameters
- *         in RTC_InitStruct.
- * @param RTC_InitStruct pointer to a RTC_InitType structure that contains
- *         the configuration information for the RTC peripheral.
- * @note   The RTC Prescaler register is write protected and can be written in
- *         initialization mode only.
- * @return An ErrorStatus enumeration value:
- *          - SUCCESS: RTC registers are initialized
- *          - ERROR: RTC registers are not initialized
- */
-ErrorStatus RTC_Init(RTC_InitType* RTC_InitStruct)
-{
-    ErrorStatus status = ERROR;
-
-    /* Check the parameters */
-    assert_param(IS_RTC_HOUR_FORMAT(RTC_InitStruct->RTC_HourFormat));
-    assert_param(IS_RTC_PREDIV_ASYNCH(RTC_InitStruct->RTC_AsynchPrediv));
-    assert_param(IS_RTC_PREDIV_SYNCH(RTC_InitStruct->RTC_SynchPrediv));
-
-    /* Disable the write protection for RTC registers */
-    RTC->WRP = 0xCA;
-    RTC->WRP = 0x53;
-
-    /* Set Initialization mode */
-    if (RTC_EnterInitMode() == ERROR)
-    {
-        status = ERROR;
-    }
-    else
-    {
-        /* Clear RTC CTRL HFMT Bit */
-        RTC->CTRL &= ((uint32_t) ~(RTC_CTRL_HFMT));
-        /* Set RTC_CTRL register */
-        RTC->CTRL |= ((uint32_t)(RTC_InitStruct->RTC_HourFormat));
-
-        /* Configure the RTC PRE */
-        RTC->PRE = (uint32_t)(RTC_InitStruct->RTC_SynchPrediv);
-        RTC->PRE |= (uint32_t)(RTC_InitStruct->RTC_AsynchPrediv << 16);
-
-        /* Exit Initialization mode */
-        RTC_ExitInitMode();
-
-        status = SUCCESS;
-    }
-    /* Enable the write protection for RTC registers */
-    RTC->WRP = 0xFF;
-
-    return status;
-}
-
-/**
  * @brief  Fills each RTC_InitStruct member with its default value.
  * @param RTC_InitStruct pointer to a RTC_InitType structure which will be
  *         initialized.
@@ -331,6 +290,22 @@ void RTC_ExitInitMode(void)
     RTC->INITSTS &= (uint32_t)~RTC_INITSTS_INITM;
 }
 
+extern uint32_t SystemCoreClock;
+
+static void delay_ms(uint16_t count)
+{
+    uint32_t i;
+    const uint32_t u32Cyc = SystemCoreClock / 10000;
+
+    while (count-- > 0)
+    {
+        i = u32Cyc;
+        while (i-- > 0)
+        {
+            ;
+        }
+    }
+}
 /**
  * @brief  Waits until the RTC Time and Date registers (RTC_TSH and RTC_DATE) are
  *         synchronized with RTC APB clock.
@@ -359,13 +334,14 @@ ErrorStatus RTC_WaitForSynchro(void)
     /* Clear RSYF flag */
     RTC->INITSTS &= (uint32_t)RTC_RSF_MASK;
 
-    /* Wait the registers to be synchronised */
+    /* Wait the registers to be synchronised and 5500ms timeout */
     do
     {
         synchrostatus = RTC->INITSTS & RTC_INITSTS_RSYF;
+        delay_ms(1);
         synchrocounter++;
-    } while ((synchrocounter != SYNCHRO_TIMEOUT) && (synchrostatus == 0x00));
-
+    } while ((synchrocounter < 5500) && (synchrostatus == 0x00));
+    
     if ((RTC->INITSTS & RTC_INITSTS_RSYF) != RESET)
     {
         status = SUCCESS;
@@ -461,93 +437,201 @@ void RTC_EnableBypassShadow(FunctionalState Cmd)
 }
 
 /**
- * @}
- */
-
-/** @addtogroup RTC_Group2 Time and Date configuration functions
- *  @brief   Time and Date configuration functions
- *
-@verbatim
- ===============================================================================
-               ##### Time and Date configuration functions #####
- ===============================================================================
-    [..] This section provide functions allowing to program and read the RTC
-         Calendar (Time and Date).
-
-@endverbatim
-  * @{
+  * @brief  Calendar initialization configuration.
+  * @param RTC_Format: specifies the format of the entered parameters.
+  *   This parameter can be one of the following values:
+  *     @arg RTC_FORMAT_BIN: Binary data format.
+  *     @arg RTC_FORMAT_BCD: BCD data format.
+  * @param RTC_InitStruct: pointer to a RTC_InitType structure that contains the configuration
+  *         information for the RTC peripheral.When the user does not need to configure this 
+  *         parameter, note that NULL can be passed in.
+  *   Note: The RTC Prescaler register is write protected and can be written in initialization
+  *         mode only.
+  * @param RTC_DateStruct: pointer to a RTC_DateType structure that contains the date configuration
+  *         information for the RTC.When the user does not need to configure this parameter,
+  *         note that NULL can be passed in.
+  *   Note: The RTC Date register is write protected and can be written in initialization
+  *         mode only.
+  * @param RTC_TimeStruct: pointer to a RTC_TimeType structure that contains the time configuration
+  *         information for the RTC.When the user does not need to configure this parameter, 
+  *         note that NULL can be passed in.
+  *   Note: The RTC Time register is write protected and can be written in initialization
+  *         mode only.
+  * @param  RTC_DelayCmd: Enable or disable 1 second delay.
+  *   This parameter can be: ENABLE or DISABLE.
+  *   Note: 1. This parameter is configured according to the user's needs. If the user needs
+  *         to call this function multiple times within 1 second to configure the calendar, it must
+  *         be enabled, because we stipulate that the interval between two calendar configurations 
+  *         must be at least 1 second.
+  *         2. If this parameter is enabled, We provide two timers to help users complete this delay 
+  *			operation (SysTick and TIM6). Users can choose which timer to use according to their needs,
+  *			and use the macro RTC_DELAY_USE_TIM6 to select. At the same time, the user should also pay  
+  *			attention to the usage of the watchdog. If necessary, the dog can be fed in the interrupt 
+  *			handler to prevent the watchdog generating a system reset due to the delay in this function.
+  * @return An ErrorStatus enumeration value:
+  *         - SUCCESS: RTC PRE register, Date register, Time register is configured
+  *         - ERROR: RTC PRE register, Date register, Time register is not configured
   */
-
-/**
- * @brief  Set the RTC current time.
- * @param RTC_Format specifies the format of the entered parameters.
- *   This parameter can be  one of the following values:
- *     @arg RTC_FORMAT_BIN Binary data format.
- *     @arg RTC_FORMAT_BCD BCD data format.
- * @param RTC_TimeStruct pointer to a RTC_TimeType structure that contains
- *                        the time configuration information for the RTC.
- * @return An ErrorStatus enumeration value:
- *          - SUCCESS: RTC Time register is configured
- *          - ERROR: RTC Time register is not configured
- */
-ErrorStatus RTC_ConfigTime(uint32_t RTC_Format, RTC_TimeType* RTC_TimeStruct)
+ErrorStatus RTC_ConfigCalendar(uint32_t RTC_Format, RTC_InitType* RTC_InitStruct, RTC_DateType* RTC_DateStruct, RTC_TimeType* RTC_TimeStruct, FunctionalState RTC_DelayCmd)
 {
-    uint32_t tmpregister = 0;
-    ErrorStatus status   = ERROR;
-
+	static uint32_t first_init_flag = 1;
+	uint32_t tmpregister1 = 0, tmpregister2 = 0;
+    ErrorStatus status    = ERROR;
+	
     /* Check the parameters */
     assert_param(IS_RTC_FORMAT(RTC_Format));
-
+	
+	if(RTC_InitStruct != NULL)
+	{
+		assert_param(IS_RTC_HOUR_FORMAT(RTC_InitStruct->RTC_HourFormat));
+		assert_param(IS_RTC_PREDIV_ASYNCH(RTC_InitStruct->RTC_AsynchPrediv));
+		assert_param(IS_RTC_PREDIV_SYNCH(RTC_InitStruct->RTC_SynchPrediv));
+	}
+	
+	if(RTC_DateStruct != NULL)
+	{
+		if ((RTC_Format == RTC_FORMAT_BIN) && ((RTC_DateStruct->Month & 0x10) == 0x10))
+		{
+			RTC_DateStruct->Month = (RTC_DateStruct->Month & (uint32_t) ~(0x10)) + 0x0A;
+		}
+	}
+	
     if (RTC_Format == RTC_FORMAT_BIN)
     {
-        if ((RTC->CTRL & RTC_CTRL_HFMT) != (uint32_t)RESET)
-        {
-            assert_param(IS_RTC_12HOUR(RTC_TimeStruct->Hours));
-            assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
-        }
-        else
-        {
-            RTC_TimeStruct->H12 = 0x00;
-            assert_param(IS_RTC_24HOUR(RTC_TimeStruct->Hours));
-        }
-        assert_param(IS_RTC_MINUTES(RTC_TimeStruct->Minutes));
-        assert_param(IS_RTC_SECONDS(RTC_TimeStruct->Seconds));
+		if(RTC_DateStruct != NULL)
+		{
+			assert_param(IS_RTC_YEAR(RTC_DateStruct->Year));
+			assert_param(IS_RTC_MONTH(RTC_DateStruct->Month));
+			assert_param(IS_RTC_DATE(RTC_DateStruct->Date));
+			assert_param(IS_RTC_WEEKDAY(RTC_DateStruct->WeekDay));
+		}		
+		if(RTC_TimeStruct != NULL)
+		{
+			if(RTC_InitStruct != NULL)
+			{
+				if(RTC_InitStruct->RTC_HourFormat == RTC_12HOUR_FORMAT)
+				{
+					assert_param(IS_RTC_12HOUR(RTC_TimeStruct->Hours));
+					assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
+				}
+				else
+				{
+					RTC_TimeStruct->H12 = RTC_AM_H12;
+					assert_param(IS_RTC_24HOUR(RTC_TimeStruct->Hours));
+				}
+			}
+			else
+			{
+				if ((RTC->CTRL & RTC_CTRL_HFMT) != (uint32_t)RESET)
+				{
+					assert_param(IS_RTC_12HOUR(RTC_TimeStruct->Hours));
+					assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
+				}
+				else
+				{
+					RTC_TimeStruct->H12 = RTC_AM_H12;
+					assert_param(IS_RTC_24HOUR(RTC_TimeStruct->Hours));
+				}
+			}
+			assert_param(IS_RTC_MINUTES(RTC_TimeStruct->Minutes));
+			assert_param(IS_RTC_SECONDS(RTC_TimeStruct->Seconds));
+		}
     }
     else
     {
-        if ((RTC->CTRL & RTC_CTRL_HFMT) != (uint32_t)RESET)
-        {
-            tmpregister = RTC_Bcd2ToByte(RTC_TimeStruct->Hours);
-            assert_param(IS_RTC_12HOUR(tmpregister));
-            assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
-        }
-        else
-        {
-            RTC_TimeStruct->H12 = 0x00;
-            assert_param(IS_RTC_24HOUR(RTC_Bcd2ToByte(RTC_TimeStruct->Hours)));
-        }
-        assert_param(IS_RTC_MINUTES(RTC_Bcd2ToByte(RTC_TimeStruct->Minutes)));
-        assert_param(IS_RTC_SECONDS(RTC_Bcd2ToByte(RTC_TimeStruct->Seconds)));
+		if(RTC_DateStruct != NULL)
+		{
+			assert_param(IS_RTC_YEAR(RTC_Bcd2ToByte(RTC_DateStruct->Year)));
+			assert_param(IS_RTC_MONTH(RTC_Bcd2ToByte(RTC_DateStruct->Month)));
+			assert_param(IS_RTC_DATE(RTC_Bcd2ToByte(RTC_DateStruct->Date)));
+			assert_param(IS_RTC_WEEKDAY(RTC_DateStruct->WeekDay));
+		}		
+		if(RTC_TimeStruct != NULL)
+		{
+			if(RTC_InitStruct != NULL)
+			{
+				if(RTC_InitStruct->RTC_HourFormat == RTC_12HOUR_FORMAT)
+				{
+					assert_param(IS_RTC_12HOUR(RTC_Bcd2ToByte(RTC_TimeStruct->Hours)));
+					assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
+				}
+				else
+				{
+					RTC_TimeStruct->H12 = RTC_AM_H12;
+					assert_param(IS_RTC_24HOUR(RTC_Bcd2ToByte(RTC_TimeStruct->Hours)));
+				}
+			}
+			else
+			{
+				if ((RTC->CTRL & RTC_CTRL_HFMT) != (uint32_t)RESET)
+				{
+					assert_param(IS_RTC_12HOUR(RTC_Bcd2ToByte(RTC_TimeStruct->Hours)));
+					assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
+				}
+				else
+				{
+					RTC_TimeStruct->H12 = RTC_AM_H12;
+					assert_param(IS_RTC_24HOUR(RTC_Bcd2ToByte(RTC_TimeStruct->Hours)));
+				}				
+			}
+			assert_param(IS_RTC_MINUTES(RTC_Bcd2ToByte(RTC_TimeStruct->Minutes)));
+			assert_param(IS_RTC_SECONDS(RTC_Bcd2ToByte(RTC_TimeStruct->Seconds)));
+		}
     }
 
     /* Check the input parameters format */
     if (RTC_Format != RTC_FORMAT_BIN)
     {
-        tmpregister = (((uint32_t)(RTC_TimeStruct->Hours) << 16) | ((uint32_t)(RTC_TimeStruct->Minutes) << 8)
-                       | ((uint32_t)RTC_TimeStruct->Seconds) | ((uint32_t)(RTC_TimeStruct->H12) << 16));
+		if(RTC_DateStruct != NULL)
+		{
+			tmpregister1 = (((uint32_t)(RTC_DateStruct->Year) << 16) | (((uint32_t)RTC_DateStruct->Month) << 8)
+			   | ((uint32_t)RTC_DateStruct->Date) | (((uint32_t)RTC_DateStruct->WeekDay) << 13));
+		}
+		
+		if(RTC_TimeStruct != NULL)
+		{
+			tmpregister2 = (((uint32_t)(RTC_TimeStruct->Hours) << 16) | ((uint32_t)(RTC_TimeStruct->Minutes) << 8)
+			   | ((uint32_t)RTC_TimeStruct->Seconds) | ((uint32_t)(RTC_TimeStruct->H12) << 16));
+		}
     }
     else
     {
-        tmpregister =
-            (uint32_t)(((uint32_t)RTC_ByteToBcd2(RTC_TimeStruct->Hours) << 16)
-                       | ((uint32_t)RTC_ByteToBcd2(RTC_TimeStruct->Minutes) << 8)
-                       | ((uint32_t)RTC_ByteToBcd2(RTC_TimeStruct->Seconds)) | (((uint32_t)RTC_TimeStruct->H12) << 16));
+		if(RTC_DateStruct != NULL)
+		{
+			tmpregister1 = (((uint32_t)RTC_ByteToBcd2(RTC_DateStruct->Year) << 16)
+			   | ((uint32_t)RTC_ByteToBcd2(RTC_DateStruct->Month) << 8)
+			   | ((uint32_t)RTC_ByteToBcd2(RTC_DateStruct->Date)) | ((uint32_t)RTC_DateStruct->WeekDay << 13));
+		}
+		
+		if(RTC_TimeStruct != NULL)
+		{
+			tmpregister2 = (uint32_t)(((uint32_t)RTC_ByteToBcd2(RTC_TimeStruct->Hours) << 16)
+			   | ((uint32_t)RTC_ByteToBcd2(RTC_TimeStruct->Minutes) << 8)
+			   | ((uint32_t)RTC_ByteToBcd2(RTC_TimeStruct->Seconds)) | (((uint32_t)RTC_TimeStruct->H12) << 16));
+		}		
     }
 
     /* Disable the write protection for RTC registers */
     RTC->WRP = 0xCA;
     RTC->WRP = 0x53;
 
+	if(RTC_DelayCmd == ENABLE)
+	{
+		/* The first initialization does not execute the delay */
+		if(!first_init_flag)
+		{
+			/* Wait for the 1.1 second delay flag to be set */
+			while(!RTC_Delay_Flag);
+			RTC_Delay_Flag = 0;
+		}
+	}
+	
+	/* Wait for the value of RTC->SUBS register to be greater than 0 and less than 
+	   the value of the synchronization prescaler bits in RTC->PRE register */
+	while(!((RTC->SUBS > 0) && (RTC->SUBS < (RTC->PRE & 0x7FFF))))
+	{		
+	}
+		
     /* Set Initialization mode */
     if (RTC_EnterInitMode() == ERROR)
     {
@@ -555,11 +639,32 @@ ErrorStatus RTC_ConfigTime(uint32_t RTC_Format, RTC_TimeType* RTC_TimeStruct)
     }
     else
     {
-        /* Set the RTC_TSH register */
-        RTC->TSH = (uint32_t)(tmpregister & RTC_TR_RESERVED_MASK);
+		if(RTC_InitStruct != NULL)
+		{
+			/* Clear RTC CTRL HFMT Bit */
+			RTC->CTRL &= ((uint32_t) ~(RTC_CTRL_HFMT));
+			/* Set RTC_CTRL register */
+			RTC->CTRL |= ((uint32_t)(RTC_InitStruct->RTC_HourFormat));
 
+			/* Configure the RTC PRE */
+			RTC->PRE = (uint32_t)(RTC_InitStruct->RTC_SynchPrediv);
+			RTC->PRE |= (uint32_t)(RTC_InitStruct->RTC_AsynchPrediv << 16);
+		}
+		
+		if(RTC_DateStruct != NULL)
+		{
+			/* Set the RTC_DATE register */
+			RTC->DATE = (uint32_t)(tmpregister1 & RTC_DATE_RESERVED_MASK);
+		}
+
+		if(RTC_TimeStruct != NULL)
+		{
+			/* Set the RTC_TSH register */
+			RTC->TSH = (uint32_t)(tmpregister2 & RTC_TR_RESERVED_MASK);
+		}
+		
         /* Exit Initialization mode */
-        RTC_ExitInitMode();
+        RTC_ExitInitMode();	
 
         /* If  RTC_CTRL_BYPS bit = 0, wait for synchro else this check is not needed */
         if ((RTC->CTRL & RTC_CTRL_BYPS) == RESET)
@@ -577,12 +682,72 @@ ErrorStatus RTC_ConfigTime(uint32_t RTC_Format, RTC_TimeType* RTC_TimeStruct)
         {
             status = SUCCESS;
         }
+		
+		if(RTC_DelayCmd == ENABLE)
+		{		
+			if(first_init_flag)
+			{
+				/* Clear the first initialization flag */
+				first_init_flag = 0;
+			}
+			
+#ifdef RTC_DELAY_USE_TIM6
+			/* Set Interrupt Priority */
+			NVIC_SetPriority(LPTIM_TIM6_IRQn, (1<<__NVIC_PRIO_BITS) - 1);
+			NVIC->ISER[0] = (1 << ((uint32_t)(LPTIM_TIM6_IRQn) & 0x1F));
+			/* Enable the TIM6 clock*/
+			RCC->APB1PCLKEN |= RCC_APB1_PERIPH_TIM6;
+			RCC->APB1PRST |= RCC_APB1_PERIPH_TIM6;
+			RCC->APB1PRST &= ~RCC_APB1_PERIPH_TIM6;
+			/* Set the Autoreload value */
+			TIM6->AR = RTC_DELAY_1S_RELOAD_VALUE_TIM6;
+			/* Prescaler configuration */
+			TIM6->PSC = RTC_DELAY_1S_PRESCALER_VALUE_TIM6 - 1;
+			/* Set or reset the UG Bit */
+			TIM6->EVTGEN = TIM_PSC_RELOAD_MODE_IMMEDIATE;
+			/* TIM6 enable update irq */
+			TIM6->DINTEN |= TIM_INT_UPDATE;
+			/* Clear the flag */
+			TIM6->STS &= (uint32_t)~TIM_FLAG_UPDATE;
+			/* TIM6 enable counter */
+			TIM6->CTRL1 |= TIM_CTRL1_CNTEN;
+#else
+			/* Set Interrupt Priority */
+			NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);
+			/* set reload register */
+			SysTick->LOAD  = (RTC_DELAY_1S_RELOAD_VALUE_SYSTICK & SysTick_LOAD_RELOAD_Msk) - 1;
+			/* Load the SysTick Counter Value */
+			SysTick->VAL   = 0;
+			/* Enable SysTick IRQ and SysTick Timer */
+			SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+						     SysTick_CTRL_TICKINT_Msk   |
+						     SysTick_CTRL_ENABLE_Msk;
+#endif
+		}
     }
     /* Enable the write protection for RTC registers */
     RTC->WRP = 0xFF;
 
     return status;
 }
+
+/**
+ * @}
+ */
+
+/** @addtogroup RTC_Group2 Time and Date get functions
+ *  @brief   Time and Date get functions
+ *
+@verbatim
+ ===============================================================================
+                    ##### Time and Date get functions #####
+ ===============================================================================
+    [..] This section provide functions allowing to read the RTC Calendar
+         (Time and Date).
+
+@endverbatim
+  * @{
+  */
 
 /**
  * @brief  Fills each RTC_TimeStruct member with its default value
@@ -646,99 +811,6 @@ uint32_t RTC_GetSubSecond(void)
     tmpregister = (uint32_t)(RTC->SUBS);
 
     return (tmpregister);
-}
-
-/**
- * @brief  Set the RTC current date.
- * @param RTC_Format specifies the format of the entered parameters.
- *   This parameter can be  one of the following values:
- *     @arg RTC_FORMAT_BIN Binary data format.
- *     @arg RTC_FORMAT_BCD BCD data format.
- * @param RTC_DateStruct pointer to a RTC_DateType structure that contains
- *                         the date configuration information for the RTC.
- * @return An ErrorStatus enumeration value:
- *          - SUCCESS: RTC Date register is configured
- *          - ERROR: RTC Date register is not configured
- */
-ErrorStatus RTC_SetDate(uint32_t RTC_Format, RTC_DateType* RTC_DateStruct)
-{
-    uint32_t tmpregister = 0;
-    ErrorStatus status   = ERROR;
-
-    /* Check the parameters */
-    assert_param(IS_RTC_FORMAT(RTC_Format));
-
-    if ((RTC_Format == RTC_FORMAT_BIN) && ((RTC_DateStruct->Month & 0x10) == 0x10))
-    {
-        RTC_DateStruct->Month = (RTC_DateStruct->Month & (uint32_t) ~(0x10)) + 0x0A;
-    }
-    if (RTC_Format == RTC_FORMAT_BIN)
-    {
-        assert_param(IS_RTC_YEAR(RTC_DateStruct->Year));
-        assert_param(IS_RTC_MONTH(RTC_DateStruct->Month));
-        assert_param(IS_RTC_DATE(RTC_DateStruct->Date));
-    }
-    else
-    {
-        assert_param(IS_RTC_YEAR(RTC_Bcd2ToByte(RTC_DateStruct->Year)));
-        tmpregister = RTC_Bcd2ToByte(RTC_DateStruct->Month);
-        assert_param(IS_RTC_MONTH(tmpregister));
-        tmpregister = RTC_Bcd2ToByte(RTC_DateStruct->Date);
-        assert_param(IS_RTC_DATE(tmpregister));
-    }
-    assert_param(IS_RTC_WEEKDAY(RTC_DateStruct->WeekDay));
-
-    /* Check the input parameters format */
-    if (RTC_Format != RTC_FORMAT_BIN)
-    {
-        tmpregister = ((((uint32_t)RTC_DateStruct->Year) << 16) | (((uint32_t)RTC_DateStruct->Month) << 8)
-                       | ((uint32_t)RTC_DateStruct->Date) | (((uint32_t)RTC_DateStruct->WeekDay) << 13));
-    }
-    else
-    {
-        tmpregister = (((uint32_t)RTC_ByteToBcd2(RTC_DateStruct->Year) << 16)
-                       | ((uint32_t)RTC_ByteToBcd2(RTC_DateStruct->Month) << 8)
-                       | ((uint32_t)RTC_ByteToBcd2(RTC_DateStruct->Date)) | ((uint32_t)RTC_DateStruct->WeekDay << 13));
-    }
-
-    /* Disable the write protection for RTC registers */
-    RTC->WRP = 0xCA;
-    RTC->WRP = 0x53;
-
-    /* Set Initialization mode */
-    if (RTC_EnterInitMode() == ERROR)
-    {
-        status = ERROR;
-    }
-    else
-    {
-        /* Set the RTC_DATE register */
-        RTC->DATE = (uint32_t)(tmpregister & RTC_DATE_RESERVED_MASK);
-
-        /* Exit Initialization mode */
-        RTC_ExitInitMode();
-
-        /* If  RTC_CTRL_BYPS bit = 0, wait for synchro else this check is not needed */
-        if ((RTC->CTRL & RTC_CTRL_BYPS) == RESET)
-        {
-            if (RTC_WaitForSynchro() == ERROR)
-            {
-                status = ERROR;
-            }
-            else
-            {
-                status = SUCCESS;
-            }
-        }
-        else
-        {
-            status = SUCCESS;
-        }
-    }
-    /* Enable the write protection for RTC registers */
-    RTC->WRP = 0xFF;
-
-    return status;
 }
 
 /**
@@ -1923,7 +1995,7 @@ void RTC_ClrFlag(uint32_t RTC_FLAG)
 
     /* Clear the Flags in the RTC_INITSTS register */
     RTC->INITSTS = (uint32_t)(
-        (uint32_t)(~((RTC_FLAG | RTC_INITSTS_INITM) & 0x0001FFFF) | (uint32_t)(RTC->INITSTS & RTC_INITSTS_INITM)));
+        (uint32_t)(~((RTC_FLAG | RTC_INITSTS_INITM) & 0x0001FFFF) | (uint32_t)(RTC->INITSTS & RTC_INITSTS_INITM)) & RTC_INT_FLAG_RESERVED_MASK);
 }
 
 /**
@@ -1995,7 +2067,7 @@ void RTC_ClrIntPendingBit(uint32_t RTC_INT)
 
     /* Clear the interrupt pending bits in the RTC_INITSTS register */
     RTC->INITSTS = (uint32_t)(
-        (uint32_t)(~((tmpregister | RTC_INITSTS_INITM) & 0x0000FFFF) | (uint32_t)(RTC->INITSTS & RTC_INITSTS_INITM)));
+        (uint32_t)(~((tmpregister | RTC_INITSTS_INITM) & 0x0000FFFF) | (uint32_t)(RTC->INITSTS & RTC_INITSTS_INITM)) & RTC_INT_FLAG_RESERVED_MASK);
 }
 
 /**

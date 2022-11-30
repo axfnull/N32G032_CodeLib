@@ -558,19 +558,15 @@ typedef struct
 #define TIM_DMABASE_CAPCMPDAT4 ((uint16_t)0x0010)
 #define TIM_DMABASE_BKDT       ((uint16_t)0x0011)
 #define TIM_DMABASE_DMACTRL    ((uint16_t)0x0012)
-#define TIM_DMABASE_CAPCMPMOD3 ((uint16_t)0x0013)
-#define TIM_DMABASE_CAPCMPDAT5 ((uint16_t)0x0014)
-#define TIM_DMABASE_CAPCMPDAT6 ((uint16_t)0x0015)
 
 #define IsTimDmaBase(BASE)                                                                                             \
     (((BASE) == TIM_DMABASE_CTRL1) || ((BASE) == TIM_DMABASE_CTRL2) || ((BASE) == TIM_DMABASE_SMCTRL)                  \
      || ((BASE) == TIM_DMABASE_DMAINTEN) || ((BASE) == TIM_DMABASE_STS) || ((BASE) == TIM_DMABASE_EVTGEN)              \
-     || ((BASE) == TIM_DMABASE_CAPCMPMOD1) || ((BASE) == TIM_DMABASE_CAPCMPMOD2) || ((BASE) == TIM_DMABASE_CAPCMPMOD3) \
+     || ((BASE) == TIM_DMABASE_CAPCMPMOD1) || ((BASE) == TIM_DMABASE_CAPCMPMOD2)                                       \
      || ((BASE) == TIM_DMABASE_CAPCMPEN) || ((BASE) == TIM_DMABASE_CNT) || ((BASE) == TIM_DMABASE_PSC)                 \
      || ((BASE) == TIM_DMABASE_AR) || ((BASE) == TIM_DMABASE_REPCNT) || ((BASE) == TIM_DMABASE_CAPCMPDAT1)             \
      || ((BASE) == TIM_DMABASE_CAPCMPDAT2) || ((BASE) == TIM_DMABASE_CAPCMPDAT3) || ((BASE) == TIM_DMABASE_CAPCMPDAT4) \
-     || ((BASE) == TIM_DMABASE_CAPCMPDAT5) || ((BASE) == TIM_DMABASE_CAPCMPDAT6) || ((BASE) == TIM_DMABASE_BKDT)       \
-     || ((BASE) == TIM_DMABASE_DMACTRL))
+     || ((BASE) == TIM_DMABASE_BKDT)|| ((BASE) == TIM_DMABASE_DMACTRL))
 /**
  * @}
  */
@@ -597,9 +593,6 @@ typedef struct
 #define TIM_DMABURST_LENGTH_16TRANSFERS ((uint16_t)0x0F00)
 #define TIM_DMABURST_LENGTH_17TRANSFERS ((uint16_t)0x1000)
 #define TIM_DMABURST_LENGTH_18TRANSFERS ((uint16_t)0x1100)
-#define TIM_DMABURST_LENGTH_19TRANSFERS ((uint16_t)0x1200)
-#define TIM_DMABURST_LENGTH_20TRANSFERS ((uint16_t)0x1300)
-#define TIM_DMABURST_LENGTH_21TRANSFERS ((uint16_t)0x1400)
 #define IsTimDmaLength(LENGTH)                                                                                         \
     (((LENGTH) == TIM_DMABURST_LENGTH_1TRANSFER) || ((LENGTH) == TIM_DMABURST_LENGTH_2TRANSFERS)                       \
      || ((LENGTH) == TIM_DMABURST_LENGTH_3TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_4TRANSFERS)                   \
@@ -609,9 +602,7 @@ typedef struct
      || ((LENGTH) == TIM_DMABURST_LENGTH_11TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_12TRANSFERS)                 \
      || ((LENGTH) == TIM_DMABURST_LENGTH_13TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_14TRANSFERS)                 \
      || ((LENGTH) == TIM_DMABURST_LENGTH_15TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_16TRANSFERS)                 \
-     || ((LENGTH) == TIM_DMABURST_LENGTH_17TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_18TRANSFERS)                 \
-     || ((LENGTH) == TIM_DMABURST_LENGTH_19TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_20TRANSFERS)                 \
-     || ((LENGTH) == TIM_DMABURST_LENGTH_21TRANSFERS))
+     || ((LENGTH) == TIM_DMABURST_LENGTH_17TRANSFERS) || ((LENGTH) == TIM_DMABURST_LENGTH_18TRANSFERS))                 
 /**
  * @}
  */

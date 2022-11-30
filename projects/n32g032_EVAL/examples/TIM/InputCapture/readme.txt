@@ -13,7 +13,7 @@
                     PA7选择为TIM3 CH2输入
                     PA3选择为IO 输出
         4、TIM：
-                    TIM3 CH2 上升沿捕获中断打开,捕获的频率范围最小为((TIM3 CLK)/0xffff)Hz,最大频率为((TIM3 CLK)/1)Hz
+                    TIM3 CH2 上升沿捕获中断打开
     使用方法：
         1、编译后打开调试模式，连接PA3与PA7，将变量TIM3Freq、gOnePulsEn添加到watch窗口
         2、默认gOnePulsEn=0，每次手动给gOnePulsEn=1，此时可以看到TIM3Freq计算出来的频率值

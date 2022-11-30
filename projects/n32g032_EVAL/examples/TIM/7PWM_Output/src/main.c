@@ -56,9 +56,6 @@ void TIM_Initial(TIM_Module* TIMx)
     /* TIMx Configuration ---------------------------------------------------
     Generate 4 PWM signals with 4 different duty cycles:
     TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
-    SystemCoreClock is set to 48 MHz for Low-density, Medium-density, High-density
-    and Connectivity line devices and to 24 MHz for Low-Density Value line and
-    Medium-Density Value line devices
 
     The objective is to generate 7 PWM signal at 17.57 KHz:
      - TIMx_Period = (SystemCoreClock / 17570) - 1

@@ -52,3 +52,5 @@ LPUART。LPUART接收从DMA传来的数据，存至RxBuffer1。比较收、发数据，比较
 
 
 4、注意事项
+
+    需先将开发板NS-LINK的MCU_TX和MCU_RX跳线帽断开

@@ -40,15 +40,6 @@
 /** @addtogroup LPTIM_PWM
  * @{
  */
-
-
-void LedBlink(GPIO_Module* GPIOx, uint16_t Pin);
-void LEDInit(uint16_t Pin);
-void LedOn(uint16_t Pin);
-void LedOff(uint16_t Pin);
-void Ledlink(uint16_t Pin);
-void delay(vu32 nCount);
-
 void LPTIM_OutputIoInit(void);
 /**
  * @brief  Main program.
@@ -57,13 +48,11 @@ int main(void)
 {
     /*!< At this stage the microcontroller clock setting is already configured,
          this is done through SystemInit() function which is called from startup
-         file (startup_n32g032_xx.s) before to branch to application main.
+         file (startup_n32g032.s) before to branch to application main.
          To reconfigure the default setting of SystemInit() function, refer to
          system_n32g032.c file
        */
-//**********************************************************
-  /* Init LED GPIO */
-    LEDInit(LED1);
+
     /* Enable the LSI source */
     RCC_EnableLsi(ENABLE);
     RCC_ConfigLPTIMClk(RCC_LPTIMCLK_SRC_LSI);  
@@ -89,7 +78,7 @@ int main(void)
     }
 }
 /**
- * @brief  output IO Initaliza.
+ * @brief  output IO Initalize.
  * @param NONE.
  *   This parameter can be one of following parameters:
  *     @arg NONE
@@ -99,77 +88,11 @@ void LPTIM_OutputIoInit(void)
     GPIO_InitType GPIO_InitStructure;
     GPIO_InitStruct(&GPIO_InitStructure);
     /* Enable the GPIO Clock */
-    RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOC, ENABLE);
+    RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_AFIO  | RCC_APB2_PERIPH_GPIOA, ENABLE);
 
     /* Configure the GPIO pin */
-    GPIO_InitStructure.Pin        = GPIO_PIN_1;
+    GPIO_InitStructure.Pin        = GPIO_PIN_9;
     GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Alternate = GPIO_AF0_LPTIM;
-    GPIO_InitPeripheral(GPIOC, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Alternate = GPIO_AF9_LPTIM;
+    GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
 }
-/**
- * @brief  Toggles the selected Led.
- * @param Led Specifies the Led to be toggled.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
- */
-void Ledlink(uint16_t Pin)
-{
-    GPIOB->POD ^= Pin;
-}
-/**
- * @brief  Turns selected Led on.
- * @param Led Specifies the Led to be set on.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
- */
-void LedOn(uint16_t Pin)
-{
-    GPIOB->PBC = Pin;
-}
-/**
- * @brief  Turns selected Led Off.
- * @param Led Specifies the Led to be set off.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- *     @arg LED3
- */
-void LedOff(uint16_t Pin)
-{
-    GPIOB->PBSC = Pin;
-}
-/**
- * @brief  Configures LED GPIO.
- * @param Led Specifies the Led to be configured.
- *   This parameter can be one of following parameters:
- *     @arg LED1
- *     @arg LED2
- */
-
-void LEDInit(uint16_t Pin)
-{
-    GPIO_InitType GPIO_InitStructure;
-
-    /* Enable the GPIO_LED Clock */
-    RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
-
-    /* Configure the GPIO_LED pin */
-    GPIO_InitStructure.Pin        = Pin;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_OUTPUT_PP;
-    
-
-    GPIO_InitPeripheral(GPIOB, &GPIO_InitStructure);
-}
-void delay(vu32 nCount)
-{
-    vu32 index = 0;
-    for (index = (34000 * nCount); index != 0; index--)
-    {
-    }
-}
-

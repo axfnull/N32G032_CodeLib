@@ -197,8 +197,8 @@ int main(void)
 
     /* Set counter reload value to obtain 250ms IWDG TimeOut.
        Counter Reload Value = 250ms/IWDG counter clock period
-                            = 250ms / (LSI/128)
-                            = 4.15ms / (LsiFreq/128)
+                            = 250ms /( 1/(LSI/32))
+                            = 234.375ms = (LsiFreq/128)
      */
     log_debug("LsiFreq is: %d\n", LsiFreq);
     IWDG_CntReload(LsiFreq/128);

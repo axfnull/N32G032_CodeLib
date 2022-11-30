@@ -8,7 +8,7 @@
         IDE工具：KEIL MDK-ARM 5.30
     
     硬件环境：
-        开发板 N32G032C8L7-STB V1.0
+        开发板 N32G032R8L7-STB V1.0
 
 
 3、使用说明

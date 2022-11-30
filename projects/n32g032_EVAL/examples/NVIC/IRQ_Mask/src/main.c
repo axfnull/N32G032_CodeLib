@@ -28,7 +28,7 @@
 /**
  * @file main.c
  * @author Nations Solution Team
- * @version v1.0.0
+ * @version v1.0.1
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
  */
@@ -71,9 +71,11 @@ int main(void)
         while(GPIO_ReadInputDataBit(KEY_INPUT_PORT,KEY_INPUT_PIN) != SET)
         {
         }
-//        while (Key_Status == ENABLE)
-//        {
-//        }
+        
+        while(GPIO_ReadInputDataBit(KEY_INPUT_PORT,KEY_INPUT_PIN) == SET)
+        {
+        }
+
         log_info("enable irq \r\n");
         /* This instruction will allow all exceptions with configurable priority to
            be activated. */

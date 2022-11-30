@@ -26,8 +26,8 @@
  * ****************************************************************************/
 
 /**
- * @file n32g43x_it.c
- * @author Nations Solution Team
+ * @file n32g032_it.c
+ * @author Nations 
  * @version v1.0.0
  *
  * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
@@ -35,7 +35,7 @@
 #include "n32g032_it.h"
 #include "main.h"
 
-/** @addtogroup N32G43x_StdPeriph_Template
+/** @addtogroup N32G032_StdPeriph_Template
  * @{
  */
 
