@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>1824817492</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_spi.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_wwdg.o</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_can.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_gpio.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_dbg.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_lptim.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\n32g032_conf.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_lptim.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_flash.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_i2c.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_adc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_pwr.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_beeper.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_beeper.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_iwdg.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_exti.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_can.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\core\core_cmFunc.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_crc.o</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_flash.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rcc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rtc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_crc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_wwdg.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_hdiv.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\startup_n32g032_EWARM.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_sqrt.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_lpuart.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_dbg.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_tsc.h</file>
+      <file>$PROJ_DIR$\Debug\Exe\CM0_SysTick_Proj.bin</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_iwdg.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\lib\rt6M_tl.a</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_comp.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_adc.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_usart.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_crc.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_lptim.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_tsc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_i2c.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_usart.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_flash.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_tim.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_usart.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_spi.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_dma.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_dma.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_pwr.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_adc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_opamp.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\CM0_SysTick_Proj.pbd</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_beeper.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_it.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_wwdg.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g032.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_rtc.h</file>
+      <file>$TOOLKIT_DIR$\config\linker\Nations\N32G032\N32G032x8.icf</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_tim.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_sqrt.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_spi.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_gpio.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\core\core_cmInstr.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_rcc.h</file>
+      <file>$PROJ_DIR$\Debug\List\CM0_SysTick_Proj.map</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_hdiv.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\n32g032.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_lpuart.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_gpio.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_it.o</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_tim.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_sqrt.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_crc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_i2c.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_lptim.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_opamp.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_dbg.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rcc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_exti.__cstat.et</file>
+      <file>$PROJ_DIR$\..\inc\main.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g032.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_gpio.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_opamp.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rtc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_pwr.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_exti.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rtc.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_i2c.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_can.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_exti.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_can.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_usart.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_adc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_flash.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_opamp.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_iwdg.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rcc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_dma.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g032.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_tsc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_spi.o</file>
+      <file>$PROJ_DIR$\..\inc\n32g032_it.h</file>
+      <file>$TOOLKIT_DIR$\lib\m6M_tl.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_hdiv.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Exe\CM0_SysTick_Proj.out</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_dbg.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_iwdg.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_lpuart.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_wwdg.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_tsc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_it.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_dma.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_pwr.o</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\core\core_cm0.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_beeper.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\misc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_dbg.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_adc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_beeper.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_crc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_dma.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_gpio.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_can.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\misc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_exti.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_flash.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_pwr.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_tim.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_lptim.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_opamp.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_i2c.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_usart.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_wwdg.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_lpuart.o</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_iwdg.c</file>
+      <file>$PROJ_DIR$\..\src\main.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_hdiv.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rtc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_tsc.c</file>
+      <file>$PROJ_DIR$\..\src\n32g032_it.c</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\startup\startup_n32g032_EWARM.S</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_lpuart.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rcc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_spi.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_sqrt.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_hdiv.o</file>
+      <file>$TOOLKIT_DIR$\lib\dl6M_tlf.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_tim.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_sqrt.o</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\CM0_SysTick_Proj.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 74</file>
+        </tool>
+        <tool>
+          <name>OBJCOPY</name>
+          <file> 32</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 66 156 107 110 14 108 19 123 115 16 9 93 167 10 79 113 85 153 94 131 21 22 118 170 169 117 109 1 26 92 102 36 120 168</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 122 74</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_dbg.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 4</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 123</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 88</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 56 101 51 7 53 68 76 30 55 8 132 52 2 75 69 80 18 5 57 40 20 34 65 39 31 29 72 33 97 35 47 60 37 106 71 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 29 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_adc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 11</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 110</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 38</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 57 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_beeper.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 13</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 14</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 133</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 132 101 56 7 53 68 30 55 8 76 51 52 2 75 69 80 18 5 57 40 20 34 65 39 31 60 72 33 97 35 47 37 29 106 71 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 60 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_crc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 23</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 19</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 83</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 101 47 72 44 35 37 67 76 80 33 106 73 126 132 51 68 97 52 60 29 71 58 50 28 134 40 7 18 5 30 53 57 2 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 40 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_dma.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 115</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 130</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 52 51 101 75 76 132 68 2 69 7 30 53 55 56 8 73 80 18 5 57 40 20 34 65 39 31 72 33 97 35 47 60 37 29 106 71 44 58 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 55 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_gpio.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 3</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 93</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 78</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 76 20 68 31 51 57 65 132 18 5 40 34 39 101 80 7 52 30 53 2 55 75 56 69 8 71 72 33 97 35 47 60 37 29 106 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 71 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_can.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 17</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 108</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 105</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 29 76 51 28 58 101 132 68 97 52 60 71 50 134 73 80 72 33 35 47 37 106 44 67 126 2 7 18 5 30 53 57 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 2 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\misc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 86</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 107</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 103</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 69 2 76 80 51 52 68 75 101 7 30 53 55 56 8 132 18 5 57 40 20 34 65 39 31 134 72 33 97 35 47 60 37 29 106 71 44 58 73 50 67 28 126</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 134 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_exti.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 99</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 16</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 90</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 101 132 76 72 44 35 37 67 51 33 106 73 126 80 68 97 52 60 29 71 58 50 28 134 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 106 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_flash.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 46</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 9</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 111</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 101 55 30 8 76 7 53 68 56 80 51 52 2 75 69 132 18 5 57 40 20 34 65 39 31 72 33 97 35 47 60 37 29 106 71 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 20 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 116</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 92</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 64</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 134 101 52 80 68 71 97 60 50 76 51 29 58 28 132 72 33 35 47 37 106 44 73 67 126 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_pwr.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 12</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 131</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 96</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 8 132 30 55 76 7 53 68 56 51 52 2 75 69 80 101 18 5 57 40 20 34 65 39 31 72 33 97 35 47 60 37 29 106 71 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 56 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_tim.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 48</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 169</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 81</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 76 5 40 132 39 18 34 51 68 57 20 65 31 73 101 80 7 52 30 53 2 55 75 56 69 8 67 72 33 97 35 47 60 37 29 106 71 44 58 50 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 67 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_lptim.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 6</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 85</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 41</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 28 51 29 76 80 58 101 68 97 52 60 71 50 134 73 132 72 33 35 47 37 106 44 67 126 8 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 8 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_opamp.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 112</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 87</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 39 5 40 76 51 18 34 132 68 57 20 65 31 73 101 80 7 52 30 53 2 55 75 56 69 8 58 72 33 97 35 47 60 37 29 106 71 44 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 58 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_i2c.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 84</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 10</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 104</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 101 76 50 97 60 68 52 71 134 80 51 29 58 28 73 132 72 33 35 47 37 106 44 67 126 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 44 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_usart.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 45</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 109</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 49</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 37 80 35 47 67 72 44 76 101 33 106 73 126 132 51 68 97 52 60 29 71 58 50 28 134 39 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 39 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_wwdg.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 24</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 1</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 63</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51 33 73 76 106 126 132 72 35 47 37 44 67 80 101 68 97 52 60 29 71 58 50 28 134 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 126 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_iwdg.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 15</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 113</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 124</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 52 101 134 68 71 51 97 60 50 76 132 29 58 28 80 72 33 35 47 37 106 44 73 67 126 34 7 18 5 30 53 57 2 40 55 20 75 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 34 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 156</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 62</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 76 98 68 47 72 44 51 35 37 67 132 33 106 73 126 80 101 97 52 60 29 71 58 50 28 134 127 91 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31 161</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 91 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134 98 127 161</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_hdiv.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 25</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 167</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 121</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 101 56 7 53 68 76 132 30 55 8 51 52 2 75 69 80 18 5 57 40 20 34 65 39 31 72 33 97 35 47 60 37 29 106 71 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 75 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rtc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 22</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 100</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 68 71 52 134 101 132 97 60 50 76 51 29 58 28 73 80 72 33 35 47 37 106 44 67 126 65 7 18 5 30 53 57 2 40 55 20 75 34 56 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 65 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_tsc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 42</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 117</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 128</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 134 101 52 68 71 132 97 60 50 76 51 29 58 28 31 80 72 33 35 47 37 106 44 73 67 126 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\n32g032_it.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 61</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 79</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 129</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51 101 68 76 58 29 28 132 97 52 60 71 50 134 91 80 72 33 35 47 37 106 44 73 67 126 98 127 119 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31 161</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 119 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 28 8 126 31 134 91 98 127 161</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\startup\startup_n32g032_EWARM.S</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 26</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_lpuart.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 125</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 153</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 77</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 68 76 31 20 80 57 65 101 18 5 40 34 39 73 132 51 7 52 30 53 2 55 75 56 69 8 28 72 33 97 35 47 60 37 29 106 71 44 58 50 67 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 28 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 69 67 39 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rcc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 114</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 21</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 89</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51 33 73 76 106 126 132 72 35 47 37 44 67 80 101 68 97 52 60 29 71 58 50 28 134 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 73 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 65 50 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_spi.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 70</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 118</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 0</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 132 47 72 44 35 37 67 76 51 33 106 73 126 80 101 68 97 52 60 29 71 58 50 28 134 7 18 5 30 53 57 2 40 55 20 75 34 56 65 69 39 8 31</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 50 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 69 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_sqrt.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 27</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 170</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 82</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51 8 30 55 76 7 53 68 56 132 52 2 75 69 80 101 18 5 57 40 20 34 65 39 31 72 33 97 35 47 60 37 29 106 71 44 58 73 50 67 28 126 134</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 69 76 132 51 68 52 33 5 30 97 35 72 47 53 18 80 101 7 57 60 2 37 40 29 55 106 20 71 75 44 34 58 56 73 65 50 67 39 28 8 126 31 134</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+</project>
+
+

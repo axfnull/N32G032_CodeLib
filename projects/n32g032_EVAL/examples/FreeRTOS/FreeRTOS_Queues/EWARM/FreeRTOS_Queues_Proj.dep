@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>2737646292</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\Exe\FreeRTOS_Queues_Proj.out</file>
+      <file>$PROJ_DIR$\Debug\Exe\FreeRTOS_Queues_Proj.bin</file>
+      <file>$PROJ_DIR$\..\src\n32g032_it.c</file>
+      <file>$PROJ_DIR$\..\src\main.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\FreeRTOS_Queues_Proj.pbd</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM0\portasm.s</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\queue.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\list.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\timers.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\tasks.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\misc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_flash.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_pwr.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rcc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_gpio.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_usart.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\startup\startup_n32g032_EWARM.S</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM0\port.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\queue.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\port.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\timers.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rcc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_it.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_pwr.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_flash.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_usart.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_gpio.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\heap_4.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\list.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\timers.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g032.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\port.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_flash.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_gpio.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\queue.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_pwr.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rcc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_usart.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_it.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_rcc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\cmsis_os.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_pwr.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g032.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_usart.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\port.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_it.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\portasm.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\queue.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_flash.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\list.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g032_gpio.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\startup_n32g032_EWARM.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\cmsis_os.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\heap_4.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\timers.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\core\core_cmInstr.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_dbg.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_i2c.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_rcc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\n32g032_conf.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_adc.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_lpuart.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_wwdg.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\core\core_cmFunc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_opamp.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_comp.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\core\core_cm0.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_tim.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_can.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_exti.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_hdiv.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_dma.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_tsc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_sqrt.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_rtc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_usart.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_flash.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_pwr.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_crc.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_iwdg.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_lptim.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g032.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\cmsis_os.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\heap_4.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\list.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\config\linker\Nations\N32G032\N32G032x8.icf</file>
+      <file>$TOOLKIT_DIR$\lib\m6M_tl.a</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$TOOLKIT_DIR$\lib\rt6M_tl.a</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_spi.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\n32g032.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\misc.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_beeper.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\inc\n32g032_gpio.h</file>
+      <file>$PROJ_DIR$\..\inc\n32g032_it.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\portable.h</file>
+      <file>$PROJ_DIR$\..\inc\FreeRTOSConfig.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\queue.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM0\portmacro.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\timers.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\list.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\semphr.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\task.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\include\stack_macros.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+      <file>$PROJ_DIR$\..\inc\main.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+      <file>$PROJ_DIR$\Debug\List\FreeRTOS_Queues_Proj.map</file>
+      <file>$TOOLKIT_DIR$\lib\dl6M_tlf.a</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\FreeRTOS_Queues_Proj.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 142</file>
+        </tool>
+        <tool>
+          <name>OBJCOPY</name>
+          <file> 1</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 104 49 33 34 46 38 40 41 47 43 44 45 39 58 42 63 37 35 36 106 107 105 143</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\n32g032_it.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 56</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 47</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 28</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 116 67 73 113 135 96 109 83 90 99 124 119 114 76 115 86 89 92 130 127 140 84 80 74 75 97 95 98 93 94 91 125 128 123 132 118 68 78 111 87 69 112 82 70 88 117 71 81 72 108 85 77 79 110 120 133 134 122 121 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 118 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 96 72 93 108 92 85 94 77 99 79 91 110 140 119 120 134 130 122 128 121 123 126 136 135 132 127 124 133 125</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 46</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 22</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 80 84 98 109 135 114 130 128 74 97 94 113 119 76 75 95 93 91 125 127 141 116 73 115 83 67 86 90 89 96 92 99 124 123 132 140 68 78 111 87 69 112 82 70 88 117 71 81 72 108 85 77 79 110 139 120 133 134 122 121 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 140 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 96 72 93 108 92 85 94 77 99 79 91 110 141 130 139 119 120 134 122 128 121 123 126 136 135 132 127 124 133 125</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM0\portasm.s</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 58</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>AARM</name>
+          <file> 122</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\queue.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 59</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 42</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 21</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 113 135 115 132 111 87 131 122 76 123 129 120 124 130 78 134 121 137 74 83 128 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 137 113 115 78 74 83 111 87 130 129 131 120 134 76 122 128 121 123 126 136 135 132 124</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\list.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 61</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 34</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 103</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 134 115 113 111 87 121 132 130 78 122 126 120 74 83 76 128 136 137 123</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 137 113 115 78 74 83 111 87 130 120 134 76 122 128 121 123 126 136 132</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\system_n32g032.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 52</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 37</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 100</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 110 114 115 116 113 117 111 112 108 109 76 70 81 77 84 68 78 87 69 82 88 71 72 85 79 73 80 74 83 67 75 86 97 90 95 89 98 96 93 92 94 99 91</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 96 72 93 108 92 85 94 77 99 79 91 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\timers.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 66</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 36</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 26</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 113 115 83 124 76 120 111 74 128 135 127 130 78 87 134 122 121 123 132 137 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 137 113 115 78 74 83 111 87 130 120 134 76 122 128 121 123 126 136 135 132 124 127</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\tasks.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 57</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 35</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 23</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 111 135 115 113 123 138 122 76 129 120 127 78 87 134 121 132 137 130 74 83 131 128 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 137 113 115 78 74 83 111 87 130 129 131 120 134 76 122 128 121 123 126 136 135 132 127 138</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\misc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 50</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 38</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 24</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 92 86 109 116 76 115 113 89 114 73 83 67 90 96 99 84 80 74 75 97 95 98 93 94 91 110 68 78 111 87 69 112 82 70 88 117 71 81 72 108 85 77 79</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 110 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 96 72 93 108 92 85 94 77 99 79 91</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_flash.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 60</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 40</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 30</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 114 90 83 99 109 73 67 113 96 116 76 115 86 89 92 84 80 74 75 97 95 98 93 94 91 68 78 111 87 69 112 82 70 88 117 71 81 72 108 85 77 79 110</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 95 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 117 89 71 98 81 96 72 93 108 92 85 94 77 99 79 91 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_pwr.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 43</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 29</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 99 84 83 90 109 73 67 113 96 76 115 86 89 92 116 114 80 74 75 97 95 98 93 94 91 68 78 111 87 69 112 82 70 88 117 71 81 72 108 85 77 79 110</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 96 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 72 93 108 92 85 94 77 99 79 91 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_rcc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 48</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 44</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 27</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 76 78 72 109 88 79 84 68 87 69 82 71 85 116 114 113 111 115 112 70 117 81 108 77 110 73 80 74 83 67 75 86 97 90 95 89 98 96 93 92 94 99 91</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 72 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 96 93 108 92 85 94 77 99 79 91 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_gpio.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 62</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 41</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 32</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 109 95 113 91 76 75 93 84 80 74 97 98 94 114 116 73 115 83 67 86 90 89 96 92 99 117 68 78 111 87 69 112 82 70 88 71 81 72 108 85 77 79 110</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 117 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 89 71 98 81 96 72 93 108 92 85 94 77 99 79 91 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\n32g032_std_periph_driver\src\n32g032_usart.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 53</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 45</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 31</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 116 87 69 85 68 71 109 114 78 88 72 79 84 76 113 111 115 112 70 117 81 108 77 110 94 73 80 74 83 67 75 86 97 90 95 89 98 96 93 92 99 91</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94 109 84 76 113 115 78 74 83 111 87 68 69 67 80 116 114 73 75 112 86 82 97 70 90 88 95 117 89 71 98 81 96 72 93 108 92 85 77 99 79 91 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\firmware\CMSIS\device\startup\startup_n32g032_EWARM.S</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 63</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 65</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 33</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 102</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 74 128 111 113 115 132 120 83 76 123 135 130 78 87 134 122 121 137 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 137 113 115 78 74 83 111 87 130 120 134 76 122 128 121 123 126 136 135 132</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM0\port.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 55</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 39</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 25</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 113 122 74 132 135 134 121 115 83 76 123 120 128 130 78 111 87 67 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 67 113 120 134 115 78 74 83 111 87 130 76 122 128 121 123 126 136 135 132</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 64</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 49</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 101</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 113 131 127 121 69 130 78 134 115 135 119 111 87 120 133 122 76 123 132 124 67 129 74 83 125 128 126 136</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 129 113 115 78 74 83 111 87 130 131 119 120 134 76 122 128 121 123 126 136 135 132 127 124 133 125 69 67</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 0 142</file>
+        </tool>
+      </outputs>
+    </file>
+  </configuration>
+</project>
+
+

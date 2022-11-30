@@ -1,0 +1,9 @@
+Nationstech.N32G032_Library.2.0.0版本：
+1、system_n32g032.c：删除RCC_CTRL寄存器的HSI细调值配置，删除PLL分频值先写1再写0操作
+2、n32g032_comp.h：修改COMP2_CTRL寄存器INMSEL[2:0]输入选择位，增加COMP_WINMODE寄存器的WINMDINSEL输入选择,修改输入参考电压的宏定义
+3、n32g032_comp.c：添加清除中断状态函数；n32g032_rcc.c：删除HSI细调值配置驱动函数，删除PLL分频值先写1再写0操作
+4、修改CompOut例程：加入中断配置；新增CompWindow例程
+
+Nationstech.N32G032_Library.2.0.1版本：
+1.增加IAR工程
+2.调整代码格式
